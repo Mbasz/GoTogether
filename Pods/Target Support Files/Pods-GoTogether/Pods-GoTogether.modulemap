@@ -1,0 +1,6 @@
+framework module Pods_GoTogether {
+  umbrella header "Pods-GoTogether-umbrella.h"
+
+  export *
+  module * { export * }
+}

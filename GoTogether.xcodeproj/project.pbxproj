@@ -7,37 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E61CDF212E497778F46B949 /* Pods_GoTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */; };
 		C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */; };
-		C17BB3EB1F13E88800A1ED1F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3EA1F13E88800A1ED1F /* EventsTableViewController.swift */; };
-		C17BB3EE1F13E88800A1ED1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17BB3EC1F13E88800A1ED1F /* Main.storyboard */; };
 		C17BB3F01F13E88800A1ED1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17BB3EF1F13E88800A1ED1F /* Assets.xcassets */; };
-		C17BB3F31F13E88800A1ED1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17BB3F11F13E88800A1ED1F /* LaunchScreen.storyboard */; };
-		C17BB3FB1F13E95900A1ED1F /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3FA1F13E95900A1ED1F /* NewEventViewController.swift */; };
-		C17BB3FD1F13E9A800A1ED1F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3FC1F13E9A800A1ED1F /* User.swift */; };
-		C17BB3FF1F13E9BA00A1ED1F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3FE1F13E9BA00A1ED1F /* Event.swift */; };
-		C17BB4041F13EA4E00A1ED1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4031F13EA4E00A1ED1F /* LoginViewController.swift */; };
-		C17BB4071F14164200A1ED1F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4061F14164200A1ED1F /* EventCell.swift */; };
-		C17BB4091F1418BB00A1ED1F /* PreviewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4081F1418BB00A1ED1F /* PreviewEventViewController.swift */; };
-		C17BB40C1F141CDF00A1ED1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB40B1F141CDF00A1ED1F /* ProfileViewController.swift */; };
-		C17BB40F1F1432C400A1ED1F /* GTPhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB40E1F1432C400A1ED1F /* GTPhotoHelper.swift */; };
+		C17BB4111F1437ED00A1ED1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */; };
+		C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */; };
+		C17BB4181F14382500A1ED1F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4131F14382500A1ED1F /* LoginViewController.swift */; };
+		C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4141F14382500A1ED1F /* NewEventViewController.swift */; };
+		C17BB41A1F14382500A1ED1F /* PreviewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4151F14382500A1ED1F /* PreviewEventViewController.swift */; };
+		C17BB41B1F14382500A1ED1F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4161F14382500A1ED1F /* ProfileViewController.swift */; };
+		C17BB41E1F14383000A1ED1F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB41C1F14383000A1ED1F /* Event.swift */; };
+		C17BB41F1F14383000A1ED1F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB41D1F14383000A1ED1F /* User.swift */; };
+		C17BB4221F14383B00A1ED1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4201F14383B00A1ED1F /* LaunchScreen.storyboard */; };
+		C17BB4231F14383B00A1ED1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4211F14383B00A1ED1F /* Main.storyboard */; };
+		C17BB4251F14384400A1ED1F /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4241F14384400A1ED1F /* EventCell.swift */; };
+		C17BB4271F14384E00A1ED1F /* GTPhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4261F14384E00A1ED1F /* GTPhotoHelper.swift */; };
+		C17BB4291F14385800A1ED1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4281F14385800A1ED1F /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A7F02AF9DA2530F425DD499 /* Pods-GoTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoTogether.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether.debug.xcconfig"; sourceTree = "<group>"; };
+		4D456AD2F6A813282C88E1CF /* Pods-GoTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoTogether.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether.release.xcconfig"; sourceTree = "<group>"; };
+		AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17BB3E51F13E88800A1ED1F /* GoTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C17BB3EA1F13E88800A1ED1F /* EventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewController.swift; sourceTree = "<group>"; };
-		C17BB3ED1F13E88800A1ED1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C17BB3EF1F13E88800A1ED1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C17BB3F21F13E88800A1ED1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C17BB3F41F13E88800A1ED1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C17BB3FA1F13E95900A1ED1F /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
-		C17BB3FC1F13E9A800A1ED1F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		C17BB3FE1F13E9BA00A1ED1F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		C17BB4031F13EA4E00A1ED1F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		C17BB4061F14164200A1ED1F /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		C17BB4081F1418BB00A1ED1F /* PreviewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewEventViewController.swift; sourceTree = "<group>"; };
-		C17BB40B1F141CDF00A1ED1F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		C17BB40E1F1432C400A1ED1F /* GTPhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTPhotoHelper.swift; sourceTree = "<group>"; };
+		C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Supporting/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsTableViewController.swift; path = Controllers/EventsTableViewController.swift; sourceTree = "<group>"; };
+		C17BB4131F14382500A1ED1F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
+		C17BB4141F14382500A1ED1F /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewEventViewController.swift; path = Controllers/NewEventViewController.swift; sourceTree = "<group>"; };
+		C17BB4151F14382500A1ED1F /* PreviewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreviewEventViewController.swift; path = Controllers/PreviewEventViewController.swift; sourceTree = "<group>"; };
+		C17BB4161F14382500A1ED1F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewController.swift; path = Controllers/ProfileViewController.swift; sourceTree = "<group>"; };
+		C17BB41C1F14383000A1ED1F /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Models/Event.swift; sourceTree = "<group>"; };
+		C17BB41D1F14383000A1ED1F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		C17BB4201F14383B00A1ED1F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Storyboards/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C17BB4211F14383B00A1ED1F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
+		C17BB4241F14384400A1ED1F /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventCell.swift; path = Views/EventCell.swift; sourceTree = "<group>"; };
+		C17BB4261F14384E00A1ED1F /* GTPhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GTPhotoHelper.swift; path = Helpers/GTPhotoHelper.swift; sourceTree = "<group>"; };
+		C17BB4281F14385800A1ED1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Supporting/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E61CDF212E497778F46B949 /* Pods_GoTogether.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		578E6F74E931C13E647BB8FF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A7F02AF9DA2530F425DD499 /* Pods-GoTogether.debug.xcconfig */,
+				4D456AD2F6A813282C88E1CF /* Pods-GoTogether.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C17BB3DC1F13E88800A1ED1F = {
 			isa = PBXGroup;
 			children = (
 				C17BB3E71F13E88800A1ED1F /* GoTogether */,
 				C17BB3E61F13E88800A1ED1F /* Products */,
+				578E6F74E931C13E647BB8FF /* Pods */,
+				C707CA6A841D70FD2F77A9ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,11 +104,11 @@
 		C17BB4001F13E9C100A1ED1F /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB3EA1F13E88800A1ED1F /* EventsTableViewController.swift */,
-				C17BB4081F1418BB00A1ED1F /* PreviewEventViewController.swift */,
-				C17BB3FA1F13E95900A1ED1F /* NewEventViewController.swift */,
-				C17BB40B1F141CDF00A1ED1F /* ProfileViewController.swift */,
-				C17BB4031F13EA4E00A1ED1F /* LoginViewController.swift */,
+				C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */,
+				C17BB4131F14382500A1ED1F /* LoginViewController.swift */,
+				C17BB4141F14382500A1ED1F /* NewEventViewController.swift */,
+				C17BB4151F14382500A1ED1F /* PreviewEventViewController.swift */,
+				C17BB4161F14382500A1ED1F /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -97,8 +116,8 @@
 		C17BB4011F13E9F600A1ED1F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB3FE1F13E9BA00A1ED1F /* Event.swift */,
-				C17BB3FC1F13E9A800A1ED1F /* User.swift */,
+				C17BB41C1F14383000A1ED1F /* Event.swift */,
+				C17BB41D1F14383000A1ED1F /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -106,8 +125,8 @@
 		C17BB4021F13EA0600A1ED1F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB3EC1F13E88800A1ED1F /* Main.storyboard */,
-				C17BB3F11F13E88800A1ED1F /* LaunchScreen.storyboard */,
+				C17BB4201F14383B00A1ED1F /* LaunchScreen.storyboard */,
+				C17BB4211F14383B00A1ED1F /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -115,7 +134,7 @@
 		C17BB4051F14162F00A1ED1F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB4061F14164200A1ED1F /* EventCell.swift */,
+				C17BB4241F14384400A1ED1F /* EventCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -123,7 +142,8 @@
 		C17BB40A1F14194500A1ED1F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB3F41F13E88800A1ED1F /* Info.plist */,
+				C17BB4281F14385800A1ED1F /* Info.plist */,
+				C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -131,9 +151,17 @@
 		C17BB40D1F14324300A1ED1F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C17BB40E1F1432C400A1ED1F /* GTPhotoHelper.swift */,
+				C17BB4261F14384E00A1ED1F /* GTPhotoHelper.swift */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		C707CA6A841D70FD2F77A9ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +171,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C17BB3F71F13E88800A1ED1F /* Build configuration list for PBXNativeTarget "GoTogether" */;
 			buildPhases = (
+				EA09E82D40DB82A97114D37B /* [CP] Check Pods Manifest.lock */,
 				C17BB3E11F13E88800A1ED1F /* Sources */,
 				C17BB3E21F13E88800A1ED1F /* Frameworks */,
 				C17BB3E31F13E88800A1ED1F /* Resources */,
+				9187C8F3120CED0529B829C5 /* [CP] Embed Pods Frameworks */,
+				510E791450213AC8DDF4D408 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,52 +227,83 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C17BB3F31F13E88800A1ED1F /* LaunchScreen.storyboard in Resources */,
+				C17BB4221F14383B00A1ED1F /* LaunchScreen.storyboard in Resources */,
+				C17BB4111F1437ED00A1ED1F /* GoogleService-Info.plist in Resources */,
 				C17BB3F01F13E88800A1ED1F /* Assets.xcassets in Resources */,
-				C17BB3EE1F13E88800A1ED1F /* Main.storyboard in Resources */,
+				C17BB4291F14385800A1ED1F /* Info.plist in Resources */,
+				C17BB4231F14383B00A1ED1F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		510E791450213AC8DDF4D408 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9187C8F3120CED0529B829C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA09E82D40DB82A97114D37B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C17BB3E11F13E88800A1ED1F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C17BB4041F13EA4E00A1ED1F /* LoginViewController.swift in Sources */,
-				C17BB3FD1F13E9A800A1ED1F /* User.swift in Sources */,
-				C17BB3EB1F13E88800A1ED1F /* EventsTableViewController.swift in Sources */,
-				C17BB3FB1F13E95900A1ED1F /* NewEventViewController.swift in Sources */,
-				C17BB4091F1418BB00A1ED1F /* PreviewEventViewController.swift in Sources */,
+				C17BB41B1F14382500A1ED1F /* ProfileViewController.swift in Sources */,
+				C17BB4251F14384400A1ED1F /* EventCell.swift in Sources */,
+				C17BB41A1F14382500A1ED1F /* PreviewEventViewController.swift in Sources */,
+				C17BB4181F14382500A1ED1F /* LoginViewController.swift in Sources */,
+				C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */,
+				C17BB41F1F14383000A1ED1F /* User.swift in Sources */,
+				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
+				C17BB41E1F14383000A1ED1F /* Event.swift in Sources */,
 				C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */,
-				C17BB40C1F141CDF00A1ED1F /* ProfileViewController.swift in Sources */,
-				C17BB3FF1F13E9BA00A1ED1F /* Event.swift in Sources */,
-				C17BB4071F14164200A1ED1F /* EventCell.swift in Sources */,
-				C17BB40F1F1432C400A1ED1F /* GTPhotoHelper.swift in Sources */,
+				C17BB4271F14384E00A1ED1F /* GTPhotoHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		C17BB3EC1F13E88800A1ED1F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C17BB3ED1F13E88800A1ED1F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C17BB3F11F13E88800A1ED1F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C17BB3F21F13E88800A1ED1F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C17BB3F51F13E88800A1ED1F /* Debug */ = {
@@ -339,10 +401,11 @@
 		};
 		C17BB3F81F13E88800A1ED1F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A7F02AF9DA2530F425DD499 /* Pods-GoTogether.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
-				INFOPLIST_FILE = GoTogether/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,10 +415,11 @@
 		};
 		C17BB3F91F13E88800A1ED1F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D456AD2F6A813282C88E1CF /* Pods-GoTogether.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
-				INFOPLIST_FILE = GoTogether/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
