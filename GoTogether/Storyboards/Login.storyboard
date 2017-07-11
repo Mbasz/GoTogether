@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="48J-T5-gW5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="HlI-1I-e3y">
+            <objects>
+                <viewController id="Waw-sc-wTa" customClass="LoginViewController" customModule="GoTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5nW-lE-ACm"/>
+                        <viewControllerLayoutGuide type="bottom" id="um6-7B-gnn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PmJ-0L-U6B" customClass="log">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GoTogether" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOI-jW-xvI">
+                                <rect key="frame" x="16" y="64" width="343" height="200"/>
+                                <color key="backgroundColor" red="1" green="0.56684058540000004" blue="0.39427572100000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="aN6-lM-JWM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-CZ-pHe">
+                                <rect key="frame" x="16" y="308.5" width="343" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.56684058540000004" blue="0.39427572100000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="wLg-Gv-ZnW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Register or Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="Waw-sc-wTa" eventType="touchUpInside" id="JW2-TK-a5Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TOI-jW-xvI" firstAttribute="leading" secondItem="PmJ-0L-U6B" secondAttribute="leadingMargin" id="AUh-7O-n6p"/>
+                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="leading" secondItem="PmJ-0L-U6B" secondAttribute="leadingMargin" id="JQR-OV-ol1"/>
+                            <constraint firstItem="TOI-jW-xvI" firstAttribute="top" secondItem="5nW-lE-ACm" secondAttribute="bottom" id="TDE-FM-ikV"/>
+                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="trailing" secondItem="PmJ-0L-U6B" secondAttribute="trailingMargin" id="pBM-Oa-6KN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TOI-jW-xvI" secondAttribute="trailing" id="qbm-a1-8y3"/>
+                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="centerY" secondItem="PmJ-0L-U6B" secondAttribute="centerY" id="vlr-jl-kUG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="HwS-RQ-5Y8"/>
+                    <connections>
+                        <segue destination="gG8-bT-sAw" kind="show" identifier="toCreateProfile" id="lIh-BT-bCc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="weF-Oo-8cK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="104.8" y="158.77061469265368"/>
+        </scene>
+        <!--Create Profile View Controller-->
+        <scene sceneID="gFO-7r-R3H">
+            <objects>
+                <viewController id="gG8-bT-sAw" customClass="CreateProfileViewController" customModule="GoTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jbl-2z-0ju"/>
+                        <viewControllerLayoutGuide type="bottom" id="cCa-mg-uur"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KXv-vl-lhj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb4-8W-cu0">
+                                <rect key="frame" x="16" y="308" width="343" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.56684058540000004" blue="0.39427572100000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8p3-OL-R71"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="Waw-sc-wTa" eventType="touchUpInside" id="ZyT-BG-xA9"/>
+                                    <action selector="nextButtonTapped:" destination="gG8-bT-sAw" eventType="touchUpInside" id="xqz-EH-ZDn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lb4-8W-cu0" firstAttribute="trailing" secondItem="KXv-vl-lhj" secondAttribute="trailingMargin" id="6Nh-gz-Q7i"/>
+                            <constraint firstItem="Lb4-8W-cu0" firstAttribute="centerY" secondItem="KXv-vl-lhj" secondAttribute="centerY" id="bvr-dn-8b4"/>
+                            <constraint firstItem="Lb4-8W-cu0" firstAttribute="leading" secondItem="KXv-vl-lhj" secondAttribute="leadingMargin" id="gq7-Db-aft"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dAU-IM-3T7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="889" y="159"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="y0T-SD-5zu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="48J-T5-gW5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sga-vr-G9V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Waw-sc-wTa" kind="relationship" relationship="rootViewController" id="oVc-2k-VW1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uix-tC-1UQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-834.39999999999998" y="158.77061469265368"/>
+        </scene>
+    </scenes>
+</document>

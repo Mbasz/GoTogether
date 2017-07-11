@@ -7,5 +7,11 @@ target 'GoTogether' do
 
   # Pods for GoTogether
 	pod 'Firebase/Core'
+	pod 'Firebase/Auth'
+  	pod 'FirebaseUI/Auth'
+  	pod 'Firebase/Database'
+  	pod 'Firebase/Storage'
+	pod 'Kingfisher', '~> 3.0'
+	pod 'DZNEmptyDataSet'
 
 end
