@@ -10,6 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 struct UserService {
+    
     static func show(forUID uid: String, completion: @escaping (User?) -> Void) {
         let ref = DatabaseReference.toLocation(.showUser(uid: uid))
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -20,17 +21,17 @@ struct UserService {
         })
     }
     
-    static func create(_ firUser: FIRUser, completion: @escaping (User?) -> Void) {
-//        let userAttrs = ["name": name]
+    static func create(_ firUser: FIRUser, name: String, completion: @escaping (User?) -> Void) {
+        let userAttrs = ["name": name]
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         
-//        ref.setValue(userAttrs) { (error, ref) in
-//            if let error = error {
-//                assertionFailure(error.localizedDescription)
-//                return completion(nil)
-//            }
-//        }
+        ref.setValue(userAttrs) { (error, ref) in
+            if let error = error {
+                assertionFailure(error.localizedDescription)
+                return completion(nil)
+            }
+        }
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             let user = User (snapshot: snapshot)
@@ -47,7 +48,7 @@ struct UserService {
                 return completion([])
             }
             
-            let events = snapshot.flatMap(Event.init)
+            let events = snapshot.reversed().flatMap(Event.init)
             completion(events)
             
         })

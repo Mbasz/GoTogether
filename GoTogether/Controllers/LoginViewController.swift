@@ -46,13 +46,13 @@ extension LoginViewController: FUIAuthDelegate {
         
         UserService.show(forUID: user!.uid) { (user) in
             if let user = user {
-                User._setCurrent(user, writeToUserDefaults: true)
+                User.setCurrent(user, writeToUserDefaults: true)
                 
                 let initialViewController = UIStoryboard.initialViewController(for: .main)
                 self.view.window?.rootViewController = initialViewController
                 self.view.window?.makeKeyAndVisible()
             } else {
-                self.performSegue(withIdentifier: "toCreateProfile", sender: self)
+                self.performSegue(withIdentifier: Constants.Segues.toCreateProfile, sender: self)
             }
         }
     }

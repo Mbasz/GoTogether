@@ -11,4 +11,10 @@ import UIKit
 
 class EventCell: UITableViewCell {
     
+    @IBOutlet weak var eventImageView: UIImageView!
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }

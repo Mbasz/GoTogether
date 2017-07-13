@@ -15,6 +15,7 @@ enum Category {
 }
 
 class Event {
+    var key: String?
     let creator: User
     var title: String
     var date: Date
@@ -54,6 +55,7 @@ class Event {
             let description = dict["description"] as? String
         else { return nil }
         
+        self.key = snapshot.key
         self.creator = User(uid: uid, name: name)
         self.title = title
         self.date = date

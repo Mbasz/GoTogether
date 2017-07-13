@@ -15,7 +15,7 @@ class User: NSObject {
     let uid: String
     let name: String
     //var location: String
-    var hasEvents: Bool
+    //var hasEvents: Bool
     
     private static var _current: User?
     
@@ -29,18 +29,17 @@ class User: NSObject {
     init(uid: String, name: String) {
         self.uid = uid
         self.name = name
-        self.hasEvents = false
+        //self.hasEvents = false
     }
     
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any],
-            let name = dict["name"] as? String,
-            let hasEvents = dict["has_events"] as? Bool
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String
             else { return nil }
         
         self.uid = snapshot.key
         self.name = name
-        self.hasEvents = hasEvents
+        
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,20 +49,19 @@ class User: NSObject {
         
         self.uid = uid
         self.name = name
-        self.hasEvents = false
+        //self.hasEvents = false
         
         super.init()
 
     }
     
-    class func _setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
+    class func setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
+        
         if writeToUserDefaults {
-            
             let data = NSKeyedArchiver.archivedData(withRootObject: user)
             
             UserDefaults.standard.set(data, forKey: Constants.UserDefaults.currentUser)
         }
-        
         _current = user
     }
 }

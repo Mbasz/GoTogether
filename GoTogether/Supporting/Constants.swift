@@ -9,6 +9,10 @@
 import Foundation
 
 struct Constants {
+    struct Segues {
+        static let toCreateProfile = "toCreateProfile"
+        static let toEvents = "toEvents"
+    }
     
     struct UserDefaults {
         static let currentUser = "currentUser"
