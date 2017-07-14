@@ -32,9 +32,9 @@ class Event {
         return ["title": title, "date": date, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "creator": userDict]
     }
     
-    init(title: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
+    init(title: String, date: Date, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
         self.title = title
-        self.date = Date()
+        self.date = date
         self.location = location
         self.imgURL = imgURL
         self.imgHeight = imgHeight

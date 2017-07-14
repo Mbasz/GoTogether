@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 struct EventService {
-    static func create(title: String, location: String, image: UIImage, link: String, description: String) {
+    static func create(title: String, date: Date, location: String, image: UIImage, link: String, description: String) {
         let imageRef = StorageReference.newEventImageReference()
         StorageService.upload(image, at: imageRef) { (downloadURL) in
             guard let downloadURL = downloadURL else {
@@ -21,16 +21,16 @@ struct EventService {
             
             let urlString = downloadURL.absoluteString
             let aspectHeight = image.aspectHeight
-            create(title: title, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description) { (event) in
+            create(title: title, date: date, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description) { (event) in
                     guard event != nil else { return }
                 }
         }
         
     }
     
-    private static func create(title: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String,  completion: @escaping (Event?) -> Void) {
+    private static func create(title: String, date: Date, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String,  completion: @escaping (Event?) -> Void) {
         let currentUser = User.current
-        let event = Event(title: title, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description)
+        let event = Event(title: title, date: date, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description)
         
         var dict = event.dictValue
         

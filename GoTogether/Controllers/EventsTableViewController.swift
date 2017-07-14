@@ -14,14 +14,27 @@ class EventsTableViewController: UITableViewController {
 
     var events = [Event]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         UserService.events(for: User.current) { (events) in
             self.events = events
             self.tableView.reloadData()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        
+//        UserService.events(for: User.current) { (events) in
+//            self.events = events
+//            self.tableView.reloadData()
+//        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,9 +67,9 @@ class EventsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let event = events[indexPath.row]
+        //let event = events[indexPath.row]
         
-        return event.imgHeight
+        return 150
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

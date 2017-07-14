@@ -18,6 +18,8 @@ class PreviewEventViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var linkLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -30,8 +32,16 @@ class PreviewEventViewController: UIViewController {
             dateLabel.text = dateFormatter.string(from: event.date)
             locationLabel.text = event.location
             linkLabel.text = event.link
+            descriptionLabel.text = event.description
+            nameLabel.text = "\(event.creator.name) is going!"
+            let imgURL = URL(string: event.imgURL)
+            eventImageView.kf.setImage(with: imgURL)
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
