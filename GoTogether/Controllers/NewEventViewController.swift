@@ -42,7 +42,7 @@ class NewEventViewController: UIViewController {
     }
     
     @IBAction func createButtonTapped(_ sender: UIButton) {
-        EventService.create(title: self.titleTextField.text!, location: self.locationTextField.text!, image: self.uploadImageView.image!, description: self.descriptionTextField.text!)
+        EventService.create(title: self.titleTextField.text!, location: self.locationTextField.text!, image: self.uploadImageView.image!, link: self.linkTextField.text!, description: self.descriptionTextField.text!)
         self.tabBarController?.selectedIndex = 0
     }
     

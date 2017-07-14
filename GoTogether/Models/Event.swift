@@ -22,22 +22,23 @@ class Event {
     var location: String
     let imgURL: String
     let imgHeight: CGFloat
+    var link: String
     var description: String
-    //var going: User? = nil
     //var category: Category
     
     var dictValue: [String: Any] {
         let userDict = ["uid": creator.uid, "name": creator.name]
         
-        return ["title": title, "date": date, "location": location, "img_URL": imgURL, "img_height": imgHeight, "description": description, "creator": userDict]
+        return ["title": title, "date": date, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "creator": userDict]
     }
     
-    init(title: String, location: String, imgURL: String, imgHeight: CGFloat, description: String) {
+    init(title: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
         self.title = title
         self.date = Date()
         self.location = location
         self.imgURL = imgURL
         self.imgHeight = imgHeight
+        self.link = link
         self.description = description
         self.creator = User.current
     }
@@ -48,20 +49,24 @@ class Event {
             let uid = userDict["uid"] as? String,
             let name = userDict["name"] as? String,
             let title = dict["title"] as? String,
-            let date = dict["date"] as? Date,
             let location = dict["location"] as? String,
-            let imgURL = dict["img_url"] as? String,
+            let imgURL = dict["img_URL"] as? String,
             let imgHeight = dict["img_height"] as? CGFloat,
+            let link = dict["link"] as? String,
             let description = dict["description"] as? String
         else { return nil }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
         
         self.key = snapshot.key
         self.creator = User(uid: uid, name: name)
         self.title = title
-        self.date = date
+        self.date = dateFormatter.date(from: dict["date"] as! String)!
         self.location = location
         self.imgURL = imgURL
         self.imgHeight = imgHeight
+        self.link = link
         self.description = description
     }
 }

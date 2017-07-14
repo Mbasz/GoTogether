@@ -44,13 +44,18 @@ struct UserService {
         let ref = DatabaseReference.toLocation(.events(uid: user.uid))
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
-                return completion([])
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else { return completion([]) }
+            
+            let events: [Event] = snapshot
+                .reversed()
+                .flatMap {
+                    guard let event = Event(snapshot: $0)
+                        else { return nil }
+                    
+                    return event
             }
-            
-            let events = snapshot.reversed().flatMap(Event.init)
             completion(events)
-            
         })
     }
     

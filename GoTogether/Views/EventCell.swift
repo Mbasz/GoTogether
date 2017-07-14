@@ -9,9 +9,17 @@
 import Foundation
 import UIKit
 
+protocol EventCellDelegate: class {
+    
+}
+
 class EventCell: UITableViewCell {
     
     @IBOutlet weak var eventImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     override func awakeFromNib() {

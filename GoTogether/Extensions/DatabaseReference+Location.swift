@@ -18,8 +18,6 @@ extension DatabaseReference {
         case newEvent(currentUID: String)
         case users
         case showUser(uid: String)
-        //case timeline(uid: String)
-        //case followers(uid: String)
         
         func asDatabaseReference() -> DatabaseReference {
             let root = Database.database().reference()
@@ -37,10 +35,6 @@ extension DatabaseReference {
                 return root.child("users")
             case .showUser(let uid):
                 return root.child("users").child(uid)
-//            case .timeline(let uid):
-//                return root.child("timeline").child(uid)
-//            case .followers(let uid):
-//                return root.child("followers").child(uid)
             }
         }
     }

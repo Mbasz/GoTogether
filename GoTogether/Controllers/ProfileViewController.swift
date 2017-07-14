@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var eventsTableView: UITableView!
     
     
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         let user = User.current
         nameLabel.text = user.name
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

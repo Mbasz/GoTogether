@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import Kingfisher
 
-
 class EventsTableViewController: UITableViewController {
 
     var events = [Event]()
@@ -18,7 +17,7 @@ class EventsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    
+        
         UserService.events(for: User.current) { (events) in
             self.events = events
             self.tableView.reloadData()
@@ -44,7 +43,12 @@ class EventsTableViewController: UITableViewController {
         
         let imgURL = URL(string: event.imgURL)
         cell.eventImageView.kf.setImage(with: imgURL)
-        cell.backgroundColor = .red
+        cell.titleLabel.text = event.title
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        cell.dateLabel.text = dateFormatter.string(from: event.date)
+        cell.nameLabel.text = "\(event.creator.name) is going!"
+        
         
         return cell
     }
@@ -53,6 +57,20 @@ class EventsTableViewController: UITableViewController {
         let event = events[indexPath.row]
         
         return event.imgHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toPreview", sender: events[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPreview" {
+            if let vc = segue.destination as? PreviewEventViewController {
+                if let sender = sender as? Event {
+                    vc.event = sender
+                }
+            }
+        }
     }
 }
 
