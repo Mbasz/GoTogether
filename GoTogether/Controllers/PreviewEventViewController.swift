@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FacebookShare
 
 class PreviewEventViewController: UIViewController {
     
@@ -18,11 +19,10 @@ class PreviewEventViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var linkLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    
+    @IBOutlet weak var linkButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -33,9 +33,10 @@ class PreviewEventViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .long
             dateLabel.text = dateFormatter.string(from: event.date)
+            dateFormatter.timeStyle = .medium
+            dateFormatter.dateFormat = "hh:mm a"
             timeLabel.text = event.time
             locationLabel.text = event.location
-            linkLabel.text = event.link
             descriptionLabel.text = event.description
             nameLabel.text = "\(event.creator.name) is going!"
             let eventImgURL = URL(string: event.imgURL)
@@ -44,6 +45,13 @@ class PreviewEventViewController: UIViewController {
             profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             eventImageView.kf.setImage(with: eventImgURL)
             profileImageView.kf.setImage(with: profileImgURL)
+//            let content = LinkShareContent(url: URL(string: event.link)!)
+//            let shareButton = ShareButton<LinkShareContent>()
+//            shareButton.content = content
+//            shareButton.center = self.view.center
+//            let shareDialog = ShareDialog(content: content)
+//            shareDialog.mode = .native
+//            self.view.addSubview(shareButton)
         }
         
     }
@@ -57,5 +65,20 @@ class PreviewEventViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    @IBAction func linkButtonTapped(_ sender: Any) {
+        if let link = event?.link {
+            UIApplication.shared.open(URL(string: link)!, options: [:], completionHandler:  { success in
+                if !success{
+                    let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
+                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(ok)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
+        else {
+            linkButton.isHidden = true
+        }
+    }
 }
+

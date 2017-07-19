@@ -19,4 +19,6 @@ target 'GoTogether' do
 	pod 'GooglePlaces'
 	pod 'FirebaseUI/Google'
   	pod 'GoogleSignIn'
+	pod 'UITextView+Placeholder', '~> 1.2'
+	pod 'FacebookShare', :git => 'https://github.com/1amageek/facebook-sdk-swift'
 end

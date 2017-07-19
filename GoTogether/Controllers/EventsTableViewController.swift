@@ -32,6 +32,7 @@ class EventsTableViewController: UITableViewController {
 //            self.events = events
 //            self.tableView.reloadData()
 //        }
+        //navigationItem.title
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -66,7 +67,6 @@ class EventsTableViewController: UITableViewController {
         dateFormatter.dateStyle = .long
         cell.dateLabel.text = dateFormatter.string(from: event.date)
         cell.nameLabel.text = "\(event.creator.name) is going!"
-        
         
         return cell
     }

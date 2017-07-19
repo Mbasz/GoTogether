@@ -14,9 +14,16 @@ PODS:
     - FacebookCore (~> 0.2)
     - FBSDKCoreKit (~> 4.15)
     - FBSDKLoginKit (~> 4.15)
+  - FacebookShare (0.2.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.2)
+    - FBSDKCoreKit (~> 4.21)
+    - FBSDKShareKit (~> 4.21)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.24.0):
     - FBSDKCoreKit
   - Firebase/Auth (4.0.2):
     - Firebase/Core
@@ -82,11 +89,13 @@ PODS:
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
   - Kingfisher (3.10.2)
+  - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
   - DZNEmptyDataSet
   - FacebookCore
   - FacebookLogin
+  - FacebookShare (from `https://github.com/1amageek/facebook-sdk-swift`)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -97,14 +106,26 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn
   - Kingfisher (~> 3.0)
+  - UITextView+Placeholder (~> 1.2)
+
+EXTERNAL SOURCES:
+  FacebookShare:
+    :git: https://github.com/1amageek/facebook-sdk-swift
+
+CHECKOUT OPTIONS:
+  FacebookShare:
+    :commit: 3ac76c770e9849285c380f380309d866911d2e93
+    :git: https://github.com/1amageek/facebook-sdk-swift
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
+  FacebookShare: d086f7a4610bbbca9cec5e774de450a9b3e1a20b
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
+  FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
   Firebase: c7ad0731eab26d18a3fc547dd048b0f7cd9c63ae
   FirebaseAnalytics: 4d7040fefc3cd8b291cde35f12cf063d7963f15d
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -120,7 +141,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
+  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: 03a58af10c6633eb0daa84ca0bb93bbc97e9c99d
+PODFILE CHECKSUM: b6bb7aa636412cf0038bcd097d3592e407a47736
 
 COCOAPODS: 1.0.1

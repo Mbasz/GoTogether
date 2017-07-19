@@ -19,21 +19,21 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
-    @IBOutlet weak var descriptionTextField: UITextView!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var friendsTableView: UITableView!
     
     
     let imageHelper = GTImageHelper()
     
-//    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
 //        titleTextField.text = ""
 //        eventDatePicker.date = Date()
 //        locationTextField.text = ""
 //        linkTextField.text = ""
 //        uploadImageView.image = UIImage(contentsOfFile: "uploadImage")
-//        
+//        descriptionTextView.text = ""
 //        friendsTableView.isHidden = true
-//    }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +47,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         imageHelper.completionHandler = { image in
             self.uploadImageView.image = image
+            
         }
     }
     
@@ -58,19 +59,21 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBAction func createButtonTapped(_ sender: UIButton) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.linkTextField.text!
+        let date = eventDatePicker.date
         dateFormatter.timeStyle = .medium
-        let calendar = Calendar.current
-        let date = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.linkTextField.text!
-        EventService.create(title: title, date: eventDatePicker.date, location: location, image: self.uploadImageView.image!, link: self.linkTextField.text!, description: self.descriptionTextField.text!)
+        dateFormatter.dateFormat = "hh:mm a"
+        let time = dateFormatter.string(from: eventDatePicker.date)
+        EventService.create(title: title, date: date, time: time, location: location, image: self.uploadImageView.image!, link: self.linkTextField.text!, description: self.descriptionTextView.text!)
         
         if !MFMessageComposeViewController.canSendText() {
             print("SMS services are not available")
-            print("Hi, I want to invite you to this event: \(title) which takes place on \(date). Place: \(location). And here's the link: \(link). See you there!")
+            print("Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!")
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
             composeVC.recipients = friends.map({$0.phone})
-            composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(date). Place: \(location). And here's the link: \(link). See you there!"
+            composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!"
             
             self.present(composeVC, animated: true, completion: nil)
         }

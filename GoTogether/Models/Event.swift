@@ -19,7 +19,7 @@ class Event {
     let creator: User
     var title: String
     var date: Date
-    var time: Date
+    var time: String
     var location: String
     let imgURL: String
     let imgHeight: CGFloat
@@ -33,7 +33,7 @@ class Event {
         return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "creator": userDict]
     }
     
-    init(title: String, date: Date, time: Date, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
+    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
         self.title = title
         self.date = date
         self.time = time
@@ -52,8 +52,8 @@ class Event {
             let name = userDict["name"] as? String,
             let profileImgURL = userDict["img_URL"] as? String,
             let title = dict["title"] as? String,
-            let location = dict["location"] as? String,
             let time = dict["time"] as? String,
+            let location = dict["location"] as? String,
             let eventImgURL = dict["img_URL"] as? String,
             let imgHeight = dict["img_height"] as? CGFloat,
             let link = dict["link"] as? String,
@@ -62,13 +62,12 @@ class Event {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
         
         self.key = snapshot.key
         self.creator = User(uid: uid, name: name, location: location, imgURL: profileImgURL)
         self.title = title
         self.date = dateFormatter.date(from: dict["date"] as! String)!
-        self.time = dateFormatter.date
+        self.time = time
         self.location = location
         self.imgURL = eventImgURL
         self.imgHeight = imgHeight
