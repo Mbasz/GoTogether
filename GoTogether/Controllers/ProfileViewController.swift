@@ -25,6 +25,11 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         // Do any additional setup after loading the view, typically from a nib.
         let user = User.current
         nameLabel.text = user.name
+        locationLabel.text = user.location
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        let imgURL = URL(string: user.imgURL)
+        profileImageView.kf.setImage(with: imgURL)
         
         self.eventsTableView.emptyDataSetSource = self
         self.eventsTableView.emptyDataSetDelegate = self
@@ -43,7 +48,7 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         return NSAttributedString(string: str, attributes: attrs)
     }
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        let color = UIColor(red: 240/255, green: 200/255, blue: 245/255, alpha: 1)
+        let color = UIColor(red: 230/255, green: 210/255, blue: 245/255, alpha: 1)
         return color
     }
 }

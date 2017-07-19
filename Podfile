@@ -13,5 +13,10 @@ target 'GoTogether' do
   	pod 'Firebase/Storage'
 	pod 'Kingfisher', '~> 3.0'
 	pod 'DZNEmptyDataSet'
-
+	pod 'FacebookCore'
+  	pod 'FacebookLogin'
+	pod 'FirebaseUI/Facebook'
+	pod 'GooglePlaces'
+	pod 'FirebaseUI/Google'
+  	pod 'GoogleSignIn'
 end

@@ -14,8 +14,14 @@ import FirebaseDatabase.FIRDataSnapshot
 class User: NSObject {
     let uid: String
     let name: String
-    //var location: String
+    var location: String
+    var imgURL: String
     //var hasEvents: Bool
+    
+//    var dictValue: [String: Any] {
+//        let userDict
+//    }
+    
     
     private static var _current: User?
     
@@ -26,29 +32,37 @@ class User: NSObject {
         return currentUser
     }
     
-    init(uid: String, name: String) {
+    init(uid: String, name: String, location: String, imgURL: String) {
         self.uid = uid
         self.name = name
+        self.location = location
+        self.imgURL = imgURL
         //self.hasEvents = false
     }
     
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let location = dict["location"] as? String, let imgURL = dict["imgURL"] as? String
             else { return nil }
         
         self.uid = snapshot.key
         self.name = name
+        self.location = location
+        self.imgURL = imgURL
         
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
         guard let uid = aDecoder.decodeObject(forKey: Constants.UserDefaults.uid) as? String,
-            let name = aDecoder.decodeObject(forKey: Constants.UserDefaults.name) as? String
+            let name = aDecoder.decodeObject(forKey: Constants.UserDefaults.name) as? String,
+            let location = aDecoder.decodeObject(forKey: Constants.UserDefaults.location) as? String,
+            let imgURL = aDecoder.decodeObject(forKey: Constants.UserDefaults.imgURL) as? String
             else { return nil }
         
         self.uid = uid
         self.name = name
+        self.location = location
+        self.imgURL = imgURL
         //self.hasEvents = false
         
         super.init()
@@ -70,6 +84,9 @@ extension User: NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(uid, forKey: Constants.UserDefaults.uid)
         aCoder.encode(name, forKey: Constants.UserDefaults.name)
+        aCoder.encode(location, forKey: Constants.UserDefaults.location)
+        aCoder.encode(imgURL, forKey: Constants.UserDefaults.imgURL)
+        
     }
 }
 

@@ -13,6 +13,7 @@ import Kingfisher
 class EventsTableViewController: UITableViewController {
 
     var events = [Event]()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -54,8 +55,12 @@ class EventsTableViewController: UITableViewController {
         let event = events[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
         
-        let imgURL = URL(string: event.imgURL)
-        cell.eventImageView.kf.setImage(with: imgURL)
+        let eventImgURL = URL(string: event.imgURL)
+        let profileImgURL = URL(string: event.creator.imgURL)
+        cell.profileImageView.layer.masksToBounds = true
+        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
+        cell.eventImageView.kf.setImage(with: eventImgURL)
+        cell.profileImageView.kf.setImage(with: profileImgURL)
         cell.titleLabel.text = event.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long

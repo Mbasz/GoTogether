@@ -33,7 +33,7 @@
 		C17BB4441F16A0FD00A1ED1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4431F16A0FD00A1ED1F /* Assets.xcassets */; };
 		C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4451F16BCD500A1ED1F /* StorageService.swift */; };
 		C17BB4481F16CCB100A1ED1F /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */; };
-		C17BB44A1F16CD8500A1ED1F /* StorageReference+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4491F16CD8500A1ED1F /* StorageReference+Event.swift */; };
+		C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4491F16CD8500A1ED1F /* StorageReference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +67,7 @@
 		C17BB4431F16A0FD00A1ED1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C17BB4451F16BCD500A1ED1F /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageService.swift; path = Services/StorageService.swift; sourceTree = "<group>"; };
 		C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Size.swift"; path = "Extensions/UIImage+Size.swift"; sourceTree = "<group>"; };
-		C17BB4491F16CD8500A1ED1F /* StorageReference+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "StorageReference+Event.swift"; path = "Extensions/StorageReference+Event.swift"; sourceTree = "<group>"; };
+		C17BB4491F16CD8500A1ED1F /* StorageReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReference.swift; path = Extensions/StorageReference.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +210,7 @@
 				C17BB42F1F1533A200A1ED1F /* DatabaseReference+Location.swift */,
 				C17BB4391F15497300A1ED1F /* UIStoryboard+Utility.swift */,
 				C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */,
-				C17BB4491F16CD8500A1ED1F /* StorageReference+Event.swift */,
+				C17BB4491F16CD8500A1ED1F /* StorageReference.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -367,7 +367,7 @@
 				C117D8411F193817005241A9 /* Friend.swift in Sources */,
 				C17BB4361F1548AC00A1ED1F /* Constants.swift in Sources */,
 				C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */,
-				C17BB44A1F16CD8500A1ED1F /* StorageReference+Event.swift in Sources */,
+				C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */,
 				C17BB4271F14384E00A1ED1F /* GTImageHelper.swift in Sources */,
 				C117D83F1F192B1D005241A9 /* FriendCell.swift in Sources */,
 			);
@@ -473,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0A7F02AF9DA2530F425DD499 /* Pods-GoTogether.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
@@ -487,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4D456AD2F6A813282C88E1CF /* Pods-GoTogether.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";

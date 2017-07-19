@@ -11,14 +11,19 @@ import UIKit
 import FirebaseAuth
 import FirebaseAuthUI
 import FirebaseDatabase
+import FirebaseFacebookAuthUI
+import FirebaseGoogleAuthUI
 
 typealias FIRUser = FirebaseAuth.User
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        nameLabel.backgroundColor = UIColor(patternImage: UIImage(named: "firework")!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,6 +36,9 @@ class LoginViewController: UIViewController {
             else { return }
         
         authUI.delegate = self
+        
+        let providers: [FUIAuthProvider] = [FUIFacebookAuth(), FUIGoogleAuth()]
+        authUI.providers = providers
         
         let authViewController = authUI.authViewController()
         present(authViewController, animated: true)

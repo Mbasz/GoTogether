@@ -39,6 +39,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.eventDatePicker.minimumDate = Date()
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         uploadImageView.isUserInteractionEnabled = true
         uploadImageView.addGestureRecognizer(tapGestureRecognizer)
@@ -56,17 +58,19 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBAction func createButtonTapped(_ sender: UIButton) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .medium
+        let calendar = Calendar.current
         let date = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.linkTextField.text!
         EventService.create(title: title, date: eventDatePicker.date, location: location, image: self.uploadImageView.image!, link: self.linkTextField.text!, description: self.descriptionTextField.text!)
         
         if !MFMessageComposeViewController.canSendText() {
             print("SMS services are not available")
-            print("Hi, I want to invite you to \(title) which happens on \(date). Place: \(location). And here's the link: \(link). See you there!")
+            print("Hi, I want to invite you to this event: \(title) which takes place on \(date). Place: \(location). And here's the link: \(link). See you there!")
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
             composeVC.recipients = friends.map({$0.phone})
-            composeVC.body = "Hi, I want to invite you to \(title) which happens on \(date). Place: \(location). And here's the link: \(link). See you there!"
+            composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(date). Place: \(location). And here's the link: \(link). See you there!"
             
             self.present(composeVC, animated: true, completion: nil)
         }
