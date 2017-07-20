@@ -12,12 +12,15 @@ import MessageUI
 
 class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
+    var category = -1
+    var isPublic = true
+    var link = ""
+    var image = UIImage(named: "uploadImage")
     var friends = [Friend]()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
     @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var friendsTableView: UITableView!
@@ -29,7 +32,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
 //        titleTextField.text = ""
 //        eventDatePicker.date = Date()
 //        locationTextField.text = ""
-//        linkTextField.text = ""
 //        uploadImageView.image = UIImage(contentsOfFile: "uploadImage")
 //        descriptionTextView.text = ""
 //        friendsTableView.isHidden = true
@@ -39,7 +41,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.eventDatePicker.minimumDate = Date()
+        //self.eventDatePicker.minimumDate
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         uploadImageView.isUserInteractionEnabled = true
@@ -47,7 +49,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         imageHelper.completionHandler = { image in
             self.uploadImageView.image = image
-            
         }
     }
     
@@ -59,12 +60,29 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBAction func createButtonTapped(_ sender: UIButton) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.linkTextField.text!
+        let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.link
         let date = eventDatePicker.date
         dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "hh:mm a"
         let time = dateFormatter.string(from: eventDatePicker.date)
-        EventService.create(title: title, date: date, time: time, location: location, image: self.uploadImageView.image!, link: self.linkTextField.text!, description: self.descriptionTextView.text!)
+        if self.uploadImageView.image! == image {
+            switch (category) {
+            case 0:
+                image = UIImage(named: "Workshop-1")
+            case 1:
+                image = UIImage(named: "Culture-1")
+            case 2:
+                image = UIImage(named: "Sport-1")
+            case 3:
+                image = UIImage(named: "Social-1")
+            default:
+                image = UIImage(named: "uploadImage")
+            }
+        } else {
+            image = self.uploadImageView.image!
+        }
+        
+        EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: self.link, description: self.descriptionTextView.text!, category: category)
         
         if !MFMessageComposeViewController.canSendText() {
             print("SMS services are not available")

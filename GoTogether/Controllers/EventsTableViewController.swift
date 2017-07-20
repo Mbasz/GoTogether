@@ -28,11 +28,6 @@ class EventsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        UserService.events(for: User.current) { (events) in
-//            self.events = events
-//            self.tableView.reloadData()
-//        }
-        //navigationItem.title
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,6 +50,19 @@ class EventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event = events[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
+        
+        switch (event.category) {
+        case 0:
+            cell.backgroundColor = UIColor(red: 224/255, green: 229/255, blue: 252/255, alpha: 1)
+        case 1:
+            cell.backgroundColor = UIColor(red: 237/255, green: 255/255, blue: 250/255, alpha: 1)
+        case 2:
+            cell.backgroundColor = UIColor(red: 227/255, green: 255/255, blue: 230/255, alpha: 1)
+        case 3:
+            cell.backgroundColor = UIColor(red: 1, green: 231/255, blue: 218/255, alpha: 1)
+        default:
+            cell.backgroundColor = UIColor(red: 224/255, green: 229/255, blue: 252/255, alpha: 1)
+        }
         
         let eventImgURL = URL(string: event.imgURL)
         let profileImgURL = URL(string: event.creator.imgURL)

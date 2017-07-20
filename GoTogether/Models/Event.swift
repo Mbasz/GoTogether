@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 import FirebaseDatabase.FIRDataSnapshot
 
-enum Category {
-    case sport, culture, workshop
-}
-
 class Event {
     var key: String?
     let creator: User
@@ -25,15 +21,15 @@ class Event {
     let imgHeight: CGFloat
     var link: String
     var description: String
-    //var category: Category
+    var category: Int
     
     var dictValue: [String: Any] {
         let userDict = ["uid": creator.uid, "name": creator.name, "location": creator.location, "img_URL": creator.imgURL]
         
-        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "creator": userDict]
+        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "category": category, "creator": userDict]
     }
     
-    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String) {
+    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String, category: Int) {
         self.title = title
         self.date = date
         self.time = time
@@ -43,6 +39,7 @@ class Event {
         self.link = link
         self.description = description
         self.creator = User.current
+        self.category = category
     }
     
     init?(snapshot: DataSnapshot) {
@@ -57,7 +54,8 @@ class Event {
             let eventImgURL = dict["img_URL"] as? String,
             let imgHeight = dict["img_height"] as? CGFloat,
             let link = dict["link"] as? String,
-            let description = dict["description"] as? String
+            let description = dict["description"] as? String,
+            let category = dict["category"] as? Int
         else { return nil }
         
         let dateFormatter = DateFormatter()
@@ -73,5 +71,6 @@ class Event {
         self.imgHeight = imgHeight
         self.link = link
         self.description = description
+        self.category = category
     }
 }

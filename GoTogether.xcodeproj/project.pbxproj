@@ -10,6 +10,7 @@
 		1E61CDF212E497778F46B949 /* Pods_GoTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */; };
 		C117D83F1F192B1D005241A9 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D83E1F192B1D005241A9 /* FriendCell.swift */; };
 		C117D8411F193817005241A9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D8401F193817005241A9 /* Friend.swift */; };
+		C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F392B1F20817E00373A2E /* CategoriesViewController.swift */; };
 		C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */; };
 		C17BB4111F1437ED00A1ED1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */; };
 		C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */; };
@@ -42,6 +43,7 @@
 		AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C117D83E1F192B1D005241A9 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendCell.swift; path = Views/FriendCell.swift; sourceTree = "<group>"; };
 		C117D8401F193817005241A9 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Friend.swift; path = Models/Friend.swift; sourceTree = "<group>"; };
+		C14F392B1F20817E00373A2E /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = Controllers/CategoriesViewController.swift; sourceTree = "<group>"; };
 		C17BB3E51F13E88800A1ED1F /* GoTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Supporting/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				C17BB4161F14382500A1ED1F /* ProfileViewController.swift */,
 				C17BB4131F14382500A1ED1F /* LoginViewController.swift */,
 				C17BB43C1F15887800A1ED1F /* CreateProfileViewController.swift */,
+				C14F392B1F20817E00373A2E /* CategoriesViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				C17BB4341F153ECB00A1ED1F /* UserService.swift in Sources */,
 				C17BB41F1F14383000A1ED1F /* User.swift in Sources */,
 				C17BB4301F1533A200A1ED1F /* DatabaseReference+Location.swift in Sources */,
+				C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */,
 				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
 				C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */,
 				C17BB41E1F14383000A1ED1F /* Event.swift in Sources */,

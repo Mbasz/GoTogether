@@ -37,7 +37,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profilePicture" translatesAutoresizingMaskIntoConstraints="NO" id="3SI-Ro-Dap">
-                                            <rect key="frame" x="155" y="86" width="50" height="50"/>
+                                            <rect key="frame" x="160" y="86" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saturday, July 7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncV-Jm-iM9">
@@ -60,7 +60,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.88035547114343138" green="0.89781713029062016" blue="0.98881771299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.92954120328197476" green="1" blue="0.97853662890757354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dateLabel" destination="ncV-Jm-iM9" id="bhv-e3-v1Q"/>
                                     <outlet property="eventImageView" destination="KrK-po-6Ie" id="Pxv-0j-OE7"/>
@@ -76,7 +76,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Events" id="J7R-Da-4wp">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="UtO-P8-nqL"/>
+                        <barButtonItem key="backBarButtonItem" title="Back" id="gK2-CC-j2P"/>
+                        <barButtonItem key="rightBarButtonItem" image="filter" id="0cF-YG-k1n">
+                            <inset key="imageInsets" minX="-13" minY="-7" maxX="13" maxY="-7"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="Kyg-Jb-lAQ" kind="show" identifier="toPreview" id="d28-1X-Vp0"/>
@@ -98,43 +101,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter title here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Afs-rn-ojK">
-                                <rect key="frame" x="16" y="28" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XSy-8D-dbI">
-                                <rect key="frame" x="16" y="394" width="343" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Add description"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qdS-Zx-RKq">
-                                <rect key="frame" x="0.0" y="66" width="375" height="122"/>
+                                <rect key="frame" x="0.0" y="107" width="375" height="122"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="521423335.18796498">
                                     <!--2017-07-10 23:48:55 +0000-->
                                 </date>
                             </datePicker>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter location here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dM-ej-hG8">
-                                <rect key="frame" x="16" y="196" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a link to the event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jxF-7U-PY7">
-                                <rect key="frame" x="16" y="242" width="343" height="30"/>
+                                <rect key="frame" x="16" y="237" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -191,8 +166,12 @@
                                     <action selector="addFriendTapped:" destination="smo-a9-0m0" eventType="touchUpInside" id="BAd-g2-Kou"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="uploadImage" translatesAutoresizingMaskIntoConstraints="NO" id="4ha-Vl-Zg9">
+                                <rect key="frame" x="106" y="275" width="163" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrE-N6-IoK" userLabel="Create and Send">
-                                <rect key="frame" x="16" y="547" width="343" height="50"/>
+                                <rect key="frame" x="16" y="553" width="343" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.570130332353456" green="0.43033363685535775" blue="0.90781755437715739" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -203,31 +182,41 @@
                                     <action selector="createButtonTapped:" destination="smo-a9-0m0" eventType="touchUpInside" id="nE0-fG-Ttd"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="uploadImage" translatesAutoresizingMaskIntoConstraints="NO" id="4ha-Vl-Zg9">
-                                <rect key="frame" x="106" y="275" width="163" height="117"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter title here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Afs-rn-ojK">
+                                <rect key="frame" x="16" y="72" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i44-jT-VD5">
+                                <rect key="frame" x="16" y="386" width="343" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Add description"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.88035547110000001" green="0.89781713029999999" blue="0.98881771299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="" image="addTab" id="mxo-TO-gLH">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
                     <connections>
-                        <outlet property="descriptionTextView" destination="XSy-8D-dbI" id="osQ-WY-QWO"/>
+                        <outlet property="descriptionTextView" destination="i44-jT-VD5" id="hjn-A1-MsU"/>
                         <outlet property="eventDatePicker" destination="qdS-Zx-RKq" id="CnP-7g-Rhw"/>
                         <outlet property="friendsTableView" destination="rvd-Iu-ZLi" id="2ge-AG-XXa"/>
-                        <outlet property="linkTextField" destination="jxF-7U-PY7" id="xcy-TP-rS8"/>
                         <outlet property="locationTextField" destination="1dM-ej-hG8" id="Q1l-iN-If6"/>
                         <outlet property="titleTextField" destination="Afs-rn-ojK" id="sur-pf-149"/>
                         <outlet property="uploadImageView" destination="4ha-Vl-Zg9" id="KXl-0y-G2G"/>
-                        <segue destination="R21-E4-Ike" kind="show" identifier="toEvents" id="cKJ-Xy-YtN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upw-nl-beg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-15.199999999999999" y="385.45727136431788"/>
+            <point key="canvasLocation" x="1936.8" y="257.72113943028489"/>
         </scene>
         <!--Profile View Controller Scene-->
         <scene sceneID="mSq-ag-I3f">
@@ -287,7 +276,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profilePicture" translatesAutoresizingMaskIntoConstraints="NO" id="NWv-wg-vAP">
-                                                    <rect key="frame" x="155" y="89" width="48" height="48"/>
+                                                    <rect key="frame" x="160" y="89" width="48" height="48"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="is going!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFI-Cx-IR7">
@@ -346,7 +335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nOe-1f-x3r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="385"/>
+            <point key="canvasLocation" x="2793" y="258"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rja-ob-5CO">
@@ -360,7 +349,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="4Yo-eE-W1A" kind="relationship" relationship="viewControllers" id="hSE-c4-Ba5"/>
-                        <segue destination="smo-a9-0m0" kind="relationship" relationship="viewControllers" id="QJq-kn-Lwl"/>
+                        <segue destination="i0e-Vk-5ng" kind="relationship" relationship="viewControllers" id="pnK-8W-ArH"/>
                         <segue destination="gww-dI-mlk" kind="relationship" relationship="viewControllers" id="52N-OJ-pMW"/>
                     </connections>
                 </tabBarController>
@@ -402,7 +391,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Marta is going!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzG-IJ-Rxq">
-                                <rect key="frame" x="96" y="486" width="118" height="34"/>
+                                <rect key="frame" x="96" y="486" width="262" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
@@ -464,11 +453,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Yo-eE-W1A" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="feedTab" id="koM-K0-gkc">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-7"/>
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Tgn-JN-4Mk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tgn-JN-4Mk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.97958728481497392" green="0.9403650732323704" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -486,15 +475,164 @@
             </objects>
             <point key="canvasLocation" x="997.60000000000002" y="-614.84257871064472"/>
         </scene>
+        <!--Categories-->
+        <scene sceneID="KeE-4R-b6j">
+            <objects>
+                <viewController id="faM-G2-l6h" userLabel="Categories" customClass="CategoriesViewController" customModule="GoTogether" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wAr-MS-nYt"/>
+                        <viewControllerLayoutGuide type="bottom" id="6YU-Cb-2aZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FMg-yC-sez">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDz-AB-vP2" userLabel="Create and Send">
+                                <rect key="frame" x="16" y="549" width="343" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5701303324" green="0.43033363689999998" blue="0.9078175544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextTapped:" destination="faM-G2-l6h" eventType="touchUpInside" id="fLh-JQ-B6K"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mgB-wX-LmN">
+                                <rect key="frame" x="16" y="84" width="343" height="330"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE1-5h-2jz">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="82.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="Workshop" backgroundImage="workshop">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="workshopTapped:" destination="faM-G2-l6h" eventType="touchUpInside" id="VEP-L2-iHu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tut-6v-Oia">
+                                        <rect key="frame" x="0.0" y="82.5" width="343" height="82.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="   Culture" backgroundImage="culture">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cultureTapped:" destination="faM-G2-l6h" eventType="touchUpInside" id="Myp-FW-IFL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SFN-jO-YoC">
+                                        <rect key="frame" x="0.0" y="165" width="343" height="82.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="Sport" backgroundImage="sport">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sportTapped:" destination="faM-G2-l6h" eventType="touchUpInside" id="4AR-H0-7nI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qej-WN-e72">
+                                        <rect key="frame" x="0.0" y="247.5" width="343" height="82.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <state key="normal" title="   Social" backgroundImage="social">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="socialTapped:" destination="faM-G2-l6h" eventType="touchUpInside" id="PME-dG-Tmq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="330" id="viW-zC-hl3"/>
+                                </constraints>
+                            </stackView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vcy-bX-4Mm">
+                                <rect key="frame" x="80" y="435" width="216" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="8VZ-CV-RS1"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Public"/>
+                                    <segment title="Friends only"/>
+                                </segments>
+                                <connections>
+                                    <action selector="isPublicTapped:" destination="faM-G2-l6h" eventType="valueChanged" id="5hS-HW-lPd"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a link to the event" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-zF-7qg">
+                                <rect key="frame" x="16" y="492" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.88035547110000001" green="0.89781713029999999" blue="0.98881771299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="mgB-wX-LmN" secondAttribute="trailing" id="0z0-y2-iqo"/>
+                            <constraint firstItem="vcy-bX-4Mm" firstAttribute="centerX" secondItem="FMg-yC-sez" secondAttribute="centerX" id="3QE-YK-3BE"/>
+                            <constraint firstItem="mgB-wX-LmN" firstAttribute="leading" secondItem="FMg-yC-sez" secondAttribute="leadingMargin" id="R2V-NJ-koI"/>
+                            <constraint firstItem="vcy-bX-4Mm" firstAttribute="top" secondItem="qej-WN-e72" secondAttribute="bottom" constant="21" id="ahv-ja-b0q"/>
+                            <constraint firstItem="mgB-wX-LmN" firstAttribute="top" secondItem="wAr-MS-nYt" secondAttribute="bottom" constant="20" id="z3Q-fB-7BN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Choose event category" id="Zxj-Db-YhG"/>
+                    <connections>
+                        <outlet property="cultureButton" destination="Tut-6v-Oia" id="ECn-iN-d0Y"/>
+                        <outlet property="linkTextfield" destination="Dga-zF-7qg" id="fZq-Re-Hjc"/>
+                        <outlet property="publicSegmentedControl" destination="vcy-bX-4Mm" id="f6w-7j-0Vr"/>
+                        <outlet property="socialButton" destination="qej-WN-e72" id="5ko-aX-YWB"/>
+                        <outlet property="sportButton" destination="SFN-jO-YoC" id="Uui-7e-ePj"/>
+                        <outlet property="workshopButton" destination="SE1-5h-2jz" id="x0n-up-2Vn"/>
+                        <segue destination="smo-a9-0m0" kind="show" identifier="toNewEvent" id="uQe-lJ-qvX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mml-iM-zP7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924" y="257.72113943028489"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kwr-hB-Je6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i0e-Vk-5ng" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="" image="addTab" id="h5K-N2-Zpp">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="B6M-5j-jaF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.97958728480000001" green="0.94036507319999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="faM-G2-l6h" kind="relationship" relationship="rootViewController" id="kjX-RO-0bQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3UG-3f-bva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-15.199999999999999" y="257.72113943028489"/>
+        </scene>
     </scenes>
     <resources>
         <image name="addTab" width="48" height="48"/>
         <image name="concert" width="1280" height="610"/>
+        <image name="culture" width="350" height="84"/>
         <image name="externalLink" width="64" height="64"/>
         <image name="feedTab" width="48" height="48"/>
+        <image name="filter" width="32" height="32"/>
         <image name="profilePicture" width="320" height="320"/>
         <image name="profileTab" width="48" height="48"/>
+        <image name="social" width="350" height="84"/>
+        <image name="sport" width="350" height="85"/>
         <image name="uploadImage" width="48" height="48"/>
+        <image name="workshop" width="350" height="87"/>
     </resources>
     <color key="tintColor" red="0.35333860750000001" green="0.49520203909999999" blue="0.98881771299999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
