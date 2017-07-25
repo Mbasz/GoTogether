@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 struct EventService {
-    static func create(title: String, date: Date, time: String, location: String, image: UIImage, link: String, description: String, category: Int) {
+    static func create(title: String, date: Date, time: String, location: String, image: UIImage, link: String, description: String, category: Int, isPublic: Bool) {
         let imageRef = StorageReference.newEventImageReference()
         StorageService.upload(image, at: imageRef) { (downloadURL) in
             guard let downloadURL = downloadURL else {
@@ -21,16 +21,16 @@ struct EventService {
             
             let urlString = downloadURL.absoluteString
             let aspectHeight = image.aspectHeight
-            create(title: title, date: date, time: time, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description, category: category) { (event) in
+            create(title: title, date: date, time: time, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description, category: category, isPublic: isPublic) { (event) in
                     guard event != nil else { return }
                 }
         }
         
     }
     
-    private static func create(title: String, date: Date, time: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String, category: Int, completion: @escaping (Event?) -> Void) {
+    private static func create(title: String, date: Date, time: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String, category: Int, isPublic: Bool, completion: @escaping (Event?) -> Void) {
         let currentUser = User.current
-        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category)
+        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category, isPublic: isPublic)
         
         var dict = event.dictValue
         
@@ -40,9 +40,13 @@ struct EventService {
         dict["date"] = dateFormatter.string(from: dict["date"] as! Date)
         
         let eventRef = DatabaseReference.toLocation(.newEvent(currentUID: currentUser.uid))
-
         eventRef.updateChildValues(dict)
         
+        if isPublic {
+            let publicRef = DatabaseReference.toLocation(.newPublicEvent)
+            publicRef.updateChildValues(dict)
+        }
+                
     }
     
     static func show(forKey eventKey: String, creatorUID: String, completion: @escaping (Event?) -> Void) {
@@ -55,4 +59,28 @@ struct EventService {
             completion(event)
         })
     }
+    
+    static func showPublic(completion: @escaping ([Event]) -> Void) {
+        let publicRef = DatabaseReference.toLocation(.showPublic)
+        publicRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
+                else { return completion([]) }
+            
+            let events: [Event] = snapshot
+                .reversed()
+                .flatMap {
+                    guard let event = Event(snapshot: $0)
+                        else { return nil }
+                    
+                    return event
+            }
+            completion(events)
+        })
+
+        
+    }
+    
+    
 }
+
+

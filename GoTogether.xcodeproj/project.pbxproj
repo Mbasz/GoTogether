@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1E61CDF212E497778F46B949 /* Pods_GoTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */; };
-		C117D83F1F192B1D005241A9 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D83E1F192B1D005241A9 /* FriendCell.swift */; };
-		C117D8411F193817005241A9 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D8401F193817005241A9 /* Friend.swift */; };
+		C117D83F1F192B1D005241A9 /* PhoneFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */; };
+		C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D8401F193817005241A9 /* PhoneFriend.swift */; };
 		C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F392B1F20817E00373A2E /* CategoriesViewController.swift */; };
+		C15B420E1F226D4100176242 /* UIColor+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15B420D1F226D4100176242 /* UIColor+Utility.swift */; };
 		C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */; };
 		C17BB4111F1437ED00A1ED1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */; };
 		C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */; };
@@ -35,15 +36,18 @@
 		C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4451F16BCD500A1ED1F /* StorageService.swift */; };
 		C17BB4481F16CCB100A1ED1F /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */; };
 		C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4491F16CD8500A1ED1F /* StorageReference.swift */; };
+		C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */; };
+		C1B1BE681F27A2C000562F96 /* FbFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE671F27A2C000562F96 /* FbFriend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A7F02AF9DA2530F425DD499 /* Pods-GoTogether.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoTogether.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether.debug.xcconfig"; sourceTree = "<group>"; };
 		4D456AD2F6A813282C88E1CF /* Pods-GoTogether.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoTogether.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoTogether/Pods-GoTogether.release.xcconfig"; sourceTree = "<group>"; };
 		AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C117D83E1F192B1D005241A9 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendCell.swift; path = Views/FriendCell.swift; sourceTree = "<group>"; };
-		C117D8401F193817005241A9 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Friend.swift; path = Models/Friend.swift; sourceTree = "<group>"; };
+		C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneFriendCell.swift; path = Views/PhoneFriendCell.swift; sourceTree = "<group>"; };
+		C117D8401F193817005241A9 /* PhoneFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneFriend.swift; path = Models/PhoneFriend.swift; sourceTree = "<group>"; };
 		C14F392B1F20817E00373A2E /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = Controllers/CategoriesViewController.swift; sourceTree = "<group>"; };
+		C15B420D1F226D4100176242 /* UIColor+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Utility.swift"; path = "Extensions/UIColor+Utility.swift"; sourceTree = "<group>"; };
 		C17BB3E51F13E88800A1ED1F /* GoTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C17BB4101F1437ED00A1ED1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Supporting/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 		C17BB4451F16BCD500A1ED1F /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageService.swift; path = Services/StorageService.swift; sourceTree = "<group>"; };
 		C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Size.swift"; path = "Extensions/UIImage+Size.swift"; sourceTree = "<group>"; };
 		C17BB4491F16CD8500A1ED1F /* StorageReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReference.swift; path = Extensions/StorageReference.swift; sourceTree = "<group>"; };
+		C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriendCell.swift; path = Views/FbFriendCell.swift; sourceTree = "<group>"; };
+		C1B1BE671F27A2C000562F96 /* FbFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriend.swift; path = Models/FbFriend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,12 +139,12 @@
 			isa = PBXGroup;
 			children = (
 				C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */,
-				C17BB4141F14382500A1ED1F /* NewEventViewController.swift */,
 				C17BB4151F14382500A1ED1F /* PreviewEventViewController.swift */,
+				C14F392B1F20817E00373A2E /* CategoriesViewController.swift */,
+				C17BB4141F14382500A1ED1F /* NewEventViewController.swift */,
 				C17BB4161F14382500A1ED1F /* ProfileViewController.swift */,
 				C17BB4131F14382500A1ED1F /* LoginViewController.swift */,
 				C17BB43C1F15887800A1ED1F /* CreateProfileViewController.swift */,
-				C14F392B1F20817E00373A2E /* CategoriesViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -148,7 +154,8 @@
 			children = (
 				C17BB41C1F14383000A1ED1F /* Event.swift */,
 				C17BB41D1F14383000A1ED1F /* User.swift */,
-				C117D8401F193817005241A9 /* Friend.swift */,
+				C117D8401F193817005241A9 /* PhoneFriend.swift */,
+				C1B1BE671F27A2C000562F96 /* FbFriend.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -167,7 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				C17BB4241F14384400A1ED1F /* EventCell.swift */,
-				C117D83E1F192B1D005241A9 /* FriendCell.swift */,
+				C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */,
+				C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 				C17BB4391F15497300A1ED1F /* UIStoryboard+Utility.swift */,
 				C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */,
 				C17BB4491F16CD8500A1ED1F /* StorageReference.swift */,
+				C15B420D1F226D4100176242 /* UIColor+Utility.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -365,15 +374,18 @@
 				C17BB41F1F14383000A1ED1F /* User.swift in Sources */,
 				C17BB4301F1533A200A1ED1F /* DatabaseReference+Location.swift in Sources */,
 				C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */,
+				C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */,
 				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
 				C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */,
 				C17BB41E1F14383000A1ED1F /* Event.swift in Sources */,
-				C117D8411F193817005241A9 /* Friend.swift in Sources */,
+				C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */,
 				C17BB4361F1548AC00A1ED1F /* Constants.swift in Sources */,
+				C1B1BE681F27A2C000562F96 /* FbFriend.swift in Sources */,
+				C15B420E1F226D4100176242 /* UIColor+Utility.swift in Sources */,
 				C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */,
 				C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */,
 				C17BB4271F14384E00A1ED1F /* GTImageHelper.swift in Sources */,
-				C117D83F1F192B1D005241A9 /* FriendCell.swift in Sources */,
+				C117D83F1F192B1D005241A9 /* PhoneFriendCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,11 +491,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -494,11 +508,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

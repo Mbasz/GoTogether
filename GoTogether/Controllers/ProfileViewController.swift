@@ -13,12 +13,14 @@ import DZNEmptyDataSet
 class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var myEvents = [Event]()
+    var friends = [FbFriend]()
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var eventsTableView: UITableView!
-    
+    @IBOutlet weak var myEventsButton: UIButton!
+    @IBOutlet weak var friendsButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +32,23 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         let imgURL = URL(string: user.imgURL)
         profileImageView.kf.setImage(with: imgURL)
+        myEventsButton.isUserInteractionEnabled = false
+        myEventsButton.layer.opacity = 0.5
+        
+        UserService.events(for: User.current) { (events) in
+            self.myEvents = events
+            self.eventsTableView.reloadData()
+        }
+        
+        UserService.friends { friends in
+            self.friends = friends
+            self.eventsTableView.reloadData()
+        }
         
         self.eventsTableView.emptyDataSetSource = self
         self.eventsTableView.emptyDataSetDelegate = self
-        
         eventsTableView.tableFooterView = UIView()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,17 +65,77 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         let color = UIColor(red: 230/255, green: 210/255, blue: 245/255, alpha: 1)
         return color
     }
+    
+    @IBAction func friendsTapped(_ sender: Any) {
+        myEventsButton.layer.opacity = 1
+        friendsButton.layer.opacity = 0.5
+        friendsButton.isUserInteractionEnabled = false
+        myEventsButton.isUserInteractionEnabled = true
+    }
+    
+    @IBAction func myEventsTapped(_ sender: Any) {
+        myEventsButton.layer.opacity = 0.5
+        friendsButton.layer.opacity = 1
+        friendsButton.isUserInteractionEnabled = true
+        myEventsButton.isUserInteractionEnabled = false
+        eventsTableView.reloadData()
+    }
+    
+    
 }
 
 extension ProfileViewController: UITableViewDataSource {
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myEvents.count
+        if myEventsButton.isUserInteractionEnabled {
+            return friends.count
+        } else {
+            return myEvents.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EventsCell") as! EventCell
+        //if
+        let event = myEvents[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
+        
+        switch (event.category) {
+        case 0:
+            cell.backgroundColor = UIColor.gtBlue
+        case 1:
+            cell.backgroundColor = UIColor.gtRed
+        case 2:
+            cell.backgroundColor = UIColor.gtGreen
+        case 3:
+            cell.backgroundColor = UIColor.gtOrange
+        default:
+            cell.backgroundColor = UIColor.gtBackground
+        }
+        
+        let eventImgURL = URL(string: event.imgURL)
+        let profileImgURL = URL(string: event.creator.imgURL)
+        cell.profileImageView.layer.masksToBounds = true
+        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
+        cell.eventImageView.kf.setImage(with: eventImgURL)
+        cell.profileImageView.kf.setImage(with: profileImgURL)
+        cell.titleLabel.text = event.title
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        cell.dateLabel.text = dateFormatter.string(from: event.date)
+        cell.nameLabel.text = "\(event.creator.name) is going!"
+        
         return cell
     }
+    
+    
+    
 }
 
+extension ProfileViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 140
+    }
+    
+}
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct Friend {
+struct PhoneFriend {
     var name: String
     var phone: String
     

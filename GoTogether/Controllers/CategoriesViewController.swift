@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class  CategoriesViewController: UIViewController {
+class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     
     var category = -1
     var isPublic = true
@@ -23,8 +23,31 @@ class  CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         publicSegmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16)], for: .normal)
+        NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.linkTextfield.delegate = self
     }
     
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height - 30)
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += (keyboardSize.height - 30)
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toNewEvent" {
@@ -32,6 +55,12 @@ class  CategoriesViewController: UIViewController {
                 vc.category = category
                 vc.isPublic = isPublic
                 vc.link = linkTextfield.text!
+                if publicSegmentedControl.selectedSegmentIndex == 0 {
+                    isPublic = true
+                }
+                else {
+                    isPublic = false
+                }
             }
         }
     }
@@ -86,15 +115,6 @@ class  CategoriesViewController: UIViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         performSegue(withIdentifier: "toNewEvent", sender: self)
-    }
-    
-    @IBAction func isPublicTapped(_ sender: Any) {
-        if publicSegmentedControl.isEnabledForSegment(at: 0) {
-            isPublic = true
-        }
-        else {
-            isPublic = false
-        }
     }
     
     

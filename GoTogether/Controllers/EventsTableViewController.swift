@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Kingfisher
 
-class EventsTableViewController: UITableViewController {
+class EventsTableViewController: UITableViewController, UITabBarControllerDelegate {
 
     var events = [Event]()
 
@@ -18,10 +18,18 @@ class EventsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        UserService.events(for: User.current) { (events) in
+        
+        EventService.showPublic() { (events) in
             self.events = events
             self.tableView.reloadData()
         }
+        
+        let numberOfItems = CGFloat((tabBarController?.tabBar.items!.count)!)
+        let tabBarItemSize = CGSize(width: (tabBarController?.tabBar.frame.width)! / numberOfItems, height: (tabBarController?.tabBar.frame.height)!)
+        tabBarController?.tabBar.selectionIndicatorImage = UIImage.imageWithColor(color: UIColor.gtSelected, size: tabBarItemSize).resizableImage(withCapInsets: .zero)
+        
+        tabBarController?.tabBar.frame.size.width = self.view.frame.width + 4
+        tabBarController?.tabBar.frame.origin.x = -2
     }
     
     override func viewDidLoad() {
@@ -30,7 +38,7 @@ class EventsTableViewController: UITableViewController {
         
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -53,15 +61,15 @@ class EventsTableViewController: UITableViewController {
         
         switch (event.category) {
         case 0:
-            cell.backgroundColor = UIColor(red: 224/255, green: 229/255, blue: 252/255, alpha: 1)
+            cell.backgroundColor = UIColor.gtBlue
         case 1:
-            cell.backgroundColor = UIColor(red: 237/255, green: 255/255, blue: 250/255, alpha: 1)
+            cell.backgroundColor = UIColor.gtRed
         case 2:
-            cell.backgroundColor = UIColor(red: 227/255, green: 255/255, blue: 230/255, alpha: 1)
+            cell.backgroundColor = UIColor.gtGreen
         case 3:
-            cell.backgroundColor = UIColor(red: 1, green: 231/255, blue: 218/255, alpha: 1)
+            cell.backgroundColor = UIColor.gtOrange
         default:
-            cell.backgroundColor = UIColor(red: 224/255, green: 229/255, blue: 252/255, alpha: 1)
+            cell.backgroundColor = UIColor.gtBackground
         }
         
         let eventImgURL = URL(string: event.imgURL)
@@ -82,7 +90,7 @@ class EventsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //let event = events[indexPath.row]
         
-        return 150
+        return 140
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

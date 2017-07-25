@@ -12,11 +12,13 @@ import FirebaseAuth
 import FirebaseDatabase
 import CoreLocation
 
-class CreateProfileViewController: UIViewController, CLLocationManagerDelegate {
+class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, UITextFieldDelegate {
     
     let locationManager = CLLocationManager()
     var location = ""
+    let firUser = Auth.auth().currentUser
     
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     
@@ -33,18 +35,30 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate {
             
         }
         
+        self.fullNameTextField.delegate = self
+        self.locationTextField.delegate = self
+        
+        self.fullNameTextField.text = firUser?.displayName
+        self.profileImageView.kf.setImage(with: firUser?.photoURL)
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         
-        guard let firUser = Auth.auth().currentUser, let name = fullNameTextField.text, let location = locationTextField.text, !name.isEmpty, !location.isEmpty
+        guard let name = fullNameTextField.text, let location = locationTextField.text, !name.isEmpty, !location.isEmpty
             else { return }
         
-        var imgURL = firUser.photoURL?.absoluteString
+        var imgURL = firUser?.photoURL?.absoluteString
         if imgURL == nil {
             imgURL = "https://cdn.pixabay.com/photo/2017/06/13/12/54/profile-2398783_960_720.png"
         }
-        UserService.create(firUser, name: name, location: location, imgURL: imgURL!) { (user) in
+        UserService.create(firUser!, name: name, location: location, imgURL: imgURL!) { (user) in
             guard let user = user else { return }
             
             User.setCurrent(user, writeToUserDefaults: true)
@@ -74,6 +88,7 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(locations.last!, completionHandler: { (placemarks, error) in
             let placemark =  placemarks?[0]
+            self.location = ""
             if let city = placemark?.locality {
                 self.location.append(city + ", ")
             }

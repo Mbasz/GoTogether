@@ -89,6 +89,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
   - Kingfisher (3.10.2)
+  - SwiftLinkPreview (2.0.6)
   - UITextView+Placeholder (1.2.0)
 
 DEPENDENCIES:
@@ -106,6 +107,7 @@ DEPENDENCIES:
   - GooglePlaces
   - GoogleSignIn
   - Kingfisher (~> 3.0)
+  - SwiftLinkPreview (~> 2.0.6)
   - UITextView+Placeholder (~> 1.2)
 
 EXTERNAL SOURCES:
@@ -141,8 +143,9 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
+  SwiftLinkPreview: 242eb54898f422b17a79c0f5b6c4dd48c6c6b5c5
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: b6bb7aa636412cf0038bcd097d3592e407a47736
+PODFILE CHECKSUM: 9e6d9eba4148e42e4a401e6c2b90b146cd617a96
 
 COCOAPODS: 1.0.1

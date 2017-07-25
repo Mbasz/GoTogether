@@ -16,7 +16,6 @@ class User: NSObject {
     let name: String
     var location: String
     var imgURL: String
-    //var hasEvents: Bool
     
 //    var dictValue: [String: Any] {
 //        let userDict

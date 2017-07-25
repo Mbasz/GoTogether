@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FacebookShare
+import FacebookCore
 
 class PreviewEventViewController: UIViewController {
     
@@ -45,13 +46,14 @@ class PreviewEventViewController: UIViewController {
             profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             eventImageView.kf.setImage(with: eventImgURL)
             profileImageView.kf.setImage(with: profileImgURL)
-//            let content = LinkShareContent(url: URL(string: event.link)!)
-//            let shareButton = ShareButton<LinkShareContent>()
-//            shareButton.content = content
-//            shareButton.center = self.view.center
+            let content = LinkShareContent(url: URL(string: event.link)!)
+            let shareButton = ShareButton<LinkShareContent>()
+            shareButton.content = content
+            shareButton.center.x = self.view.center.x
+            shareButton.frame.origin.y = 550
 //            let shareDialog = ShareDialog(content: content)
 //            shareDialog.mode = .native
-//            self.view.addSubview(shareButton)
+            self.view.addSubview(shareButton)
         }
         
     }
