@@ -46,9 +46,12 @@ class PreviewEventViewController: UIViewController {
             profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             eventImageView.kf.setImage(with: eventImgURL)
             profileImageView.kf.setImage(with: profileImgURL)
-            let content = LinkShareContent(url: URL(string: event.link)!)
+            
             let shareButton = ShareButton<LinkShareContent>()
-            shareButton.content = content
+            if let url = URL(string: event.link) {
+                let content = LinkShareContent(url: url)
+                shareButton.content = content
+            }
             shareButton.center.x = self.view.center.x
             shareButton.frame.origin.y = 550
 //            let shareDialog = ShareDialog(content: content)
@@ -68,10 +71,10 @@ class PreviewEventViewController: UIViewController {
     }
     
     @IBAction func linkButtonTapped(_ sender: Any) {
-        if let link = event?.link {
-            UIApplication.shared.open(URL(string: link)!, options: [:], completionHandler:  { success in
-                if !success{
-                    let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
+        if let event = event, let urlLink = URL(string: event.link) {
+            UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
+                if !success {
+                    let alertController = UIAlertController(title: "Problem with internet connection", message: nil, preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)
@@ -79,7 +82,10 @@ class PreviewEventViewController: UIViewController {
             })
         }
         else {
-            linkButton.isHidden = true
+            let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

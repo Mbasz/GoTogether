@@ -64,23 +64,24 @@ struct UserService {
         let connection = GraphRequestConnection()
         let params = ["fields": "name, picture"]
         connection.add(GraphRequest(graphPath: "/me/friends", parameters: params)) { response, result in
-        switch result {
-        case .success(let response):
-            var friends = [FbFriend]()
-            if let responseDict = response.dictionaryValue {
-                for friendDict in responseDict["data"] {
-                    let name = friendDict["name"] as String
-                    let imgURL = friendDict["picture"]["data"]["url"]
-                    let friend = FbFriend(name: name, imgURL: imgURL)
-                    friends.append(friend)
+            switch result {
+            case .success(let response):
+                var friends = [FbFriend]()
+                if let responseDict = response.dictionaryValue {
+                    for friendDict in responseDict["data"] as! [NSDictionary] {
+                        let name = friendDict["name"] as! String
+                        let imgURL = ((friendDict["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String
+                        let friend = FbFriend(name: name, imgURL: imgURL)
+                        friends.append(friend)
+                    }
                 }
+                completion(friends)
+            case .failed(let error):
+                print(error.localizedDescription)
+                completion([])
             }
-        case .failed:
-            completion([])
-        }
         }
         connection.start()
-        completion(friends)
     }
     
 }

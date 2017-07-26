@@ -17,7 +17,9 @@ class GTImageHelper: NSObject {
         imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
         
-        viewController.present(imagePickerController, animated: true)
+        viewController.addChildViewController(imagePickerController)
+        imagePickerController.didMove(toParentViewController: viewController)
+        viewController.view.addSubview(imagePickerController.view)
     }
 }
 
@@ -26,9 +28,11 @@ extension GTImageHelper: UINavigationControllerDelegate, UIImagePickerController
         if let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             completionHandler?(selectedImage)
         }
-        picker.dismiss(animated: true)
+        picker.view.removeFromSuperview()
+        picker.removeFromParentViewController()
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
+        picker.view.removeFromSuperview()
+        picker.removeFromParentViewController()
     }
 }

@@ -28,6 +28,19 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         self.linkTextfield.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        workshopButton.layer.opacity = 1
+        workshopButton.isUserInteractionEnabled = true
+        cultureButton.layer.opacity = 1
+        cultureButton.isUserInteractionEnabled = true
+        sportButton.layer.opacity = 1
+        sportButton.isUserInteractionEnabled = true
+        socialButton.layer.opacity = 1
+        socialButton.isUserInteractionEnabled = true
+        publicSegmentedControl.selectedSegmentIndex = 0
+        linkTextfield.text = ""
+    }
+    
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -114,6 +127,7 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func nextTapped(_ sender: Any) {
+        self.view.endEditing(true)
         performSegue(withIdentifier: "toNewEvent", sender: self)
     }
     

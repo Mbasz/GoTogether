@@ -31,12 +31,25 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     let imageHelper = GTImageHelper()
     
     override func viewWillAppear(_ animated: Bool) {
-//        titleTextField.text = ""
-//        eventDatePicker.date = Date()
-//        locationTextField.text = ""
-//        uploadImageView.image = UIImage(contentsOfFile: "uploadImage")
-//        descriptionTextView.text = ""
-//        friendsTableView.isHidden = true
+        titleTextField.text = ""
+        eventDatePicker.date = Date()
+        locationTextField.text = ""
+        uploadImageView.image = UIImage(named: "uploadImage")
+        descriptionTextView.text = ""
+        slp.preview(link, onSuccess: { result in
+            if let title: String = result[.title] as? String {
+                self.titleTextField.text = title
+            }
+            if let description = result[.description] as? String {
+                self.descriptionTextView.text = description
+            }
+            if let imageURL = result[.image] as? String {
+                self.uploadImageView.kf.setImage(with: URL(string: imageURL))
+            }
+            
+        }, onError: { error in
+            print("\(error.localizedDescription)")
+        })
     }
     
     override func viewDidLoad() {
@@ -52,24 +65,10 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         imageHelper.completionHandler = { image in
             self.uploadImageView.image = image
         }
+        
         self.titleTextField.delegate = self
         self.locationTextField.delegate = self
         self.descriptionTextView.delegate = self
-        
-        slp.preview(link, onSuccess: { result in
-            if let title: String = result[.title] as? String {
-                self.titleTextField.text = title
-            }
-            if let description = result[.description] as? String {
-                self.descriptionTextView.text = description
-            }
-            if let imageURL = result[.image] as? String {
-                self.uploadImageView.kf.setImage(with: URL(string: imageURL))
-            }
-            
-        }, onError: { error in
-            print("\(error.localizedDescription)")
-        })
     }
     
     override func didReceiveMemoryWarning() {
