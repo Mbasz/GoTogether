@@ -10,6 +10,10 @@
 		1E61CDF212E497778F46B949 /* Pods_GoTogether.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */; };
 		C117D83F1F192B1D005241A9 /* PhoneFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */; };
 		C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C117D8401F193817005241A9 /* PhoneFriend.swift */; };
+		C14B2D7F1F2909F8000B6AFD /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B2D7E1F2909F8000B6AFD /* FilterViewController.swift */; };
+		C14B2D811F290B53000B6AFD /* FilterCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B2D801F290B53000B6AFD /* FilterCategoryTableViewController.swift */; };
+		C14B2D831F290C55000B6AFD /* FilterDateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B2D821F290C55000B6AFD /* FilterDateTableViewController.swift */; };
+		C14B2D851F2911F9000B6AFD /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B2D841F2911F9000B6AFD /* Filter.swift */; };
 		C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F392B1F20817E00373A2E /* CategoriesViewController.swift */; };
 		C15B420E1F226D4100176242 /* UIColor+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15B420D1F226D4100176242 /* UIColor+Utility.swift */; };
 		C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */; };
@@ -46,6 +50,10 @@
 		AF9BA376E45F30AC91332593 /* Pods_GoTogether.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoTogether.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneFriendCell.swift; path = Views/PhoneFriendCell.swift; sourceTree = "<group>"; };
 		C117D8401F193817005241A9 /* PhoneFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneFriend.swift; path = Models/PhoneFriend.swift; sourceTree = "<group>"; };
+		C14B2D7E1F2909F8000B6AFD /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterViewController.swift; path = Controllers/FilterViewController.swift; sourceTree = "<group>"; };
+		C14B2D801F290B53000B6AFD /* FilterCategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterCategoryTableViewController.swift; path = Controllers/FilterCategoryTableViewController.swift; sourceTree = "<group>"; };
+		C14B2D821F290C55000B6AFD /* FilterDateTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilterDateTableViewController.swift; path = Controllers/FilterDateTableViewController.swift; sourceTree = "<group>"; };
+		C14B2D841F2911F9000B6AFD /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Models/Filter.swift; sourceTree = "<group>"; };
 		C14F392B1F20817E00373A2E /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = Controllers/CategoriesViewController.swift; sourceTree = "<group>"; };
 		C15B420D1F226D4100176242 /* UIColor+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Utility.swift"; path = "Extensions/UIColor+Utility.swift"; sourceTree = "<group>"; };
 		C17BB3E51F13E88800A1ED1F /* GoTogether.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoTogether.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +147,9 @@
 			isa = PBXGroup;
 			children = (
 				C17BB4121F14382500A1ED1F /* EventsTableViewController.swift */,
+				C14B2D7E1F2909F8000B6AFD /* FilterViewController.swift */,
+				C14B2D801F290B53000B6AFD /* FilterCategoryTableViewController.swift */,
+				C14B2D821F290C55000B6AFD /* FilterDateTableViewController.swift */,
 				C17BB4151F14382500A1ED1F /* PreviewEventViewController.swift */,
 				C14F392B1F20817E00373A2E /* CategoriesViewController.swift */,
 				C17BB4141F14382500A1ED1F /* NewEventViewController.swift */,
@@ -156,6 +167,7 @@
 				C17BB41D1F14383000A1ED1F /* User.swift */,
 				C117D8401F193817005241A9 /* PhoneFriend.swift */,
 				C1B1BE671F27A2C000562F96 /* FbFriend.swift */,
+				C14B2D841F2911F9000B6AFD /* Filter.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -362,6 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C17BB4481F16CCB100A1ED1F /* UIImage+Size.swift in Sources */,
+				C14B2D811F290B53000B6AFD /* FilterCategoryTableViewController.swift in Sources */,
+				C14B2D851F2911F9000B6AFD /* Filter.swift in Sources */,
 				C17BB43D1F15887800A1ED1F /* CreateProfileViewController.swift in Sources */,
 				C17BB4321F153E3C00A1ED1F /* EventService.swift in Sources */,
 				C17BB41B1F14382500A1ED1F /* ProfileViewController.swift in Sources */,
@@ -373,6 +387,7 @@
 				C17BB4341F153ECB00A1ED1F /* UserService.swift in Sources */,
 				C17BB41F1F14383000A1ED1F /* User.swift in Sources */,
 				C17BB4301F1533A200A1ED1F /* DatabaseReference+Location.swift in Sources */,
+				C14B2D831F290C55000B6AFD /* FilterDateTableViewController.swift in Sources */,
 				C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */,
 				C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */,
 				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
@@ -381,6 +396,7 @@
 				C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */,
 				C17BB4361F1548AC00A1ED1F /* Constants.swift in Sources */,
 				C1B1BE681F27A2C000562F96 /* FbFriend.swift in Sources */,
+				C14B2D7F1F2909F8000B6AFD /* FilterViewController.swift in Sources */,
 				C15B420E1F226D4100176242 /* UIColor+Utility.swift in Sources */,
 				C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */,
 				C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */,

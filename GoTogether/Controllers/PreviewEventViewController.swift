@@ -74,7 +74,7 @@ class PreviewEventViewController: UIViewController {
         if let event = event, let urlLink = URL(string: event.link) {
             UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
                 if !success {
-                    let alertController = UIAlertController(title: "Problem with internet connection", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)

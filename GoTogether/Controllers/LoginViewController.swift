@@ -39,9 +39,6 @@ class LoginViewController: UIViewController {
         authUI.providers = providers
         let authViewController = authUI.authViewController()
         
-//        let fbLoginManager = LoginManager()
-//        fbLoginManager.logIn([.userFriends], viewController: authViewController, completion: nil)
-
         present(authViewController, animated: true)
     }
 }
@@ -49,7 +46,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController: FUIAuthDelegate {
     func authUI(_ authUI: FUIAuth, didSignInWith user: FIRUser?, error: Error?) {
         if let error = error {
-            //assertionFailure("Error signing in: \(error.localizedDescription)")
+            print("Error signing in: \(error.localizedDescription)")
             return
         }
         

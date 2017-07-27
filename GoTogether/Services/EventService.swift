@@ -60,19 +60,50 @@ struct EventService {
         })
     }
     
-    static func showPublic(completion: @escaping ([Event]) -> Void) {
+    static func showPublic(filter: Filter?, completion: @escaping ([Event]) -> Void) {
         let publicRef = DatabaseReference.toLocation(.showPublic)
         publicRef.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
                 else { return completion([]) }
             
-            let events: [Event] = snapshot
+            var events: [Event] = snapshot
                 .reversed()
                 .flatMap {
                     guard let event = Event(snapshot: $0)
                         else { return nil }
                     
                     return event
+            }
+            if let filter = filter {
+                print(filter.location)
+                switch filter.category {
+                case 0:
+                    events = events.filter {$0.category == 0}
+                case 1:
+                    events = events.filter {$0.category == 1}
+                case 2:
+                    events = events.filter {$0.category == 2}
+                case 3:
+                    events = events.filter {$0.category == 3}
+                default:
+                    break
+                }
+                
+//                switch filter.date {
+//                case 0:
+//                    events = events.filter {$0.date == Date()}
+//                case 1:
+//                    events = events.filter {$0.date == 1}
+//                case 2:
+//                    events = events.filter {$0.date == 2}
+//                case 3:
+//                    events = events.filter {$0.date == 3}
+//                case 4:
+//                    events = events.filter {$0.date == 3}
+//                default:
+//                    break
+//                }
+                
             }
             completion(events)
         })
