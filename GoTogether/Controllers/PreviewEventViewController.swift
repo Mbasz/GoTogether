@@ -52,8 +52,9 @@ class PreviewEventViewController: UIViewController {
                 let content = LinkShareContent(url: url)
                 shareButton.content = content
             }
-            shareButton.center.x = self.view.center.x
             shareButton.frame.origin.y = 550
+            shareButton.frame.size = CGSize(width: 80, height: 30)
+            shareButton.center.x = self.view.center.x
 //            let shareDialog = ShareDialog(content: content)
 //            shareDialog.mode = .native
             self.view.addSubview(shareButton)
@@ -72,14 +73,18 @@ class PreviewEventViewController: UIViewController {
     
     @IBAction func linkButtonTapped(_ sender: Any) {
         if let event = event, let urlLink = URL(string: event.link) {
-            UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
-                if !success {
-                    let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alertController.addAction(ok)
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
+                    if !success {
+                        let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
+                        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(ok)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                })
+            } else {
+                UIApplication.shared.openURL(urlLink)
+            }
         }
         else {
             let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)

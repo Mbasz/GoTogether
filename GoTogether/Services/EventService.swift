@@ -75,7 +75,6 @@ struct EventService {
                     return event
             }
             if let filter = filter {
-                print(filter.location)
                 switch filter.category {
                 case 0:
                     events = events.filter {$0.category == 0}
@@ -88,22 +87,27 @@ struct EventService {
                 default:
                     break
                 }
-                
-//                switch filter.date {
-//                case 0:
-//                    events = events.filter {$0.date == Date()}
-//                case 1:
-//                    events = events.filter {$0.date == 1}
-//                case 2:
-//                    events = events.filter {$0.date == 2}
-//                case 3:
-//                    events = events.filter {$0.date == 3}
-//                case 4:
-//                    events = events.filter {$0.date == 3}
-//                default:
-//                    break
-//                }
-                
+                let calendar = Calendar.current
+                let date = Date()
+                switch filter.date {
+                case 0:
+                    events = events.filter {$0.date == date}
+                case 1:
+                    //events = events.filter {$0.date == 1}
+                    break
+                case 2:
+                    //events = events.filter {$0.date == 2}
+                    break
+                case 3:
+                    events = events.filter {calendar.component(.month, from: $0.date) == calendar.component(.month, from: date) }
+                case 4:
+                    events = events.filter {(calendar.component(.month, from: $0.date) - 1) == calendar.component(.month, from: date) }
+                default:
+                    break
+                }
+                if !filter.location.isEmpty {
+                    events = events.filter {$0.location.lowercased().contains(filter.location.lowercased())}
+                }
             }
             completion(events)
         })

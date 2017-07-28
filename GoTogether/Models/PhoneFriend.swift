@@ -11,10 +11,10 @@ import UIKit
 
 struct PhoneFriend {
     var name: String
-    var phone: String
+    var number: String
     
-    init(name: String, phone: String) {
+    init(name: String, number: String) {
         self.name = name
-        self.phone = phone
+        self.number = number
     }
 }

@@ -108,7 +108,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             case 3:
                 image = UIImage(named: "Social-1")
             default:
-                image = UIImage(named: "uploadImage")
+                image = UIImage(named: "default")
             }
         } else {
             image = self.uploadImageView.image!
@@ -122,7 +122,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
-            composeVC.recipients = friends.map({$0.phone})
+            composeVC.recipients = friends.map({$0.number})
             composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!"
             
             self.present(composeVC, animated: true, completion: nil)
@@ -148,15 +148,24 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         //show alert controller
         let alertController = UIAlertController(title: "Add New Friend", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Type name"
+        }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Type phone number"
+        }
+        
         let addButton = UIAlertAction(title: "Add", style: .default) { (_) in
             //append this friend to array
-            guard let nameField = alertController.textFields?[0], let phoneField = alertController.textFields?[1] else {
+            guard let nameField = alertController.textFields?[0], let numberField = alertController.textFields?[1] else {
                 return
             }
             let name = nameField.text!
-            let phone = phoneField.text!
+            let number = numberField.text!
             
-            let friend = PhoneFriend(name: name, phone: phone)
+            let friend = PhoneFriend(name: name, number: number)
 
             self.friends.append(friend)
             self.friendsTableView.isHidden = false
@@ -167,14 +176,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         alertController.addAction(addButton)
         alertController.addAction(cancelButton)
-         
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Type name"
-        }
-        
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Type phone number"
-        }
         
         self.present(alertController, animated: true, completion: nil)
     }
@@ -189,7 +190,7 @@ extension NewEventViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhoneFriendCell") as! PhoneFriendCell
         let friend = friends[indexPath.row]
         cell.nameLabel.text = friend.name
-        cell.phoneLabel.text = friend.phone
+        cell.numberLabel.text = friend.number
         return cell
     }
     

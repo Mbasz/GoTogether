@@ -29,7 +29,11 @@ class FilterCategoryTableViewController: UITableViewController {
             tableView.cellForRow(at: indexPath)?.isSelected = true
             selected = indexPath.row
         }
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
 }

@@ -282,7 +282,7 @@
 				TargetAttributes = {
 					C17BB3E41F13E88800A1ED1F = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = M8ZCG3FX48;
+						DevelopmentTeam = ALLAMRG85U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -508,7 +508,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = M8ZCG3FX48;
+				DEVELOPMENT_TEAM = ALLAMRG85U;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;
@@ -525,7 +525,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = M8ZCG3FX48;
+				DEVELOPMENT_TEAM = ALLAMRG85U;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Marta.GoTogether;

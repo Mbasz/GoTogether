@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         }
     }
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        let color = UIColor.gtPink
+        let color = UIColor.gtBackground
         return color
     }
     
@@ -127,7 +127,7 @@ extension ProfileViewController: UITableViewDataSource {
             case 3:
                 cell.backgroundColor = UIColor.gtOrange
             default:
-                cell.backgroundColor = UIColor.gtBackground
+                cell.backgroundColor = UIColor.gtPink
             }
             
             let eventImgURL = URL(string: event.imgURL)
