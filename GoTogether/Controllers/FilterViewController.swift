@@ -25,13 +25,21 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
     @IBOutlet weak var timeContainer: UIView!
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        self.hideKeyboard()
         return false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationTextField.delegate = self
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+//        tapGesture.cancelsTouchesInView = true
+//        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

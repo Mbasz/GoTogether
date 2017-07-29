@@ -23,6 +23,7 @@ class Event {
     var description: String
     var category: Int
     var isPublic: Bool
+    //var participant: User?
     
     var dictValue: [String: Any] {
         let userDict = ["uid": creator.uid, "name": creator.name, "location": creator.location, "img_URL": creator.imgURL]

@@ -34,6 +34,7 @@ class FilterCategoryTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.layer.cornerRadius = 5
     }
     
 }

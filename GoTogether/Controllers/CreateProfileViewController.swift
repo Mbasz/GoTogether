@@ -21,6 +21,8 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var nextButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +33,7 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
             locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
             locationManager.requestLocation()
         }
-        else {
-            
-        }
+        else { }
         
         self.fullNameTextField.delegate = self
         self.locationTextField.delegate = self
@@ -42,11 +42,21 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
         self.profileImageView.kf.setImage(with: firUser?.photoURL)
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(tapGesture)
+        
+        nextButton.layer.cornerRadius = 5
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        self.hideKeyboard()
         return false
+    }
+    
+    func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {

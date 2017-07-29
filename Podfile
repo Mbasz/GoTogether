@@ -22,4 +22,5 @@ target 'GoTogether' do
 	pod 'UITextView+Placeholder', '~> 1.2'
 	pod 'FacebookShare', :git => 'https://github.com/1amageek/facebook-sdk-swift'
 	pod 'SwiftLinkPreview', '~> 2.0.6'
+	pod 'BEMCheckBox'
 end

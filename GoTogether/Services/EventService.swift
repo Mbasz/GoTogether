@@ -91,17 +91,14 @@ struct EventService {
                 let date = Date()
                 switch filter.date {
                 case 0:
-                    events = events.filter {$0.date == date}
+                    events = events.filter {calendar.isDate($0.date, equalTo: date, toGranularity: .day)}
                 case 1:
-                    //events = events.filter {$0.date == 1}
-                    break
+                    events = events.filter {calendar.isDate($0.date, equalTo: date, toGranularity: .weekOfYear)}
                 case 2:
-                    //events = events.filter {$0.date == 2}
-                    break
+                    events = events.filter {calendar.component(.weekOfYear, from: $0.date) == calendar.component(.weekOfYear, from: calendar.date(byAdding: .weekOfYear, value: 1, to: date)!)}
                 case 3:
-                    events = events.filter {calendar.component(.month, from: $0.date) == calendar.component(.month, from: date) }
-                case 4:
-                    events = events.filter {(calendar.component(.month, from: $0.date) - 1) == calendar.component(.month, from: date) }
+                    events = events.filter {calendar.isDate($0.date, equalTo: date, toGranularity: .month)}                case 4:
+                    events = events.filter {calendar.component(.month, from: $0.date) == calendar.component(.month, from: calendar.date(byAdding: .month, value: 1, to: date)!) }
                 default:
                     break
                 }

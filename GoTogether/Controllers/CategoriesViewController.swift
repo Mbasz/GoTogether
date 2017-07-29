@@ -20,12 +20,18 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var socialButton: UIButton!
     @IBOutlet weak var publicSegmentedControl: UISegmentedControl!
     @IBOutlet weak var linkTextfield: UITextField!
+    @IBOutlet weak var nextButton: UIButton!
+    
     
     override func viewDidLoad() {
         publicSegmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16)], for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.linkTextfield.delegate = self
+        nextButton.layer.cornerRadius = 5
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,10 +47,14 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         linkTextfield.text = ""
     }
     
+    func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+    
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+                self.view.frame.origin.y -= (keyboardSize.height - (tabBarController?.tabBar.frame.height)!)
             }
         }
     }
@@ -52,13 +62,13 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height
+                self.view.frame.origin.y += (keyboardSize.height - (tabBarController?.tabBar.frame.height)!)
             }
         }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        self.hideKeyboard()
         return false
     }
     

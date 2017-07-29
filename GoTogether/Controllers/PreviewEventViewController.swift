@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import FacebookShare
 import FacebookCore
+import BEMCheckBox
 
-class PreviewEventViewController: UIViewController {
+class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     
     var event: Event?
     
@@ -24,11 +25,14 @@ class PreviewEventViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var checkbox: BEMCheckBox!
+    @IBOutlet weak var checkboxLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        checkbox.delegate = self
         if let event = event {
             titleLabel.text = event.title
             let dateFormatter = DateFormatter()
@@ -53,11 +57,12 @@ class PreviewEventViewController: UIViewController {
                 shareButton.content = content
             }
             shareButton.frame.origin.y = 550
-            shareButton.frame.size = CGSize(width: 80, height: 30)
-            shareButton.center.x = self.view.center.x
+            shareButton.frame.size = CGSize(width: 70, height: 30)
+            shareButton.center.x = self.view.center.x + 140
 //            let shareDialog = ShareDialog(content: content)
 //            shareDialog.mode = .native
             self.view.addSubview(shareButton)
+            checkbox.onAnimationType = .bounce
         }
         
     }
@@ -69,6 +74,14 @@ class PreviewEventViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func animationDidStop(for checkBox: BEMCheckBox) {
+        if checkbox.on {
+            checkbox.isHidden = true
+            nameLabel.text = "You're going with \(event!.creator.name)!"
+            checkboxLabel.text = ""
+        }
     }
     
     @IBAction func linkButtonTapped(_ sender: Any) {

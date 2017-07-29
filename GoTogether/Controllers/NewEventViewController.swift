@@ -10,9 +10,11 @@ import Foundation
 import UIKit
 import MessageUI
 import SwiftLinkPreview
+import MapKit
 
-class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate, UITextViewDelegate, UITextFieldDelegate {
+class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate, UITextViewDelegate, UITextFieldDelegate, MKLocalSearchCompleterDelegate {
     
+    let searchCompleter = MKLocalSearchCompleter()
     let slp = SwiftLinkPreview()
     var category = -1
     var isPublic = true
@@ -26,7 +28,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var friendsTableView: UITableView!
-    
+    @IBOutlet weak var addFriendButton: UIButton!
+    @IBOutlet weak var createButton: UIButton!
     
     let imageHelper = GTImageHelper()
     
@@ -55,8 +58,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        //self.eventDatePicker.minimumDate
+
+        eventDatePicker.minimumDate = Date()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         uploadImageView.isUserInteractionEnabled = true
@@ -69,6 +72,15 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         self.titleTextField.delegate = self
         self.locationTextField.delegate = self
         self.descriptionTextView.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = true
+        self.view.addGestureRecognizer(tapGesture)
+        
+        addFriendButton.layer.cornerRadius = 5
+        createButton.layer.cornerRadius = 5
+        
+        searchCompleter.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,9 +88,20 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         // Dispose of any resources that can be recreated.
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func hideKeyboard() {
         self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.hideKeyboard()
         return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == locationTextField {
+            searchCompleter.queryFragment = locationTextField.text!
+        }
+        return true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

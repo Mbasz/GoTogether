@@ -6,7 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,11 +25,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-CZ-pHe">
-                                <rect key="frame" x="16" y="597" width="343" height="50"/>
+                                <rect key="frame" x="16" y="602.5" width="343" height="44.5"/>
                                 <color key="backgroundColor" red="0.52980963339999998" green="0.41633798109999998" blue="0.75539035870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="wLg-Gv-ZnW"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Register or Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,21 +37,26 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firework" translatesAutoresizingMaskIntoConstraints="NO" id="xe8-FP-2Fo">
                                 <rect key="frame" x="16" y="30" width="343" height="547"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xe8-FP-2Fo" secondAttribute="height" multiplier="343:547" id="Ju0-s0-ag1"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.94650601420000002" green="0.93731587510000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="xe8-FP-2Fo" firstAttribute="trailing" secondItem="PmJ-0L-U6B" secondAttribute="trailingMargin" id="0oK-Cm-HfI"/>
+                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="width" secondItem="xe8-FP-2Fo" secondAttribute="width" id="7pq-jN-fgB"/>
                             <constraint firstItem="um6-7B-gnn" firstAttribute="top" secondItem="nGH-CZ-pHe" secondAttribute="bottom" constant="20" id="FNX-X8-xWM"/>
                             <constraint firstItem="nGH-CZ-pHe" firstAttribute="leading" secondItem="PmJ-0L-U6B" secondAttribute="leadingMargin" id="JQR-OV-ol1"/>
-                            <constraint firstItem="um6-7B-gnn" firstAttribute="top" secondItem="xe8-FP-2Fo" secondAttribute="bottom" constant="90" id="gXT-LZ-Mfy"/>
-                            <constraint firstItem="xe8-FP-2Fo" firstAttribute="top" secondItem="5nW-lE-ACm" secondAttribute="bottom" constant="10" id="lwf-iG-Hk5"/>
+                            <constraint firstItem="xe8-FP-2Fo" firstAttribute="top" secondItem="5nW-lE-ACm" secondAttribute="bottom" constant="10" id="TIB-XG-8ar"/>
                             <constraint firstItem="nGH-CZ-pHe" firstAttribute="trailing" secondItem="PmJ-0L-U6B" secondAttribute="trailingMargin" id="pBM-Oa-6KN"/>
+                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="height" secondItem="PmJ-0L-U6B" secondAttribute="height" multiplier="1:15" id="wBh-XG-va3"/>
                             <constraint firstItem="xe8-FP-2Fo" firstAttribute="leading" secondItem="PmJ-0L-U6B" secondAttribute="leadingMargin" id="wQg-OR-xg0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HwS-RQ-5Y8"/>
                     <connections>
+                        <outlet property="loginButton" destination="nGH-CZ-pHe" id="UBz-Eu-gad"/>
                         <segue destination="gG8-bT-sAw" kind="show" identifier="toCreateProfile" animates="NO" id="5wS-I5-aBu"/>
                     </connections>
                 </viewController>
@@ -73,7 +77,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="yYS-Gh-AUr">
-                                <rect key="frame" x="16" y="267" width="343" height="110"/>
+                                <rect key="frame" x="16" y="272.5" width="343" height="110"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter full name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x8s-Mk-YZb">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -90,11 +94,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb4-8W-cu0">
-                                <rect key="frame" x="16" y="447" width="343" height="50"/>
+                                <rect key="frame" x="16" y="452.5" width="343" height="44.5"/>
                                 <color key="backgroundColor" red="0.52980963339999998" green="0.41633798109999998" blue="0.75539035870000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="8p3-OL-R71"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,6 +112,7 @@
                         <color key="backgroundColor" red="0.94650601420000002" green="0.93731587510000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Lb4-8W-cu0" firstAttribute="trailing" secondItem="KXv-vl-lhj" secondAttribute="trailingMargin" id="6Nh-gz-Q7i"/>
+                            <constraint firstItem="Lb4-8W-cu0" firstAttribute="height" secondItem="KXv-vl-lhj" secondAttribute="height" multiplier="1:15" id="6vo-Cq-a8V"/>
                             <constraint firstItem="yYS-Gh-AUr" firstAttribute="leading" secondItem="KXv-vl-lhj" secondAttribute="leadingMargin" id="Ank-7O-OlH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yYS-Gh-AUr" secondAttribute="trailing" id="MgA-95-Bre"/>
                             <constraint firstItem="Lb4-8W-cu0" firstAttribute="leading" secondItem="KXv-vl-lhj" secondAttribute="leadingMargin" id="gq7-Db-aft"/>
@@ -121,6 +123,7 @@
                     <connections>
                         <outlet property="fullNameTextField" destination="x8s-Mk-YZb" id="S7N-ve-SWq"/>
                         <outlet property="locationTextField" destination="G9c-Fc-8iL" id="ZsY-xW-PZq"/>
+                        <outlet property="nextButton" destination="Lb4-8W-cu0" id="Tji-l9-HUo"/>
                         <outlet property="profileImageView" destination="hlz-7Z-xwb" id="O01-lO-1XB"/>
                     </connections>
                 </viewController>
