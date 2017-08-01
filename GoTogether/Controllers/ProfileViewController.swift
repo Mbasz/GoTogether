@@ -39,11 +39,10 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         self.eventsTableView.emptyDataSetSource = self
         self.eventsTableView.emptyDataSetDelegate = self
         eventsTableView.tableFooterView = UIView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserService.events(for: User.current) { (events) in
+        UserService.myEvents(for: User.current) { (events) in
             self.myEvents = events
             self.eventsTableView.reloadData()
         }
@@ -52,6 +51,7 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
             self.friends = friends
         }
         
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,14 +118,14 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
             
             switch (event.category) {
-            case 0:
-                cell.backgroundColor = UIColor.gtBlue
-            case 1:
-                cell.backgroundColor = UIColor.gtRed
-            case 2:
-                cell.backgroundColor = UIColor.gtGreen
-            case 3:
-                cell.backgroundColor = UIColor.gtOrange
+//            case 0:
+//                cell.backgroundColor = UIColor.gtBlue
+//            case 1:
+//                cell.backgroundColor = UIColor.gtRed
+//            case 2:
+//                cell.backgroundColor = UIColor.gtGreen
+//            case 3:
+//                cell.backgroundColor = UIColor.gtOrange
             default:
                 cell.backgroundColor = UIColor.gtPink
             }
@@ -142,10 +142,32 @@ extension ProfileViewController: UITableViewDataSource {
             cell.dateLabel.text = dateFormatter.string(from: event.date)
             cell.nameLabel.text = "\(event.creator.name) is going!"
             
+            if event.date < Date() {
+                cell.alpha = 0.1
+            }
+            
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !myEventsButton.isUserInteractionEnabled {
+            let event = myEvents[indexPath.row]
+            performSegue(withIdentifier: "toProfilePreview", sender: event)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfilePreview" {
+            if let vc = segue.destination as? ProfilePreviewEventViewController {
+                if let sender = sender as? Event {
+                    vc.event = sender
+                }
+            }
+        }
+    }
 }
+
 
 extension ProfileViewController: UITableViewDelegate {
 

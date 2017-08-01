@@ -13,11 +13,13 @@ class Filter {
     var location: String
     var category: Int
     var date: Int
+    var set: Bool
     
     init(isPublic: Bool, location: String, category: Int, date: Int) {
         self.isPublic = isPublic
         self.location = location
         self.category = category
         self.date = date
+        self.set = false
     }
 }

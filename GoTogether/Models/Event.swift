@@ -23,15 +23,15 @@ class Event {
     var description: String
     var category: Int
     var isPublic: Bool
-    //var participant: User?
+    var hasParticipant: Bool
     
     var dictValue: [String: Any] {
         let userDict = ["uid": creator.uid, "name": creator.name, "location": creator.location, "img_URL": creator.imgURL]
         
-        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "category": category, "is_public": isPublic, "creator": userDict]
+        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "category": category, "is_public": isPublic, "has_participant": hasParticipant, "creator": userDict]
     }
     
-    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String, category: Int, isPublic: Bool) {
+    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String, category: Int, isPublic: Bool, hasParticipant: Bool) {
         self.title = title
         self.date = date
         self.time = time
@@ -43,6 +43,7 @@ class Event {
         self.creator = User.current
         self.category = category
         self.isPublic = isPublic
+        self.hasParticipant = hasParticipant
     }
     
     init?(snapshot: DataSnapshot) {
@@ -59,7 +60,13 @@ class Event {
             let link = dict["link"] as? String,
             let description = dict["description"] as? String,
             let category = dict["category"] as? Int,
-            let isPublic = dict["is_public"] as? Bool
+            let isPublic = dict["is_public"] as? Bool,
+            let hasParticipant = dict["has_participant"] as? Bool
+//            let partDict = dict["participant"] as? [String: Any],
+//            let partUID = partDict["uid"] as? String,
+//            let partName = partDict["name"] as? String,
+//            let partImgURL = partDict["img_URL"] as? String,
+//            let partLocation = partDict["location"] as? String
         else { return nil }
         
         let dateFormatter = DateFormatter()
@@ -77,5 +84,7 @@ class Event {
         self.description = description
         self.category = category
         self.isPublic = isPublic
+        self.hasParticipant = hasParticipant
+        //self.participant = User(uid: partUID, name: partName, location: partLocation, imgURL: partImgURL)
     }
 }

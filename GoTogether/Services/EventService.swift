@@ -30,7 +30,7 @@ struct EventService {
     
     private static func create(title: String, date: Date, time: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String, category: Int, isPublic: Bool, completion: @escaping (Event?) -> Void) {
         let currentUser = User.current
-        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category, isPublic: isPublic)
+        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category, isPublic: isPublic, hasParticipant: false)
         
         var dict = event.dictValue
         
@@ -49,18 +49,33 @@ struct EventService {
                 
     }
     
-    static func show(forKey eventKey: String, creatorUID: String, completion: @escaping (Event?) -> Void) {
-        let ref = DatabaseReference.toLocation(.showEvent(uid: creatorUID, eventKey: eventKey))
+//    static func show(forKey eventKey: String, creatorUID: String, completion: @escaping (Event?) -> Void) {
+//        let ref = DatabaseReference.toLocation(.showEvent(uid: creatorUID, eventKey: eventKey))
+//        
+//        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+//            guard let event = Event(snapshot: snapshot) else {
+//                return completion(nil)
+//            }
+//            completion(event)
+//        })
+//    }
+    
+//    static func addParticipant(eventKey: String) {
+//        let currentUser = User.current
+//        let userDict = currentUser.dictValue
+//        
+//        let eventRef = DatabaseReference.toLocation(.addParticipant(currentUID: currentUser.uid, eventKey: eventKey))
+//        eventRef.updateChildValues(userDict)
+//        
+//        let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: eventKey))
+//        publicRef.removeValue()
+//    }
+    
+    static func observePublic() {
         
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            guard let event = Event(snapshot: snapshot) else {
-                return completion(nil)
-            }
-            completion(event)
-        })
     }
     
-    static func showPublic(filter: Filter?, completion: @escaping ([Event]) -> Void) {
+    static func showPublic(uids: [String], filter: Filter?, completion: @escaping ([Event]) -> Void) {
         let publicRef = DatabaseReference.toLocation(.showPublic)
         publicRef.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
@@ -74,7 +89,20 @@ struct EventService {
                     
                     return event
             }
+            let calendar = Calendar.current
+            let date = Date()
             if let filter = filter {
+                if !filter.isPublic {
+                    var events2 = [Event]()
+                    for event in events {
+                        for uid in uids {
+                            if (event.creator.uid == uid) {
+                                events2.append(event)
+                            }
+                        }
+                    }
+                    events = events2
+                }
                 switch filter.category {
                 case 0:
                     events = events.filter {$0.category == 0}
@@ -84,11 +112,11 @@ struct EventService {
                     events = events.filter {$0.category == 2}
                 case 3:
                     events = events.filter {$0.category == 3}
+                case 4:
+                    events = events.filter {$0.category == 4}
                 default:
                     break
                 }
-                let calendar = Calendar.current
-                let date = Date()
                 switch filter.date {
                 case 0:
                     events = events.filter {calendar.isDate($0.date, equalTo: date, toGranularity: .day)}
@@ -106,6 +134,7 @@ struct EventService {
                     events = events.filter {$0.location.lowercased().contains(filter.location.lowercased())}
                 }
             }
+            //events = events.filter {$0.date >= date}
             completion(events)
         })
 

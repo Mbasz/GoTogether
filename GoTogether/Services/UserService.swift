@@ -40,8 +40,40 @@ struct UserService {
         })
     }
 
+    static func tag (event: Event) {
+        let currentUser = User.current
+        event.hasParticipant = true
+        var dict = event.dictValue
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        
+        dict["date"] = dateFormatter.string(from: dict["date"] as! Date)
+        
+        let eventRef = DatabaseReference.toLocation(.showEvent(uid: currentUser.uid, eventKey: event.key!) )
+        eventRef.updateChildValues(dict)
+        
+        let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: event.key!))
+        publicRef.removeValue()
+    }
     
-    static func events(for user: User, completion: @escaping ([Event]) -> Void) {
+    static func untag (event: Event) {
+        let currentUser = User.current
+        
+        let eventRef = DatabaseReference.toLocation(.showEvent(uid: currentUser.uid, eventKey: event.key!) )
+        eventRef.removeValue()
+        
+        event.hasParticipant = false
+        var dict = event.dictValue
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dict["date"] = dateFormatter.string(from: dict["date"] as! Date)
+        
+        let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: event.key!))
+        publicRef.updateChildValues(dict)
+    }
+    
+    static func myEvents(for user: User, completion: @escaping ([Event]) -> Void) {
         let ref = DatabaseReference.toLocation(.events(uid: user.uid))
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -62,16 +94,17 @@ struct UserService {
     
     static func friends(completion: @escaping ([FbFriend]) -> Void) {
         let connection = GraphRequestConnection()
-        let params = ["fields": "name, picture"]
+        let params = ["fields": "id, name, picture"]
         connection.add(GraphRequest(graphPath: "/me/friends", parameters: params)) { response, result in
             switch result {
             case .success(let response):
                 var friends = [FbFriend]()
                 if let responseDict = response.dictionaryValue {
                     for friendDict in responseDict["data"] as! [NSDictionary] {
+                        let uid = friendDict["id"] as! String
                         let name = friendDict["name"] as! String
                         let imgURL = ((friendDict["picture"] as! [String: Any])["data"] as! [String: Any])["url"] as! String
-                        let friend = FbFriend(name: name, imgURL: imgURL)
+                        let friend = FbFriend(uid: uid, name: name, imgURL: imgURL)
                         friends.append(friend)
                     }
                 }

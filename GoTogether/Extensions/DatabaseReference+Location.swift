@@ -15,8 +15,10 @@ extension DatabaseReference {
         case root
         case events(uid: String)
         case showEvent(uid: String, eventKey: String)
+        case showPublicEvent(eventKey: String)
         case newEvent(currentUID: String)
         case newPublicEvent
+        case addParticipant(currentUID: String, eventKey: String)
         case showPublic
         case users
         case showUser(uid: String)
@@ -31,12 +33,16 @@ extension DatabaseReference {
                 return root.child("events").child(uid)
             case let .showEvent(uid, eventKey):
                 return root.child("events").child(uid).child(eventKey)
+            case let .showPublicEvent(eventKey):
+                return root.child("public_events").child(eventKey)
             case .newEvent(let currentUID):
                 return root.child("events").child(currentUID).childByAutoId()
             case .newPublicEvent:
                 return root.child("public_events").childByAutoId()
             case .showPublic:
                 return root.child("public_events")
+            case let .addParticipant(currentUID, eventKey):
+                return root.child("events").child(currentUID).child(eventKey)
             case .users:
                 return root.child("users")
             case .showUser(let uid):

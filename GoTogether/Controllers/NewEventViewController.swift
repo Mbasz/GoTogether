@@ -21,6 +21,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     var link = ""
     var image = UIImage(named: "uploadImage")
     var friends = [PhoneFriend]()
+    let imageHelper = GTImageHelper()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
@@ -30,8 +31,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
-    
-    let imageHelper = GTImageHelper()
     
     override func viewWillAppear(_ animated: Bool) {
         titleTextField.text = ""
@@ -73,9 +72,9 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         self.locationTextField.delegate = self
         self.descriptionTextView.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = true
-        self.view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+//        tapGesture.cancelsTouchesInView = true
+//        self.view.addGestureRecognizer(tapGesture)
         
         addFriendButton.layer.cornerRadius = 5
         createButton.layer.cornerRadius = 5
@@ -131,7 +130,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             case 3:
                 image = UIImage(named: "Social-1")
             default:
-                image = UIImage(named: "default")
+                image = UIImage(named: "Other-1")
             }
         } else {
             image = self.uploadImageView.image!

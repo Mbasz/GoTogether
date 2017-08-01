@@ -42,6 +42,7 @@
 		C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4491F16CD8500A1ED1F /* StorageReference.swift */; };
 		C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */; };
 		C1B1BE681F27A2C000562F96 /* FbFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE671F27A2C000562F96 /* FbFriend.swift */; };
+		C1F475A01F3104B0006E5230 /* ProfilePreviewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		C17BB4491F16CD8500A1ED1F /* StorageReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReference.swift; path = Extensions/StorageReference.swift; sourceTree = "<group>"; };
 		C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriendCell.swift; path = Views/FbFriendCell.swift; sourceTree = "<group>"; };
 		C1B1BE671F27A2C000562F96 /* FbFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriend.swift; path = Models/FbFriend.swift; sourceTree = "<group>"; };
+		C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePreviewEventViewController.swift; path = Controllers/ProfilePreviewEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				C14F392B1F20817E00373A2E /* CategoriesViewController.swift */,
 				C17BB4141F14382500A1ED1F /* NewEventViewController.swift */,
 				C17BB4161F14382500A1ED1F /* ProfileViewController.swift */,
+				C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */,
 				C17BB4131F14382500A1ED1F /* LoginViewController.swift */,
 				C17BB43C1F15887800A1ED1F /* CreateProfileViewController.swift */,
 			);
@@ -391,6 +394,7 @@
 				C14F392C1F20817E00373A2E /* CategoriesViewController.swift in Sources */,
 				C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */,
 				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
+				C1F475A01F3104B0006E5230 /* ProfilePreviewEventViewController.swift in Sources */,
 				C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */,
 				C17BB41E1F14383000A1ED1F /* Event.swift in Sources */,
 				C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */,

@@ -16,7 +16,7 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var date = -1
     var categoryContainerVC: FilterCategoryTableViewController!
     var dateContainerVC: FilterDateTableViewController!
-    var filter: Filter?
+    var filter: Filter? = nil
     weak var eventsVC: EventsTableViewController?
     
     @IBOutlet weak var publicSegmentedControl: UISegmentedControl!
@@ -42,18 +42,27 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
         self.view.endEditing(true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParentViewController {
             categoryContainerVC = childViewControllers[0] as! FilterCategoryTableViewController
+            if publicSegmentedControl.selectedSegmentIndex == 0 {
+                isPublic = true
+            } else {
+                isPublic = false
+            }
             category = categoryContainerVC.selected
             dateContainerVC = childViewControllers[1] as! FilterDateTableViewController
             date = dateContainerVC.selected
-            filter = Filter(isPublic: isPublic, location: locationTextField.text!, category: category, date: date)
+            if !isPublic || locationTextField.text != "" || category != -1 || date != -1 {
+                filter = Filter(isPublic: isPublic, location: locationTextField.text!, category: category, date: date)
+            }
             eventsVC?.filter = filter
         }
     }
-    
-    
 }

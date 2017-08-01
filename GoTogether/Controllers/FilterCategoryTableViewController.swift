@@ -35,6 +35,8 @@ class FilterCategoryTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.layer.cornerRadius = 5
+        tableView.layer.borderColor = UIColor.gtBlue.cgColor
+        tableView.layer.borderWidth = 1
     }
     
 }

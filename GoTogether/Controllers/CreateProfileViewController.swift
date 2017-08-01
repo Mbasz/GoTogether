@@ -17,6 +17,7 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
     let locationManager = CLLocationManager()
     var location = ""
     let firUser = Auth.auth().currentUser
+    let imageHelper = GTImageHelper()
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -39,13 +40,23 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
         self.locationTextField.delegate = self
         
         self.fullNameTextField.text = firUser?.displayName
-        self.profileImageView.kf.setImage(with: firUser?.photoURL)
+        if firUser?.photoURL != nil {
+            self.profileImageView.kf.setImage(with: firUser?.photoURL)
+        }
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        tapGesture.cancelsTouchesInView = true
-        self.view.addGestureRecognizer(tapGesture)
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+//        tapGesture.cancelsTouchesInView = true
+//        self.view.addGestureRecognizer(tapGesture)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tapGestureRecognizer)
+        
+        imageHelper.completionHandler = { image in
+            self.profileImageView.image = image
+        }
         
         nextButton.layer.cornerRadius = 5
     }
@@ -58,6 +69,14 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
     func hideKeyboard() {
         self.view.endEditing(true)
     }
+    
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            imageHelper.presentImagePickerController(with: .photoLibrary, from: self)
+        }
+    }
+
     
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         

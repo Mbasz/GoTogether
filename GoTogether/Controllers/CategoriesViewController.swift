@@ -11,6 +11,7 @@ import UIKit
 
 class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     
+    var selected = false
     var category = -1
     var isPublic = true
     
@@ -18,6 +19,7 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cultureButton: UIButton!
     @IBOutlet weak var sportButton: UIButton!
     @IBOutlet weak var socialButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
     @IBOutlet weak var publicSegmentedControl: UISegmentedControl!
     @IBOutlet weak var linkTextfield: UITextField!
     @IBOutlet weak var nextButton: UIButton!
@@ -43,8 +45,11 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         sportButton.isUserInteractionEnabled = true
         socialButton.layer.opacity = 1
         socialButton.isUserInteractionEnabled = true
+        otherButton.layer.opacity = 1
+        otherButton.isUserInteractionEnabled = true
         publicSegmentedControl.selectedSegmentIndex = 0
         linkTextfield.text = ""
+        selected = false
     }
     
     func hideKeyboard() {
@@ -97,7 +102,10 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         sportButton.isUserInteractionEnabled = true
         socialButton.layer.opacity = 1
         socialButton.isUserInteractionEnabled = true
+        otherButton.layer.opacity = 1
+        otherButton.isUserInteractionEnabled = true
         category = 0
+        selected = true
     }
     
     @IBAction func cultureTapped(_ sender: Any) {
@@ -109,7 +117,10 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         sportButton.isUserInteractionEnabled = true
         socialButton.layer.opacity = 1
         socialButton.isUserInteractionEnabled = true
+        otherButton.layer.opacity = 1
+        otherButton.isUserInteractionEnabled = true
         category = 1
+        selected = true
     }
     
     @IBAction func sportTapped(_ sender: Any) {
@@ -121,7 +132,10 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         sportButton.isUserInteractionEnabled = false
         socialButton.layer.opacity = 1
         socialButton.isUserInteractionEnabled = true
+        otherButton.layer.opacity = 1
+        otherButton.isUserInteractionEnabled = true
         category = 2
+        selected = true
     }
     
     @IBAction func socialTapped(_ sender: Any) {
@@ -133,14 +147,39 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         sportButton.isUserInteractionEnabled = true
         socialButton.layer.opacity = 0.5
         socialButton.isUserInteractionEnabled = false
+        otherButton.layer.opacity = 1
+        otherButton.isUserInteractionEnabled = true
         category = 3
+        selected = true
     }
+    
+    @IBAction func otherTapped(_ sender: Any) {
+        workshopButton.layer.opacity = 1
+        workshopButton.isUserInteractionEnabled = true
+        cultureButton.layer.opacity = 1
+        cultureButton.isUserInteractionEnabled = true
+        sportButton.layer.opacity = 1
+        sportButton.isUserInteractionEnabled = true
+        socialButton.layer.opacity = 1
+        socialButton.isUserInteractionEnabled = true
+        otherButton.layer.opacity = 0.5
+        otherButton.isUserInteractionEnabled = false
+        category = 4
+        selected = true
+    }
+    
     
     @IBAction func nextTapped(_ sender: Any) {
-        self.view.endEditing(true)
-        performSegue(withIdentifier: "toNewEvent", sender: self)
+        if selected {
+            self.view.endEditing(true)
+            performSegue(withIdentifier: "toNewEvent", sender: self)
+        } else {
+            let alertController = UIAlertController(title: "Please select a category", message: nil, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(ok)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
-    
     
 }
 

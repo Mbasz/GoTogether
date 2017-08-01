@@ -17,7 +17,7 @@ extension UIColor {
         return UIColor(red: 235/255, green: 255/255, blue: 240/255, alpha: 1)
     }
     static var gtBlue: UIColor {
-        return UIColor(red: 230/255, green: 240/255, blue: 255/255, alpha: 1)
+        return UIColor(red: 90/255, green: 126/255, blue: 252/255, alpha: 1)
     }
     static var gtOrange: UIColor {
         return UIColor(red: 1, green: 231/255, blue: 218/255, alpha: 1)

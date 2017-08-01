@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "rsz_1pexels-photo-342411.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Webp.net-resizeimage.png",
       "scale" : "2x"
     },
     {
@@ -17,8 +17,5 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }

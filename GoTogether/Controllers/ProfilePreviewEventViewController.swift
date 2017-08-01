@@ -1,18 +1,17 @@
 //
-//  PreviewEventViewController.swift
+//  ProfilePreviewEventViewController.swift
 //  GoTogether
 //
-//  Created by Marta on 10/07/2017.
+//  Created by Marta on 01/08/2017.
 //  Copyright © 2017 Marta. All rights reserved.
 //
 
 import Foundation
+import BEMCheckBox
 import UIKit
 import FacebookShare
-import FacebookCore
-import BEMCheckBox
 
-class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
+class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     
     var event: Event?
     var urlLink: URL!
@@ -23,9 +22,9 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var checkbox: BEMCheckBox!
     @IBOutlet weak var checkboxLabel: UILabel!
     
@@ -36,6 +35,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         checkbox.delegate = self
         checkbox.onAnimationType = .bounce
         checkbox.offAnimationType = .bounce
+        navigationController?.isNavigationBarHidden = false
         
         if let event = event {
             titleLabel.text = event.title
@@ -56,7 +56,8 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
                 checkbox.isHidden = true
                 checkboxLabel.isHidden = true
             } else {
-                nameLabel.text = "\(event.creator.name) is going!"
+                nameLabel.text = "You're going with \(event.creator.name)!"
+                checkboxLabel.text = ""
                 let profileImgURL = URL(string: event.creator.imgURL)
                 profileImageView.layer.masksToBounds = true
                 profileImageView.layer.cornerRadius = profileImageView.frame.height/2
@@ -79,11 +80,10 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             shareButton.frame.origin.y = 550
             shareButton.frame.size = CGSize(width: 70, height: 30)
             shareButton.center.x = self.view.center.x + 140
-//            let shareDialog = ShareDialog(content: content)
-//            shareDialog.mode = .native
+            //            let shareDialog = ShareDialog(content: content)
+            //            shareDialog.mode = .native
             self.view.addSubview(shareButton)
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,17 +91,12 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         
         if event!.hasParticipant {
             checkbox.on = true
-            checkboxLabel.text = "You're going with \(event!.creator.name)!"
+            checkboxLabel.text = ""
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func animationDidStop(for checkBox: BEMCheckBox) {
@@ -130,5 +125,5 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             UIApplication.shared.openURL(urlLink)
         }
     }
+    
 }
-

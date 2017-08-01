@@ -17,10 +17,10 @@ class User: NSObject {
     var location: String
     var imgURL: String
     
-//    var dictValue: [String: Any] {
-//        let userDict
-//    }
-    
+    var dictValue: [String: Any] {
+        let userDict = ["uid": uid, "name": name, "location": location, "img_URL": imgURL]
+        return userDict
+    }
     
     private static var _current: User?
     
@@ -36,7 +36,6 @@ class User: NSObject {
         self.name = name
         self.location = location
         self.imgURL = imgURL
-        //self.hasEvents = false
     }
     
     init?(snapshot: DataSnapshot) {
@@ -62,7 +61,6 @@ class User: NSObject {
         self.name = name
         self.location = location
         self.imgURL = imgURL
-        //self.hasEvents = false
         
         super.init()
 
