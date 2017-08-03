@@ -42,6 +42,9 @@
 		C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BB4491F16CD8500A1ED1F /* StorageReference.swift */; };
 		C1B1BE661F26AF3900562F96 /* FbFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */; };
 		C1B1BE681F27A2C000562F96 /* FbFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1BE671F27A2C000562F96 /* FbFriend.swift */; };
+		C1B356401F31769D0004894E /* ParticipantService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B3563F1F31769D0004894E /* ParticipantService.swift */; };
+		C1B356421F3185410004894E /* ProfileEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356411F3185410004894E /* ProfileEventCell.swift */; };
+		C1B356441F32812D0004894E /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356431F32812D0004894E /* Participant.swift */; };
 		C1F475A01F3104B0006E5230 /* ProfilePreviewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,9 @@
 		C17BB4491F16CD8500A1ED1F /* StorageReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReference.swift; path = Extensions/StorageReference.swift; sourceTree = "<group>"; };
 		C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriendCell.swift; path = Views/FbFriendCell.swift; sourceTree = "<group>"; };
 		C1B1BE671F27A2C000562F96 /* FbFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriend.swift; path = Models/FbFriend.swift; sourceTree = "<group>"; };
+		C1B3563F1F31769D0004894E /* ParticipantService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParticipantService.swift; path = Services/ParticipantService.swift; sourceTree = "<group>"; };
+		C1B356411F3185410004894E /* ProfileEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEventCell.swift; path = Views/ProfileEventCell.swift; sourceTree = "<group>"; };
+		C1B356431F32812D0004894E /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Participant.swift; path = Models/Participant.swift; sourceTree = "<group>"; };
 		C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePreviewEventViewController.swift; path = Controllers/ProfilePreviewEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +174,7 @@
 			children = (
 				C17BB41C1F14383000A1ED1F /* Event.swift */,
 				C17BB41D1F14383000A1ED1F /* User.swift */,
+				C1B356431F32812D0004894E /* Participant.swift */,
 				C117D8401F193817005241A9 /* PhoneFriend.swift */,
 				C1B1BE671F27A2C000562F96 /* FbFriend.swift */,
 				C14B2D841F2911F9000B6AFD /* Filter.swift */,
@@ -191,6 +198,7 @@
 				C17BB4241F14384400A1ED1F /* EventCell.swift */,
 				C117D83E1F192B1D005241A9 /* PhoneFriendCell.swift */,
 				C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */,
+				C1B356411F3185410004894E /* ProfileEventCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 				C17BB4311F153E3C00A1ED1F /* EventService.swift */,
 				C17BB4331F153ECB00A1ED1F /* UserService.swift */,
 				C17BB4451F16BCD500A1ED1F /* StorageService.swift */,
+				C1B3563F1F31769D0004894E /* ParticipantService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -380,10 +389,12 @@
 				C14B2D811F290B53000B6AFD /* FilterCategoryTableViewController.swift in Sources */,
 				C14B2D851F2911F9000B6AFD /* Filter.swift in Sources */,
 				C17BB43D1F15887800A1ED1F /* CreateProfileViewController.swift in Sources */,
+				C1B356421F3185410004894E /* ProfileEventCell.swift in Sources */,
 				C17BB4321F153E3C00A1ED1F /* EventService.swift in Sources */,
 				C17BB41B1F14382500A1ED1F /* ProfileViewController.swift in Sources */,
 				C17BB4251F14384400A1ED1F /* EventCell.swift in Sources */,
 				C17BB43A1F15497300A1ED1F /* UIStoryboard+Utility.swift in Sources */,
+				C1B356401F31769D0004894E /* ParticipantService.swift in Sources */,
 				C17BB41A1F14382500A1ED1F /* PreviewEventViewController.swift in Sources */,
 				C17BB4181F14382500A1ED1F /* LoginViewController.swift in Sources */,
 				C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */,
@@ -403,6 +414,7 @@
 				C14B2D7F1F2909F8000B6AFD /* FilterViewController.swift in Sources */,
 				C15B420E1F226D4100176242 /* UIColor+Utility.swift in Sources */,
 				C17BB3E91F13E88800A1ED1F /* AppDelegate.swift in Sources */,
+				C1B356441F32812D0004894E /* Participant.swift in Sources */,
 				C17BB44A1F16CD8500A1ED1F /* StorageReference.swift in Sources */,
 				C17BB4271F14384E00A1ED1F /* GTImageHelper.swift in Sources */,
 				C117D83F1F192B1D005241A9 /* PhoneFriendCell.swift in Sources */,

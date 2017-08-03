@@ -43,7 +43,7 @@ struct EventService {
         eventRef.updateChildValues(dict)
         
         if isPublic {
-            let publicRef = DatabaseReference.toLocation(.newPublicEvent)
+            let publicRef = DatabaseReference.toLocation(.newPublicEvent(eventKey: eventRef.key))
             publicRef.updateChildValues(dict)
         }
                 
@@ -60,16 +60,12 @@ struct EventService {
 //        })
 //    }
     
-//    static func addParticipant(eventKey: String) {
-//        let currentUser = User.current
-//        let userDict = currentUser.dictValue
-//        
-//        let eventRef = DatabaseReference.toLocation(.addParticipant(currentUID: currentUser.uid, eventKey: eventKey))
-//        eventRef.updateChildValues(userDict)
-//        
-//        let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: eventKey))
-//        publicRef.removeValue()
-//    }
+    static func remove(currentUID: String, eventKey: String) {
+        let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: eventKey))
+        publicRef.removeValue()
+        let ref = DatabaseReference.toLocation(.showEvent(uid: currentUID, eventKey: eventKey))
+        ref.removeValue()
+    }
     
     static func observePublic() {
         
@@ -135,6 +131,7 @@ struct EventService {
                 }
             }
             //events = events.filter {$0.date >= date}
+            events = events.filter {$0.creator.uid != User.current.uid}
             completion(events)
         })
 

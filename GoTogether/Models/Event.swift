@@ -62,11 +62,6 @@ class Event {
             let category = dict["category"] as? Int,
             let isPublic = dict["is_public"] as? Bool,
             let hasParticipant = dict["has_participant"] as? Bool
-//            let partDict = dict["participant"] as? [String: Any],
-//            let partUID = partDict["uid"] as? String,
-//            let partName = partDict["name"] as? String,
-//            let partImgURL = partDict["img_URL"] as? String,
-//            let partLocation = partDict["location"] as? String
         else { return nil }
         
         let dateFormatter = DateFormatter()
@@ -85,6 +80,5 @@ class Event {
         self.category = category
         self.isPublic = isPublic
         self.hasParticipant = hasParticipant
-        //self.participant = User(uid: partUID, name: partName, location: partLocation, imgURL: partImgURL)
     }
 }

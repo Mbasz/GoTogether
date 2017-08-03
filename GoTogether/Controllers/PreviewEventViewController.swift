@@ -76,9 +76,9 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
                 let content = LinkShareContent(url: url)
                 shareButton.content = content
             }
-            shareButton.frame.origin.y = 550
-            shareButton.frame.size = CGSize(width: 70, height: 30)
-            shareButton.center.x = self.view.center.x + 140
+            shareButton.frame.origin.y = 570
+            shareButton.frame.origin.x = 27
+            shareButton.frame.size = CGSize(width: 75, height: 30)
 //            let shareDialog = ShareDialog(content: content)
 //            shareDialog.mode = .native
             self.view.addSubview(shareButton)

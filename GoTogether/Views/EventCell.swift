@@ -9,10 +9,6 @@
 import Foundation
 import UIKit
 
-protocol EventCellDelegate: class {
-    
-}
-
 class EventCell: UITableViewCell {
     
     @IBOutlet weak var eventImageView: UIImageView!

@@ -95,8 +95,6 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
             let initialViewController = UIStoryboard.initialViewController(for: .main)
             self.view.window?.rootViewController = initialViewController
             self.view.window?.makeKeyAndVisible()
-            
-            print("Created new user \(user.name)")
         }
     }
     

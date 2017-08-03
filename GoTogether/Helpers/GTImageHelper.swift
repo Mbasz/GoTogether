@@ -34,5 +34,6 @@ extension GTImageHelper: UINavigationControllerDelegate, UIImagePickerController
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.view.removeFromSuperview()
         picker.removeFromParentViewController()
+        
     }
 }

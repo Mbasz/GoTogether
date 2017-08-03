@@ -23,7 +23,7 @@ struct UserService {
     }
     
     static func create(_ firUser: FIRUser, name: String, location: String, imgURL: String, completion: @escaping (User?) -> Void) {
-        let userAttrs = ["name": name, "location": location, "imgURL": imgURL]
+        let userAttrs = ["name": name, "location": location, "img_URL": imgURL]
         
         let ref = Database.database().reference().child("users").child(firUser.uid)
         
@@ -53,8 +53,14 @@ struct UserService {
         let eventRef = DatabaseReference.toLocation(.showEvent(uid: currentUser.uid, eventKey: event.key!) )
         eventRef.updateChildValues(dict)
         
+        let creatorRef = DatabaseReference.toLocation(.showEvent(uid: event.creator.uid, eventKey: event.key!))
+        creatorRef.removeValue()
+        creatorRef.updateChildValues(dict)
+        
         let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: event.key!))
         publicRef.removeValue()
+        
+        ParticipantService.create(user: currentUser, eventKey: event.key!)
     }
     
     static func untag (event: Event) {
@@ -71,6 +77,11 @@ struct UserService {
         
         let publicRef = DatabaseReference.toLocation(.showPublicEvent(eventKey: event.key!))
         publicRef.updateChildValues(dict)
+        
+        let creatorRef = DatabaseReference.toLocation(.showEvent(uid: event.creator.uid, eventKey: event.key!))
+        creatorRef.updateChildValues(dict)
+        
+        ParticipantService.remove(eventKey: event.key!)
     }
     
     static func myEvents(for user: User, completion: @escaping ([Event]) -> Void) {

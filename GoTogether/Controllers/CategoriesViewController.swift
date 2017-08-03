@@ -14,6 +14,8 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     var selected = false
     var category = -1
     var isPublic = true
+    var link = ""
+    var reload = false
     
     @IBOutlet weak var workshopButton: UIButton!
     @IBOutlet weak var cultureButton: UIButton!
@@ -37,19 +39,22 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        workshopButton.layer.opacity = 1
-        workshopButton.isUserInteractionEnabled = true
-        cultureButton.layer.opacity = 1
-        cultureButton.isUserInteractionEnabled = true
-        sportButton.layer.opacity = 1
-        sportButton.isUserInteractionEnabled = true
-        socialButton.layer.opacity = 1
-        socialButton.isUserInteractionEnabled = true
-        otherButton.layer.opacity = 1
-        otherButton.isUserInteractionEnabled = true
-        publicSegmentedControl.selectedSegmentIndex = 0
-        linkTextfield.text = ""
-        selected = false
+        if reload {
+            workshopButton.layer.opacity = 1
+            workshopButton.isUserInteractionEnabled = true
+            cultureButton.layer.opacity = 1
+            cultureButton.isUserInteractionEnabled = true
+            sportButton.layer.opacity = 1
+            sportButton.isUserInteractionEnabled = true
+            socialButton.layer.opacity = 1
+            socialButton.isUserInteractionEnabled = true
+            otherButton.layer.opacity = 1
+            otherButton.isUserInteractionEnabled = true
+            publicSegmentedControl.selectedSegmentIndex = 0
+            linkTextfield.text = ""
+            selected = false
+        }
+        
     }
     
     func hideKeyboard() {
@@ -80,15 +85,14 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toNewEvent" {
             if let vc = segue.destination as? NewEventViewController {
-                vc.category = category
-                vc.isPublic = isPublic
-                vc.link = linkTextfield.text!
+                link = linkTextfield.text!
                 if publicSegmentedControl.selectedSegmentIndex == 0 {
                     isPublic = true
                 }
                 else {
                     isPublic = false
                 }
+                vc.categoriesVC = self
             }
         }
     }
@@ -172,6 +176,7 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     @IBAction func nextTapped(_ sender: Any) {
         if selected {
             self.view.endEditing(true)
+            reload = false
             performSegue(withIdentifier: "toNewEvent", sender: self)
         } else {
             let alertController = UIAlertController(title: "Please select a category", message: nil, preferredStyle: .alert)

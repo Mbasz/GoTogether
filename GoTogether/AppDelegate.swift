@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseAuthUI
 import FBSDKLoginKit
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         configureInitialRootViewController(for: window)
+        GMSPlacesClient.provideAPIKey("AIzaSyDh5miJpGl_9VvwEJuPkbWzISuNPcEHo-w")
         
         return true
     }

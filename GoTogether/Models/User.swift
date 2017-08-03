@@ -18,7 +18,8 @@ class User: NSObject {
     var imgURL: String
     
     var dictValue: [String: Any] {
-        let userDict = ["uid": uid, "name": name, "location": location, "img_URL": imgURL]
+        //without UID!
+        let userDict = ["name": name, "location": location, "img_URL": imgURL]
         return userDict
     }
     
@@ -39,7 +40,7 @@ class User: NSObject {
     }
     
     init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let location = dict["location"] as? String, let imgURL = dict["imgURL"] as? String
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let location = dict["location"] as? String, let imgURL = dict["img_URL"] as? String
             else { return nil }
         
         self.uid = snapshot.key

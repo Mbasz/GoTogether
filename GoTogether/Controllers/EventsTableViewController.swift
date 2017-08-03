@@ -59,7 +59,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
         filter = nil
         
         refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = UIColor.gtBackground
+        refreshControl!.backgroundColor = UIColor.gtBackground
         refreshControl!.addTarget(self, action: #selector(reloadEvents), for: .valueChanged)
         tableView.addSubview(refreshControl!)
     }

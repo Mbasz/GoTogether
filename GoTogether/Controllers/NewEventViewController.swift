@@ -10,39 +10,40 @@ import Foundation
 import UIKit
 import MessageUI
 import SwiftLinkPreview
-import MapKit
+import GooglePlaces
 
-class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate, UITextViewDelegate, UITextFieldDelegate, MKLocalSearchCompleterDelegate {
+class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
-    let searchCompleter = MKLocalSearchCompleter()
+    weak var categoriesVC: CategoriesViewController?
     let slp = SwiftLinkPreview()
-    var category = -1
-    var isPublic = true
-    var link = ""
     var image = UIImage(named: "uploadImage")
     var friends = [PhoneFriend]()
     let imageHelper = GTImageHelper()
+    var searchController: UISearchController?
+    var results = [String]()
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
-    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var uploadImageView: UIImageView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var friendsTableView: UITableView!
     @IBOutlet weak var addFriendButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var addLocationButton: UIButton!
+    @IBOutlet weak var locationTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        titleTextField.text = ""
-        eventDatePicker.date = Date()
-        locationTextField.text = ""
-        uploadImageView.image = UIImage(named: "uploadImage")
-        descriptionTextView.text = ""
-        slp.preview(link, onSuccess: { result in
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        self.view.addSubview(activityIndicator)
+        activityIndicator.center = self.view.center
+        activityIndicator.backgroundColor = UIColor.gtPurple
+        activityIndicator.startAnimating()
+        
+        slp.preview(categoriesVC!.link, onSuccess: { result in
             if let title: String = result[.title] as? String {
                 self.titleTextField.text = title
             }
-            if let description = result[.description] as? String {
+            if let description = result[.description] as? String, description.characters.count < 100 {
                 self.descriptionTextView.text = description
             }
             if let imageURL = result[.image] as? String {
@@ -52,6 +53,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         }, onError: { error in
             print("\(error.localizedDescription)")
         })
+        
+        activityIndicator.stopAnimating()
     }
     
     override func viewDidLoad() {
@@ -68,9 +71,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             self.uploadImageView.image = image
         }
         
-        self.titleTextField.delegate = self
-        self.locationTextField.delegate = self
-        self.descriptionTextView.delegate = self
+        titleTextField.delegate = self
+        descriptionTextView.delegate = self
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 //        tapGesture.cancelsTouchesInView = true
@@ -78,13 +80,22 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         addFriendButton.layer.cornerRadius = 5
         createButton.layer.cornerRadius = 5
-        
-        searchCompleter.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        //if searchBar.text != "" {
+            view.viewWithTag(100)?.frame.origin = CGPoint(x: 27, y: 65)
+        //}
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        //if searchBar.text == "" {
+            view.viewWithTag(100)?.frame.origin = CGPoint(x: 27, y: 225)
+        //}
     }
     
     func hideKeyboard() {
@@ -96,13 +107,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         return false
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == locationTextField {
-            searchCompleter.queryFragment = locationTextField.text!
-        }
-        return true
-    }
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" && text.characters.count == 1 {
             textView.resignFirstResponder()
@@ -112,15 +116,16 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     }
     
     @IBAction func createButtonTapped(_ sender: UIButton) {
+        categoriesVC!.reload = true
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
-        let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = self.locationTextField.text!, link = self.link
+        let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = locationTextField.text!, link = categoriesVC!.link
         let date = eventDatePicker.date
         dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "hh:mm a"
         let time = dateFormatter.string(from: eventDatePicker.date)
         if self.uploadImageView.image! == image {
-            switch (category) {
+            switch (categoriesVC!.category) {
             case 0:
                 image = UIImage(named: "Workshop-1")
             case 1:
@@ -136,11 +141,10 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             image = self.uploadImageView.image!
         }
         
-        EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: self.link, description: self.descriptionTextView.text!, category: category, isPublic: isPublic)
+        EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: link, description: self.descriptionTextView.text!, category: categoriesVC!.category, isPublic: categoriesVC!.isPublic)
         
         if !MFMessageComposeViewController.canSendText() {
             print("SMS services are not available")
-            print("Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!")
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
@@ -149,6 +153,11 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             
             self.present(composeVC, animated: true, completion: nil)
         }
+//        titleTextField.text = ""
+//        eventDatePicker.date = Date()
+//        searchController?.searchBar.text = ""
+//        uploadImageView.image = UIImage(named: "uploadImage")
+//        descriptionTextView.text = ""
         self.dismiss(animated: true, completion: nil)
         tabBarController?.selectedIndex = 0
         navigationController?.popToRootViewController(animated: true)
@@ -164,6 +173,13 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             imageHelper.presentImagePickerController(with: .photoLibrary, from: self)
         }
+    }
+    
+    @IBAction func addLocationTapped(_ sender: Any) {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        autocompleteController.tableCellBackgroundColor = UIColor.gtBackground
+        present(autocompleteController, animated: true, completion: nil)
     }
     
     @IBAction func addFriendTapped(_ sender: Any) {
@@ -203,6 +219,30 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     }
 }
 
+extension NewEventViewController: GMSAutocompleteViewControllerDelegate {
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.locationTextField.text = place.formattedAddress
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+
+
 extension NewEventViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
@@ -217,4 +257,6 @@ extension NewEventViewController: UITableViewDataSource {
     }
     
 }
+
+
 

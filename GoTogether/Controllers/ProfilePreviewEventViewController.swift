@@ -14,6 +14,7 @@ import FacebookShare
 class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     
     var event: Event?
+    var participant: Participant?
     var urlLink: URL!
     
     @IBOutlet weak var eventImageView: UIImageView!
@@ -27,7 +28,7 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var checkbox: BEMCheckBox!
     @IBOutlet weak var checkboxLabel: UILabel!
-    
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         checkbox.onAnimationType = .bounce
         checkbox.offAnimationType = .bounce
         navigationController?.isNavigationBarHidden = false
+        deleteButton.layer.cornerRadius = 5
         
         if let event = event {
             titleLabel.text = event.title
@@ -49,18 +51,29 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             descriptionLabel.text = event.description
             let eventImgURL = URL(string: event.imgURL)
             eventImageView.kf.setImage(with: eventImgURL)
+            profileImageView.layer.masksToBounds = true
+            profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             
             if User.current.uid == event.creator.uid {
-                nameLabel.isHidden = true
-                profileImageView.isHidden = true
                 checkbox.isHidden = true
                 checkboxLabel.isHidden = true
+                
+                if event.hasParticipant {
+                    ParticipantService.show(eventKey: event.key!) { participant in
+                        self.participant = participant
+                        let profileImgURL = URL(string: participant!.imgURL)
+                        self.nameLabel.text = "\(participant!.name) is going with you!"
+                        self.profileImageView.kf.setImage(with: profileImgURL)
+                    }
+                } else {
+                    nameLabel.isHidden = true
+                    profileImageView.isHidden = true
+                }
             } else {
+                deleteButton.isHidden = true
                 nameLabel.text = "You're going with \(event.creator.name)!"
                 checkboxLabel.text = ""
                 let profileImgURL = URL(string: event.creator.imgURL)
-                profileImageView.layer.masksToBounds = true
-                profileImageView.layer.cornerRadius = profileImageView.frame.height/2
                 profileImageView.kf.setImage(with: profileImgURL)
             }
             
@@ -76,12 +89,12 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             if let url = URL(string: event.link) {
                 let content = LinkShareContent(url: url)
                 shareButton.content = content
+                let shareDialog = ShareDialog(content: content)
+                shareDialog.mode = .native
             }
-            shareButton.frame.origin.y = 550
-            shareButton.frame.size = CGSize(width: 70, height: 30)
-            shareButton.center.x = self.view.center.x + 140
-            //            let shareDialog = ShareDialog(content: content)
-            //            shareDialog.mode = .native
+            shareButton.frame.origin.y = 570
+            shareButton.frame.origin.x = 27
+            shareButton.frame.size = CGSize(width: 75, height: 30)
             self.view.addSubview(shareButton)
         }
     }
@@ -125,5 +138,10 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             UIApplication.shared.openURL(urlLink)
         }
     }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        EventService.remove(currentUID: User.current.uid, eventKey: event!.key!)
+    }
+    
     
 }

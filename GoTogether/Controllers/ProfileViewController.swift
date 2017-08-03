@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 
-class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class ProfileViewController: UIViewController, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     var myEvents = [Event]()
     var friends = [FbFriend]()
+    var refreshControl: UIRefreshControl?
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -35,6 +36,11 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
         myEventsButton.isUserInteractionEnabled = false
         myEventsButton.layer.opacity = 0.5
         
+        refreshControl = UIRefreshControl()
+        refreshControl!.backgroundColor = UIColor.gtPink
+        refreshControl!.addTarget(self, action: #selector(reloadMyEvents), for: .valueChanged)
+        eventsTableView.addSubview(refreshControl!)
+        
         self.eventsTableView.reloadData()
         self.eventsTableView.emptyDataSetSource = self
         self.eventsTableView.emptyDataSetDelegate = self
@@ -42,10 +48,9 @@ class ProfileViewController: UIViewController, DZNEmptyDataSetSource, DZNEmptyDa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UserService.myEvents(for: User.current) { (events) in
-            self.myEvents = events
-            self.eventsTableView.reloadData()
-        }
+        super.viewWillAppear(animated)
+        
+        reloadMyEvents()
         
         UserService.friends { (friends) in
             self.friends = friends
@@ -115,7 +120,7 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         } else {
             let event = myEvents[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileEventCell", for: indexPath) as! ProfileEventCell
             
             switch (event.category) {
 //            case 0:
@@ -130,23 +135,24 @@ extension ProfileViewController: UITableViewDataSource {
                 cell.backgroundColor = UIColor.gtPink
             }
             
-            let eventImgURL = URL(string: event.imgURL)
-            let profileImgURL = URL(string: event.creator.imgURL)
-            cell.profileImageView.layer.masksToBounds = true
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
-            cell.eventImageView.kf.setImage(with: eventImgURL)
-            cell.profileImageView.kf.setImage(with: profileImgURL)
-            cell.titleLabel.text = event.title
+            let imgURL = URL(string: event.imgURL)
+            cell.profileImageView.kf.setImage(with: imgURL)
+            cell.profileTitleLabel.text = event.title
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .long
-            cell.dateLabel.text = dateFormatter.string(from: event.date)
-            cell.nameLabel.text = "\(event.creator.name) is going!"
-            
-            if event.date < Date() {
-                cell.alpha = 0.1
-            }
-            
+            cell.profileDateLabel.text = dateFormatter.string(from: event.date)
+                if event.date < Date() {
+                    cell.alpha = 0.1
+                }
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if myEventsButton.isUserInteractionEnabled {
+            return 70
+        } else {
+            return 115
         }
     }
     
@@ -154,6 +160,16 @@ extension ProfileViewController: UITableViewDataSource {
         if !myEventsButton.isUserInteractionEnabled {
             let event = myEvents[indexPath.row]
             performSegue(withIdentifier: "toProfilePreview", sender: event)
+        }
+    }
+    
+    func reloadMyEvents() {
+        UserService.myEvents(for: User.current) { (events) in
+            self.myEvents = events
+            if self.refreshControl!.isRefreshing {
+                self.refreshControl!.endRefreshing()
+            }
+            self.eventsTableView.reloadData()
         }
     }
     
@@ -168,15 +184,4 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
-
-extension ProfileViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if myEventsButton.isUserInteractionEnabled {
-            return 70
-        } else {
-            return 140
-        }
-    }
-}
 
