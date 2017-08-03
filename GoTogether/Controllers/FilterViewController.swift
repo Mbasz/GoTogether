@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import GooglePlaces
 
 class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
@@ -65,4 +66,38 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
             eventsVC?.filter = filter
         }
     }
+    
+    @IBAction func locationTapped(_ sender: Any) {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        autocompleteController.tableCellBackgroundColor = UIColor.gtBackground
+        present(autocompleteController, animated: true, completion: nil)
+    }
+    
 }
+
+extension FilterViewController: GMSAutocompleteViewControllerDelegate {
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        self.locationTextField.text = place.formattedAddress
+        self.locationTextField.backgroundColor = UIColor.white
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        //
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+}
+

@@ -28,6 +28,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     @IBOutlet weak var linkButton: UIButton!
     @IBOutlet weak var checkbox: BEMCheckBox!
     @IBOutlet weak var checkboxLabel: UILabel!
+    @IBOutlet weak var chatButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -55,6 +56,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
                 profileImageView.isHidden = true
                 checkbox.isHidden = true
                 checkboxLabel.isHidden = true
+                chatButton.isHidden = true
             } else {
                 nameLabel.text = "\(event.creator.name) is going!"
                 let profileImgURL = URL(string: event.creator.imgURL)
@@ -63,13 +65,15 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
                 profileImageView.kf.setImage(with: profileImgURL)
             }
             
-            if URL(string: event.link) != nil {
-                urlLink = URL(string: event.link)!
-                linkButton.isEnabled = true
+            if let urlLink = URL(string: event.link) {
+                if UIApplication.shared.canOpenURL(urlLink) {
+                    linkButton.isEnabled = true
+                }
+                else {
+                    linkButton.isEnabled = false
+                }
             }
-            else {
-                linkButton.isEnabled = false
-            }
+                
             
             let shareButton = ShareButton<LinkShareContent>()
             if let url = URL(string: event.link) {

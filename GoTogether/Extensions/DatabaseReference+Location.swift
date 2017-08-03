@@ -22,6 +22,10 @@ extension DatabaseReference {
         case showPublic
         case users
         case showUser(uid: String)
+        case newChat(currentUID: String, eventKey: String)
+        case showChats(currentUID: String, eventKey: String)
+        case newMessage(chatKey: String)
+        case showMessages(chatKey: String)
         
         func asDatabaseReference() -> DatabaseReference {
             let root = Database.database().reference()
@@ -47,6 +51,14 @@ extension DatabaseReference {
                 return root.child("users")
             case .showUser(let uid):
                 return root.child("users").child(uid)
+            case let .newChat(currentUID, eventKey):
+                return root.child("chats").child(currentUID).child(eventKey).childByAutoId()
+            case let .showChats(currentUID, eventKey):
+                return root.child("chats").child(currentUID).child(eventKey)
+            case .newMessage(let chatKey):
+                return root.child("messages").child(chatKey).childByAutoId()
+            case .showMessages(let chatKey):
+                return root.child("messages").child(chatKey)
             }
         }
     }

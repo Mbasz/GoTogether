@@ -222,6 +222,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
 extension NewEventViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         self.locationTextField.text = place.formattedAddress
+        self.locationTextField.backgroundColor = UIColor.white
         dismiss(animated: true, completion: nil)
     }
     

@@ -45,6 +45,9 @@
 		C1B356401F31769D0004894E /* ParticipantService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B3563F1F31769D0004894E /* ParticipantService.swift */; };
 		C1B356421F3185410004894E /* ProfileEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356411F3185410004894E /* ProfileEventCell.swift */; };
 		C1B356441F32812D0004894E /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356431F32812D0004894E /* Participant.swift */; };
+		C1B356461F33A6150004894E /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356451F33A6150004894E /* Message.swift */; };
+		C1B356481F33A72C0004894E /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356471F33A72C0004894E /* ChatService.swift */; };
+		C1B3564A1F33A8F60004894E /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B356491F33A8F60004894E /* Chat.swift */; };
 		C1F475A01F3104B0006E5230 /* ProfilePreviewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +94,9 @@
 		C1B3563F1F31769D0004894E /* ParticipantService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParticipantService.swift; path = Services/ParticipantService.swift; sourceTree = "<group>"; };
 		C1B356411F3185410004894E /* ProfileEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileEventCell.swift; path = Views/ProfileEventCell.swift; sourceTree = "<group>"; };
 		C1B356431F32812D0004894E /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Participant.swift; path = Models/Participant.swift; sourceTree = "<group>"; };
+		C1B356451F33A6150004894E /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
+		C1B356471F33A72C0004894E /* ChatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatService.swift; path = Services/ChatService.swift; sourceTree = "<group>"; };
+		C1B356491F33A8F60004894E /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chat.swift; path = Models/Chat.swift; sourceTree = "<group>"; };
 		C1F4759F1F3104B0006E5230 /* ProfilePreviewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePreviewEventViewController.swift; path = Controllers/ProfilePreviewEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,6 +184,8 @@
 				C117D8401F193817005241A9 /* PhoneFriend.swift */,
 				C1B1BE671F27A2C000562F96 /* FbFriend.swift */,
 				C14B2D841F2911F9000B6AFD /* Filter.swift */,
+				C1B356451F33A6150004894E /* Message.swift */,
+				C1B356491F33A8F60004894E /* Chat.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -228,6 +236,7 @@
 				C17BB4331F153ECB00A1ED1F /* UserService.swift */,
 				C17BB4451F16BCD500A1ED1F /* StorageService.swift */,
 				C1B3563F1F31769D0004894E /* ParticipantService.swift */,
+				C1B356471F33A72C0004894E /* ChatService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -388,6 +397,7 @@
 				C17BB4481F16CCB100A1ED1F /* UIImage+Size.swift in Sources */,
 				C14B2D811F290B53000B6AFD /* FilterCategoryTableViewController.swift in Sources */,
 				C14B2D851F2911F9000B6AFD /* Filter.swift in Sources */,
+				C1B356461F33A6150004894E /* Message.swift in Sources */,
 				C17BB43D1F15887800A1ED1F /* CreateProfileViewController.swift in Sources */,
 				C1B356421F3185410004894E /* ProfileEventCell.swift in Sources */,
 				C17BB4321F153E3C00A1ED1F /* EventService.swift in Sources */,
@@ -397,6 +407,7 @@
 				C1B356401F31769D0004894E /* ParticipantService.swift in Sources */,
 				C17BB41A1F14382500A1ED1F /* PreviewEventViewController.swift in Sources */,
 				C17BB4181F14382500A1ED1F /* LoginViewController.swift in Sources */,
+				C1B3564A1F33A8F60004894E /* Chat.swift in Sources */,
 				C17BB4171F14382500A1ED1F /* EventsTableViewController.swift in Sources */,
 				C17BB4341F153ECB00A1ED1F /* UserService.swift in Sources */,
 				C17BB41F1F14383000A1ED1F /* User.swift in Sources */,
@@ -407,6 +418,7 @@
 				C17BB4191F14382500A1ED1F /* NewEventViewController.swift in Sources */,
 				C1F475A01F3104B0006E5230 /* ProfilePreviewEventViewController.swift in Sources */,
 				C17BB4461F16BCD500A1ED1F /* StorageService.swift in Sources */,
+				C1B356481F33A72C0004894E /* ChatService.swift in Sources */,
 				C17BB41E1F14383000A1ED1F /* Event.swift in Sources */,
 				C117D8411F193817005241A9 /* PhoneFriend.swift in Sources */,
 				C17BB4361F1548AC00A1ED1F /* Constants.swift in Sources */,

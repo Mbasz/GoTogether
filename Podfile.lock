@@ -89,6 +89,9 @@ PODS:
   - GTMSessionFetcher/Core (1.1.10)
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
+  - JSQMessagesViewController (7.3.5):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - Kingfisher (3.10.2)
   - SwiftLinkPreview (2.0.6)
   - UITextView+Placeholder (1.2.0)
@@ -108,6 +111,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - GooglePlaces
   - GoogleSignIn
+  - JSQMessagesViewController
   - Kingfisher (~> 3.0)
   - SwiftLinkPreview (~> 2.0.6)
   - UITextView+Placeholder (~> 1.2)
@@ -145,10 +149,12 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   SwiftLinkPreview: 242eb54898f422b17a79c0f5b6c4dd48c6c6b5c5
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
 
-PODFILE CHECKSUM: c5d54dc99b663da6206666230825066502d840af
+PODFILE CHECKSUM: 10684c65e5654ab9f623c65961e2b4a7f69926dd
 
 COCOAPODS: 1.0.1

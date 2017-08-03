@@ -24,4 +24,5 @@ target 'GoTogether' do
 	pod 'SwiftLinkPreview', '~> 2.0.6'
 	pod 'BEMCheckBox'
 	pod 'GooglePlaces'
+	pod 'JSQMessagesViewController'
 end

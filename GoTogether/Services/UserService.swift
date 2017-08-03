@@ -128,4 +128,17 @@ struct UserService {
         connection.start()
     }
     
+    static func observeChats(for user: User, eventKey: String, withCompletion completion: @escaping (DatabaseReference, [Chat]) -> Void) -> DatabaseHandle {
+        let ref = DatabaseReference.toLocation(.showChats(currentUID: user.uid, eventKey: eventKey))
+        
+        return ref.observe(.value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                return completion(ref, [])
+            }
+            
+            let chats = snapshot.flatMap(Chat.init)
+            completion(ref, chats)
+        })
+    }
+    
 }
