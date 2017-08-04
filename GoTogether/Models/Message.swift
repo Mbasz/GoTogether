@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase.FIRDataSnapshot
+import JSQMessagesViewController
 
 class Message {
     
@@ -16,9 +17,15 @@ class Message {
     let timestamp: Date
     let sender: Participant
     
+    lazy var jsqMessageValue: JSQMessage = {
+        return JSQMessage(senderId: self.sender.uid,
+                          senderDisplayName: self.sender.name,
+                          date: self.timestamp,
+                          text: self.content)
+    }()
+    
     var dictValue: [String : Any] {
-        let userDict = ["username" : sender.name,
-                        "uid" : sender.uid]
+        let userDict = ["name" : sender.name, "uid" : sender.uid, "img_URL": sender.imgURL]
         
         return ["sender" : userDict,
                 "content" : content,
@@ -35,7 +42,7 @@ class Message {
             let imgURL = userDict["img_URL"] as? String
             else { return nil }
         
-        self.key = snapshot.key
+        self.key = snapshot.key as String
         self.content = content
         self.timestamp = Date(timeIntervalSince1970: timestamp)
         self.sender = Participant(uid: uid, name: name, imgURL: imgURL)

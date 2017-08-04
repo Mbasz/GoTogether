@@ -16,8 +16,10 @@ class GTImageHelper: NSObject {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
-        
         viewController.addChildViewController(imagePickerController)
+        viewController.navigationController?.setNavigationBarHidden(true, animated: true)
+        //imagePickerController.navigationBar.tintColor
+        imagePickerController.navigationBar.barTintColor = UIColor.gtPink
         imagePickerController.didMove(toParentViewController: viewController)
         viewController.view.addSubview(imagePickerController.view)
     }

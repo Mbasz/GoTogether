@@ -30,7 +30,7 @@ struct ChatService {
         var multiUpdateValue = [String : Any]()
         
         for uid in chat.memberUIDs {
-            multiUpdateValue["chats/\(uid)/\(chatRef.key)"] = chatDict
+            multiUpdateValue["chats/\(uid)/\(eventKey)/\(chatRef.key)"] = chatDict
         }
         
         let messagesRef = DatabaseReference.toLocation(.newMessage(chatKey: chatRef.key))
@@ -67,7 +67,7 @@ struct ChatService {
         })
     }
     
-    static func sendMessage(_ message: Message, for chat: Chat, success: ((Bool) -> Void)? = nil) {
+    static func sendMessage(_ message: Message, for chat: Chat, eventKey: String, success: ((Bool) -> Void)? = nil) {
         guard let chatKey = chat.key else {
             success?(false)
             return
@@ -77,8 +77,8 @@ struct ChatService {
         
         for uid in chat.memberUIDs {
             let lastMessage = "\(message.sender.name): \(message.content)"
-            multiUpdateValue["chats/\(uid)/\(chatKey)/lastMessage"] = lastMessage
-            multiUpdateValue["chats/\(uid)/\(chatKey)/lastMessageSent"] = message.timestamp.timeIntervalSince1970
+            multiUpdateValue["chats/\(uid)/\(eventKey)/\(chatKey)/lastMessage"] = lastMessage
+            multiUpdateValue["chats/\(uid)/\(eventKey)/\(chatKey)/lastMessageSent"] = message.timestamp.timeIntervalSince1970
         }
         
         let messagesRef = DatabaseReference.toLocation(.newMessage(chatKey: chatKey))

@@ -69,6 +69,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         imageHelper.completionHandler = { image in
             self.uploadImageView.image = image
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
         
         titleTextField.delegate = self
@@ -153,11 +154,6 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             
             self.present(composeVC, animated: true, completion: nil)
         }
-//        titleTextField.text = ""
-//        eventDatePicker.date = Date()
-//        searchController?.searchBar.text = ""
-//        uploadImageView.image = UIImage(named: "uploadImage")
-//        descriptionTextView.text = ""
         self.dismiss(animated: true, completion: nil)
         tabBarController?.selectedIndex = 0
         navigationController?.popToRootViewController(animated: true)

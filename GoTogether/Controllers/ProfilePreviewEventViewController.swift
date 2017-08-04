@@ -13,9 +13,11 @@ import FacebookShare
 
 class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     
-    var event: Event?
+    var event: Event!
     var participant: Participant?
     var urlLink: URL!
+    var existingChat: Chat?
+    var creator, user: Participant?
     
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -39,70 +41,72 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         navigationController?.isNavigationBarHidden = false
         deleteButton.layer.cornerRadius = 5
         
-        if let event = event {
-            titleLabel.text = event.title
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
-            dateLabel.text = dateFormatter.string(from: event.date)
-            dateFormatter.timeStyle = .medium
-            dateFormatter.dateFormat = "hh:mm a"
-            timeLabel.text = event.time
-            locationLabel.text = event.location
-            descriptionLabel.text = event.description
-            let eventImgURL = URL(string: event.imgURL)
-            eventImageView.kf.setImage(with: eventImgURL)
-            profileImageView.layer.masksToBounds = true
-            profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        let currentUser = User.current
+        creator = Participant(uid: event.creator.uid, name: event.creator.name, imgURL: event.creator.imgURL)
+        user = Participant(uid: currentUser.uid, name: currentUser.name, imgURL: currentUser.imgURL)
+        
+        titleLabel.text = event.title
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateLabel.text = dateFormatter.string(from: event.date)
+        dateFormatter.timeStyle = .medium
+        dateFormatter.dateFormat = "hh:mm a"
+        timeLabel.text = event.time
+        locationLabel.text = event.location
+        descriptionLabel.text = event.description
+        let eventImgURL = URL(string: event.imgURL)
+        eventImageView.kf.setImage(with: eventImgURL)
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        
+        if currentUser.uid == event.creator.uid {
+            checkbox.isHidden = true
+            checkboxLabel.isHidden = true
             
-            if User.current.uid == event.creator.uid {
-                checkbox.isHidden = true
-                checkboxLabel.isHidden = true
-                
-                if event.hasParticipant {
-                    ParticipantService.show(eventKey: event.key!) { participant in
-                        self.participant = participant
-                        let profileImgURL = URL(string: participant!.imgURL)
-                        self.nameLabel.text = "\(participant!.name) is going with you!"
-                        self.profileImageView.kf.setImage(with: profileImgURL)
-                    }
-                } else {
-                    nameLabel.isHidden = true
-                    profileImageView.isHidden = true
+            if event.hasParticipant {
+                ParticipantService.show(eventKey: event.key!) { participant in
+                    self.participant = participant
+                    let profileImgURL = URL(string: participant!.imgURL)
+                    self.nameLabel.text = "\(participant!.name) is going with you!"
+                    self.profileImageView.kf.setImage(with: profileImgURL)
                 }
             } else {
-                deleteButton.isHidden = true
-                nameLabel.text = "You're going with \(event.creator.name)!"
-                checkboxLabel.text = ""
-                let profileImgURL = URL(string: event.creator.imgURL)
-                profileImageView.kf.setImage(with: profileImgURL)
+                nameLabel.isHidden = true
+                profileImageView.isHidden = true
             }
-            
-            if URL(string: event.link) != nil {
-                urlLink = URL(string: event.link)!
-                linkButton.isEnabled = true
-            }
-            else {
-                linkButton.isEnabled = false
-            }
-            
-            let shareButton = ShareButton<LinkShareContent>()
-            if let url = URL(string: event.link) {
-                let content = LinkShareContent(url: url)
-                shareButton.content = content
-                let shareDialog = ShareDialog(content: content)
-                shareDialog.mode = .native
-            }
-            shareButton.frame.origin.y = 570
-            shareButton.frame.origin.x = 27
-            shareButton.frame.size = CGSize(width: 75, height: 30)
-            self.view.addSubview(shareButton)
+        } else {
+            deleteButton.isHidden = true
+            nameLabel.text = "You're going with \(event.creator.name)!"
+            checkboxLabel.text = ""
+            let profileImgURL = URL(string: event.creator.imgURL)
+            profileImageView.kf.setImage(with: profileImgURL)
         }
+        
+        if URL(string: event.link) != nil {
+            urlLink = URL(string: event.link)!
+            linkButton.isEnabled = true
+        }
+        else {
+            linkButton.isEnabled = false
+        }
+        
+        let shareButton = ShareButton<LinkShareContent>()
+        if let url = URL(string: event.link) {
+            let content = LinkShareContent(url: url)
+            shareButton.content = content
+            let shareDialog = ShareDialog(content: content)
+            shareDialog.mode = .native
+        }
+        shareButton.frame.origin.y = 570
+        shareButton.frame.origin.x = 27
+        shareButton.frame.size = CGSize(width: 75, height: 30)
+        self.view.addSubview(shareButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if event!.hasParticipant {
+        if event.hasParticipant {
             checkbox.on = true
             checkboxLabel.text = ""
         }
@@ -124,6 +128,19 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "toChats", let destination = segue.destination as? ProfileChatListTableViewController
+        {
+            destination.eventKey = event?.key!
+        } else if segue.identifier == "toParticipantChat", let destination = segue.destination as? ProfileChatViewController {
+            let members = [creator!, user!]
+            destination.chat = existingChat ?? Chat(members: members)
+            destination.eventKey = event.key!
+        }
+    }
+
     @IBAction func linkButtonTapped(_ sender: Any) {
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
@@ -141,7 +158,26 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
         EventService.remove(currentUID: User.current.uid, eventKey: event!.key!)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
+    @IBAction func chatButtonTapped(_ sender: UIButton) {
+        if User.current.uid == event?.creator.uid {
+            performSegue(withIdentifier: "toChats", sender: self)
+        } else {
+            sender.isEnabled = false
+            ChatService.checkForExistingChat(with: creator!, eventKey: event.key!) { (chat) in
+                sender.isEnabled = true
+                self.existingChat = chat
+                
+                self.performSegue(withIdentifier: "toParticipantChat", sender: self)
+            }
+        }
+    }
     
 }
+
+
+
+
+
