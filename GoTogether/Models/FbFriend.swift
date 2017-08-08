@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FirebaseDatabase.FIRDataSnapshot
 
 struct FbFriend {
     var uid: String
@@ -20,4 +21,12 @@ struct FbFriend {
         self.imgURL = imgURL
     }
     
+    init?(snapshot: DataSnapshot) {
+        guard let dict = snapshot.value as? [String: Any], let name = dict["name"] as? String, let imgURL = dict["img_URL"] as? String
+            else { return nil }
+        
+        self.uid = snapshot.key
+        self.name = name
+        self.imgURL = imgURL
+    }
 }

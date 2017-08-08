@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import DZNEmptyDataSet
+import FirebaseAuth
 
 class ProfileViewController: UIViewController, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
@@ -31,10 +32,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, DZNEmptyData
         locationLabel.text = user.location
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        profileImageView.clipsToBounds = true
         let imgURL = URL(string: user.imgURL)
-        profileImageView.kf.setImage(with: imgURL)
+        if user.imgURL.isEmpty {
+            profileImageView.image = UIImage(named: "profilePictrue")
+        } else {
+            profileImageView.kf.setImage(with: imgURL)
+        }
         myEventsButton.isUserInteractionEnabled = false
         myEventsButton.layer.opacity = 0.5
+        myEventsButton.layer.borderColor = UIColor.white.cgColor
+        myEventsButton.layer.borderWidth = 1
+        friendsButton.layer.borderColor = UIColor.white.cgColor
+        friendsButton.layer.borderWidth = 1
         
         refreshControl = UIRefreshControl()
         refreshControl!.backgroundColor = UIColor.gtPink

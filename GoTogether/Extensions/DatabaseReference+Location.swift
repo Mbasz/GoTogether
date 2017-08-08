@@ -26,6 +26,7 @@ extension DatabaseReference {
         case showChats(currentUID: String, eventKey: String)
         case newMessage(chatKey: String)
         case showMessages(chatKey: String)
+        case fbID(uid: String)
         
         func asDatabaseReference() -> DatabaseReference {
             let root = Database.database().reference()
@@ -59,6 +60,8 @@ extension DatabaseReference {
                 return root.child("messages").child(chatKey).childByAutoId()
             case .showMessages(let chatKey):
                 return root.child("messages").child(chatKey)
+            case .fbID(let uid):
+                return root.child("fb_IDs").child(uid)
             }
         }
     }

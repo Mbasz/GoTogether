@@ -22,13 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if (FBSDKAccessToken.current()) != nil {
-            
-        }
-        
         FirebaseApp.configure()
         configureInitialRootViewController(for: window)
         GMSPlacesClient.provideAPIKey("AIzaSyDh5miJpGl_9VvwEJuPkbWzISuNPcEHo-w")
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
     }

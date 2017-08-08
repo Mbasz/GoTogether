@@ -24,7 +24,7 @@ class ChatViewController: JSQMessagesViewController {
             fatalError("Error creating bubble image factory.")
         }
         
-        let color = UIColor.jsq_messageBubbleRed()
+        let color = UIColor.gtPurple
         return bubbleImageFactory.outgoingMessagesBubbleImage(with: color)
     }()
     
@@ -42,6 +42,15 @@ class ChatViewController: JSQMessagesViewController {
         
         setupJSQMessagesViewController()
         tryObservingMessages()
+        navigationController?.navigationBar.titleTextAttributes?[NSFontAttributeName] = UIFont.boldSystemFont(ofSize: 16)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     deinit {
@@ -55,6 +64,9 @@ class ChatViewController: JSQMessagesViewController {
         
         // remove attachment button
         inputToolbar.contentView.leftBarButtonItem = nil
+        
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
     }
     
     func tryObservingMessages() {
@@ -90,6 +102,10 @@ extension ChatViewController {
         } else {
             return incomingBubbleImageView
         }
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return nil
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -78,19 +78,18 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
                 linkButton.isEnabled = false
             }
         }
-            
         
-        let shareButton = ShareButton<LinkShareContent>()
-        if let url = URL(string: event.link) {
-            let content = LinkShareContent(url: url)
-            shareButton.content = content
-        }
-        shareButton.frame.origin.y = 570
-        shareButton.frame.origin.x = 27
-        shareButton.frame.size = CGSize(width: 75, height: 30)
-//            let shareDialog = ShareDialog(content: content)
-//            shareDialog.mode = .native
-        self.view.addSubview(shareButton)
+//        let shareButton = ShareButton<LinkShareContent>()
+//        if let url = URL(string: event.link) {
+//            let content = LinkShareContent(url: url)
+//            shareButton.content = content
+//        }
+//        shareButton.frame.origin.y = 570
+//        shareButton.frame.origin.x = 27
+//        shareButton.frame.size = CGSize(width: 75, height: 30)
+//        let shareDialog = ShareDialog(content: content)
+//        shareDialog.mode = .native
+//        self.view.addSubview(shareButton)
         
     }
     
@@ -99,7 +98,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         
         if event!.hasParticipant {
             checkbox.on = true
-            checkboxLabel.text = "You're going with \(event!.creator.name)!"
+            checkboxLabel.text = ""
         }
     }
     
@@ -120,7 +119,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             performSegue(withIdentifier: "toChat", sender: self)
         } else {
             nameLabel.text = "\(event!.creator.name) is going!"
-            checkboxLabel.text = "Go Together"
+            checkboxLabel.text = "Go Togethr"
             UserService.untag(event: event!)
         }
     }
@@ -162,8 +161,6 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             
             self.performSegue(withIdentifier: "toChat", sender: self)
         }
-        performSegue(withIdentifier: "toParticipantChat", sender: self)
-        performSegue(withIdentifier: "toChat", sender: self)
     }
     
     

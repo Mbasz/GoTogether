@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import FacebookCore
+import FirebaseAuth
 
 struct UserService {
     
@@ -36,7 +37,22 @@ struct UserService {
         
         ref.observeSingleEvent(of: .value, with: { (snapshot) in
             let user = User (snapshot: snapshot)
+            if firUser.providerID == "facebook.com" {
+                let idRef = DatabaseReference.toLocation(.fbID(uid: user!.uid))
+                let dict = ["id": firUser.providerData[0].uid]
+                idRef.updateChildValues(dict)
+            }
             completion(user)
+        })
+        
+    }
+    
+    static func fbID(uid: String, completion: @escaping (String?) -> Void) {
+        let ref = DatabaseReference.toLocation(.fbID(uid: uid))
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            if let dict = snapshot.value as? [String: String], let id = dict["id"] {
+                completion(id)
+            } else { completion(nil) }
         })
     }
 

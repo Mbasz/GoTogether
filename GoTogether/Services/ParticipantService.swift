@@ -8,7 +8,6 @@
 
 import Foundation
 import FirebaseDatabase
-import FacebookCore
 
 struct ParticipantService {
     

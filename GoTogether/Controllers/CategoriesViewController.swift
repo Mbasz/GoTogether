@@ -22,13 +22,11 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var sportButton: UIButton!
     @IBOutlet weak var socialButton: UIButton!
     @IBOutlet weak var otherButton: UIButton!
-    @IBOutlet weak var publicSegmentedControl: UISegmentedControl!
     @IBOutlet weak var linkTextfield: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
     
     override func viewDidLoad() {
-        publicSegmentedControl.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 16)], for: .normal)
         NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CategoriesViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.linkTextfield.delegate = self
@@ -36,6 +34,8 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGesture.cancelsTouchesInView = true
         self.view.addGestureRecognizer(tapGesture)
+        cultureButton.titleEdgeInsets.top = 12
+        socialButton.titleEdgeInsets.bottom = 12
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +50,6 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
             socialButton.isUserInteractionEnabled = true
             otherButton.layer.opacity = 1
             otherButton.isUserInteractionEnabled = true
-            publicSegmentedControl.selectedSegmentIndex = 0
             linkTextfield.text = ""
             selected = false
         }
@@ -86,12 +85,7 @@ class  CategoriesViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "toNewEvent" {
             if let vc = segue.destination as? NewEventViewController {
                 link = linkTextfield.text!
-                if publicSegmentedControl.selectedSegmentIndex == 0 {
-                    isPublic = true
-                }
-                else {
-                    isPublic = false
-                }
+                isPublic = true
                 vc.categoriesVC = self
             }
         }

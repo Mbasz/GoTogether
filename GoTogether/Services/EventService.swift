@@ -67,11 +67,7 @@ struct EventService {
         ref.removeValue()
     }
     
-    static func observePublic() {
-        
-    }
-    
-    static func showPublic(uids: [String], filter: Filter?, completion: @escaping ([Event]) -> Void) {
+    static func showPublic(ids: [String], filter: Filter?, completion: @escaping ([Event]) -> Void) {
         let publicRef = DatabaseReference.toLocation(.showPublic)
         publicRef.observeSingleEvent(of: .value, with: { (snapshot) in
             guard let snapshot = snapshot.children.allObjects as? [DataSnapshot]
@@ -91,11 +87,18 @@ struct EventService {
                 if !filter.isPublic {
                     var events2 = [Event]()
                     for event in events {
-                        for uid in uids {
-                            if (event.creator.uid == uid) {
-                                events2.append(event)
+                        var creatorID: String?
+                        UserService.fbID(uid: event.creator.uid) { id in
+                            creatorID = id
+                        }
+                        if creatorID != nil {
+                            for id in ids {
+                                if creatorID == id {
+                                    events2.append(event)
+                                }
                             }
                         }
+                        
                     }
                     events = events2
                 }

@@ -19,12 +19,18 @@ typealias FIRUser = FirebaseAuth.User
 
 class LoginViewController: UIViewController {
     
+    var customPicker: FUIAuthPickerViewController? = nil
+    
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         loginButton.layer.cornerRadius = 5
+        imageView.layer.cornerRadius = 5
+        imageView.layer.masksToBounds = true
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,11 +43,12 @@ class LoginViewController: UIViewController {
             else { return }
         
         authUI.delegate = self
-        
         let providers: [FUIAuthProvider] = [FUIFacebookAuth(permissions: ["user_friends"]) , FUIGoogleAuth()]
         authUI.providers = providers
-        let authViewController = authUI.authViewController()
+        customPicker = FUIAuthPickerViewController(authUI: authUI)
+        customPicker?.view.backgroundColor = UIColor.gtPink
         
+        let authViewController = authUI.authViewController()
         present(authViewController, animated: true)
     }
 }
@@ -64,6 +71,10 @@ extension LoginViewController: FUIAuthDelegate {
                 self.performSegue(withIdentifier: Constants.Segues.toCreateProfile, sender: self)
             }
         }
+    }
+    
+    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+        return customPicker!
     }
 }
 

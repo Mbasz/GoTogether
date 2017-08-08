@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import GooglePlaces
+import BEMCheckBox
 
-class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
+class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, BEMCheckBoxDelegate {
     
     var isPublic = true
     var category = -1
@@ -20,7 +21,8 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
     var filter: Filter? = nil
     weak var eventsVC: EventsTableViewController?
     
-    @IBOutlet weak var publicSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var friendsCheckbox: BEMCheckBox!
+    @IBOutlet weak var nearbyCheckbox: BEMCheckBox!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var categoryContainer: UIView!
     @IBOutlet weak var timeContainer: UIView!
@@ -33,6 +35,12 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
     override func viewDidLoad() {
         super.viewDidLoad()
         self.locationTextField.delegate = self
+        friendsCheckbox.delegate = self
+        friendsCheckbox.onAnimationType = .bounce
+        friendsCheckbox.offAnimationType = .bounce
+        nearbyCheckbox.delegate = self
+        nearbyCheckbox.onAnimationType = .bounce
+        nearbyCheckbox.offAnimationType = .bounce
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 //        tapGesture.cancelsTouchesInView = true
@@ -45,6 +53,8 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        locationTextField.isUserInteractionEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -52,10 +62,10 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
         
         if self.isMovingFromParentViewController {
             categoryContainerVC = childViewControllers[0] as! FilterCategoryTableViewController
-            if publicSegmentedControl.selectedSegmentIndex == 0 {
-                isPublic = true
-            } else {
+            if friendsCheckbox.on {
                 isPublic = false
+            } else {
+                isPublic = true
             }
             category = categoryContainerVC.selected
             dateContainerVC = childViewControllers[1] as! FilterDateTableViewController
@@ -72,6 +82,18 @@ class FilterViewController: UIViewController, UITextFieldDelegate, UINavigationC
         autocompleteController.delegate = self
         autocompleteController.tableCellBackgroundColor = UIColor.gtBackground
         present(autocompleteController, animated: true, completion: nil)
+    }
+    
+    func didTap(_ checkBox: BEMCheckBox) {
+        if checkBox == nearbyCheckbox {
+            if checkBox.on {
+                locationTextField.text = User.current.location
+                locationTextField.isUserInteractionEnabled = false
+            } else {
+                locationTextField.text = ""
+                locationTextField.isUserInteractionEnabled = true
+            }
+        }
     }
     
 }

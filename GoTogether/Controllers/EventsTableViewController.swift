@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 
 class EventsTableViewController: UITableViewController, UITabBarControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
-    var uids = [String]()
+    var ids = [String]()
     var events = [Event]()
     var eventsSearched: Array<Event>? = nil
     var filter: Filter?
@@ -26,10 +26,12 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
         super.viewWillAppear(true)
         searchController.searchBar.resignFirstResponder()
         
-        reloadEvents()
         UserService.friends { friends in
-            self.uids = friends.map { $0.uid }
+            let friends = friends
+            self.ids = friends.map { $0.uid }
         }
+        
+        reloadEvents()
         
         let numberOfItems = CGFloat((tabBarController?.tabBar.items!.count)!)
         let tabBarItemSize = CGSize(width: (tabBarController?.tabBar.frame.width)! / numberOfItems, height: (tabBarController?.tabBar.frame.height)!)
@@ -164,7 +166,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
     }
     
     func reloadEvents() {
-        EventService.showPublic(uids: uids, filter: filter) { (events) in
+        EventService.showPublic(ids: ids, filter: filter) { (events) in
             self.events = events
             if self.refreshControl!.isRefreshing {
                 self.refreshControl!.endRefreshing()

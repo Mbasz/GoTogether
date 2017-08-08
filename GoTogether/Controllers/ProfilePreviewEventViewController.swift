@@ -90,17 +90,17 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             linkButton.isEnabled = false
         }
         
-        let shareButton = ShareButton<LinkShareContent>()
-        if let url = URL(string: event.link) {
-            let content = LinkShareContent(url: url)
-            shareButton.content = content
-            let shareDialog = ShareDialog(content: content)
-            shareDialog.mode = .native
-        }
-        shareButton.frame.origin.y = 570
-        shareButton.frame.origin.x = 27
-        shareButton.frame.size = CGSize(width: 75, height: 30)
-        self.view.addSubview(shareButton)
+//        let shareButton = ShareButton<LinkShareContent>()
+//        if let url = URL(string: event.link) {
+//            let content = LinkShareContent(url: url)
+//            shareButton.content = content
+//            let shareDialog = ShareDialog(content: content)
+//            shareDialog.mode = .native
+//        }
+//        shareButton.frame.origin.y = 570
+//        shareButton.frame.origin.x = 27
+//        shareButton.frame.size = CGSize(width: 75, height: 30)
+//        self.view.addSubview(shareButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +123,7 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             UserService.tag(event: event!)
         } else {
             nameLabel.text = "\(event!.creator.name) is going!"
-            checkboxLabel.text = "Go Together"
+            checkboxLabel.text = "Go Togethr"
             UserService.untag(event: event!)
         }
     }

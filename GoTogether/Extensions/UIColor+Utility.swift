@@ -11,13 +11,13 @@ import  UIKit
 
 extension UIColor {
     static var gtBackground: UIColor {
-        return UIColor(red: 224/255, green: 229/255, blue: 252/255, alpha: 1)
+        return UIColor(red: 228/255, green: 225/255, blue: 252/255, alpha: 1)
     }
     static var gtGreen: UIColor {
         return UIColor(red: 235/255, green: 255/255, blue: 240/255, alpha: 1)
     }
     static var gtBlue: UIColor {
-        return UIColor(red: 90/255, green: 126/255, blue: 252/255, alpha: 1)
+        return UIColor(red: 127/255, green: 124/255, blue: 175/255, alpha: 1)
     }
     static var gtOrange: UIColor {
         return UIColor(red: 1, green: 231/255, blue: 218/255, alpha: 1)
@@ -26,7 +26,7 @@ extension UIColor {
         return UIColor(red: 1, green: 213/255, blue: 217/255, alpha: 1)
     }
     static var gtPurple: UIColor {
-        return UIColor(red: 135/255, green: 105/255, blue: 190/255, alpha: 1)
+        return UIColor(red: 135/255, green: 106/255, blue: 193/255, alpha: 1)
     }
     static var gtPink: UIColor {
         return UIColor(red: 250/255, green: 240/255, blue: 255/255, alpha: 1)

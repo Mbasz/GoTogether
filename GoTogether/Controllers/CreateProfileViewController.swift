@@ -18,6 +18,7 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
     var location = ""
     let firUser = Auth.auth().currentUser
     let imageHelper = GTImageHelper()
+    var imgURL = ""
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var fullNameTextField: UITextField!
@@ -50,13 +51,13 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
 //        tapGesture.cancelsTouchesInView = true
 //        self.view.addGestureRecognizer(tapGesture)
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.addGestureRecognizer(tapGestureRecognizer)
-        
-        imageHelper.completionHandler = { image in
-            self.profileImageView.image = image
-        }
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+//        profileImageView.isUserInteractionEnabled = true
+//        profileImageView.addGestureRecognizer(tapGestureRecognizer)
+//        
+//        imageHelper.completionHandler = { image in
+//            self.profileImageView.image = image
+//        }
         
         nextButton.layer.cornerRadius = 5
     }
@@ -83,11 +84,12 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
         guard let name = fullNameTextField.text, let location = locationTextField.text, !name.isEmpty, !location.isEmpty
             else { return }
         
-        var imgURL = firUser?.photoURL?.absoluteString
-        if imgURL == nil {
-            imgURL = "https://cdn.pixabay.com/photo/2017/06/13/12/54/profile-2398783_960_720.png"
+        if firUser?.photoURL?.absoluteString != nil{
+            imgURL = firUser!.photoURL!.absoluteString
+        } else {
+            imgURL = ""
         }
-        UserService.create(firUser!, name: name, location: location, imgURL: imgURL!) { (user) in
+        UserService.create(firUser!, name: name, location: location, imgURL: imgURL) { (user) in
             guard let user = user else { return }
             
             User.setCurrent(user, writeToUserDefaults: true)

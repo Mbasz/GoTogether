@@ -33,10 +33,28 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBOutlet weak var locationTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        let container: UIView = UIView()
+        container.frame = self.view.frame
+        container.center.x = self.view.center.x
+        container.center.y = self.view.center.y - 20
+        container.tag = 101
+        container.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0.5)
+        container.isUserInteractionEnabled = false
+        let loadingView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        loadingView.center = self.view.center
+        loadingView.backgroundColor = UIColor.gtPurple
+        loadingView.alpha = 0.7
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        self.view.addSubview(activityIndicator)
-        activityIndicator.center = self.view.center
-        activityIndicator.backgroundColor = UIColor.gtPurple
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        loadingView.addSubview(activityIndicator)
+        container.addSubview(loadingView)
+        self.view.addSubview(container)
+        activityIndicator.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
+        activityIndicator.isHidden = false
+        
         activityIndicator.startAnimating()
         
         slp.preview(categoriesVC!.link, onSuccess: { result in
@@ -49,12 +67,15 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             if let imageURL = result[.image] as? String {
                 self.uploadImageView.kf.setImage(with: URL(string: imageURL))
             }
+            activityIndicator.stopAnimating()
+            self.view.viewWithTag(101)?.removeFromSuperview()
             
         }, onError: { error in
             print("\(error.localizedDescription)")
+            activityIndicator.stopAnimating()
+            self.view.viewWithTag(101)?.removeFromSuperview()
         })
         
-        activityIndicator.stopAnimating()
     }
     
     override func viewDidLoad() {
@@ -74,6 +95,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         titleTextField.delegate = self
         descriptionTextView.delegate = self
+        locationTextField.delegate = self
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 //        tapGesture.cancelsTouchesInView = true
@@ -86,6 +108,14 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == locationTextField {
+            addLocation()
+            return false
+        }
+        return true
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -149,8 +179,9 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
-            composeVC.recipients = friends.map({$0.number})
+            composeVC.recipients = friends.map { $0.number }
             composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!"
+            composeVC.subject = title
             
             self.present(composeVC, animated: true, completion: nil)
         }
@@ -171,7 +202,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         }
     }
     
-    @IBAction func addLocationTapped(_ sender: Any) {
+    func addLocation() {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         autocompleteController.tableCellBackgroundColor = UIColor.gtBackground
@@ -223,7 +254,7 @@ extension NewEventViewController: GMSAutocompleteViewControllerDelegate {
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-        
+        print(error.localizedDescription)
     }
     
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
