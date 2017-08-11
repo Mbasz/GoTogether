@@ -57,18 +57,25 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         let eventImgURL = URL(string: event.imgURL)
         eventImageView.kf.setImage(with: eventImgURL)
         profileImageView.layer.masksToBounds = true
-        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
+        profileImageView.layer.cornerRadius = 20
         
         if currentUser.uid == event.creator.uid {
             checkbox.isHidden = true
             checkboxLabel.isHidden = true
             
+            
             if event.hasParticipant {
                 ParticipantService.show(eventKey: event.key!) { participant in
                     self.participant = participant
-                    let profileImgURL = URL(string: participant!.imgURL)
+                    if participant!.imgURL.isEmpty {
+                        self.profileImageView.image = UIImage(named: "profilePicture")
+                    } else {
+                        let imgURL = URL(string: participant!.imgURL)
+                        self.profileImageView.kf.setImage(with: imgURL)
+                    }
+                    self.profileImageView.layer.borderWidth = 1
+                    self.profileImageView.layer.borderColor = UIColor.white.cgColor
                     self.nameLabel.text = "\(participant!.name) is going with you!"
-                    self.profileImageView.kf.setImage(with: profileImgURL)
                 }
             } else {
                 nameLabel.isHidden = true
@@ -78,15 +85,25 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             deleteButton.isHidden = true
             nameLabel.text = "You're going with \(event.creator.name)!"
             checkboxLabel.text = ""
-            let profileImgURL = URL(string: event.creator.imgURL)
-            profileImageView.kf.setImage(with: profileImgURL)
+            profileImageView.layer.borderWidth = 1
+            profileImageView.layer.borderColor = UIColor.white.cgColor
+            if event.creator.imgURL.isEmpty {
+                self.profileImageView.image = UIImage(named: "profilePicture")
+            } else {
+                let profileImgURL = URL(string: event.creator.imgURL)
+                self.profileImageView.kf.setImage(with: profileImgURL)
+            }
         }
         
         if URL(string: event.link) != nil {
-            urlLink = URL(string: event.link)!
-            linkButton.isEnabled = true
-        }
-        else {
+            urlLink = URL(string: event.link)
+            if UIApplication.shared.canOpenURL(urlLink) {
+                linkButton.isEnabled = true
+            }
+            else {
+                linkButton.isEnabled = false
+            }
+        } else {
             linkButton.isEnabled = false
         }
         

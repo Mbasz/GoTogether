@@ -93,6 +93,7 @@
 		C17BB4451F16BCD500A1ED1F /* StorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageService.swift; path = Services/StorageService.swift; sourceTree = "<group>"; };
 		C17BB4471F16CCB100A1ED1F /* UIImage+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Size.swift"; path = "Extensions/UIImage+Size.swift"; sourceTree = "<group>"; };
 		C17BB4491F16CD8500A1ED1F /* StorageReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StorageReference.swift; path = Extensions/StorageReference.swift; sourceTree = "<group>"; };
+		C187DCDA1F3CEFE300CEBC79 /* GoTogether.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoTogether.entitlements; sourceTree = "<group>"; };
 		C1B1BE651F26AF3900562F96 /* FbFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriendCell.swift; path = Views/FbFriendCell.swift; sourceTree = "<group>"; };
 		C1B1BE671F27A2C000562F96 /* FbFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FbFriend.swift; path = Models/FbFriend.swift; sourceTree = "<group>"; };
 		C1B3563F1F31769D0004894E /* ParticipantService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParticipantService.swift; path = Services/ParticipantService.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		C17BB3E71F13E88800A1ED1F /* GoTogether */ = {
 			isa = PBXGroup;
 			children = (
+				C187DCDA1F3CEFE300CEBC79 /* GoTogether.entitlements */,
 				C17BB3E81F13E88800A1ED1F /* AppDelegate.swift */,
 				C17BB42C1F143F4F00A1ED1F /* Services */,
 				C17BB4001F13E9C100A1ED1F /* View Controllers */,
@@ -317,6 +319,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = M8ZCG3FX48;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -551,6 +558,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GoTogether/GoTogether.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
@@ -559,6 +567,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -568,6 +577,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GoTogether/GoTogether.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = M8ZCG3FX48;
 				INFOPLIST_FILE = "$(SRCROOT)/GoTogether/Supporting/Info.plist";
@@ -576,6 +586,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

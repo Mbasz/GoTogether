@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 struct EventService {
-    static func create(title: String, date: Date, time: String, location: String, image: UIImage, link: String, description: String, category: Int, isPublic: Bool) {
+    static func create(title: String, date: Date, time: String, location: String, image: UIImage, link: String, description: String, category: Int, isPublic: Bool, id: String) {
         let imageRef = StorageReference.newEventImageReference()
         StorageService.upload(image, at: imageRef) { (downloadURL) in
             guard let downloadURL = downloadURL else {
@@ -21,16 +21,16 @@ struct EventService {
             
             let urlString = downloadURL.absoluteString
             let aspectHeight = image.aspectHeight
-            create(title: title, date: date, time: time, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description, category: category, isPublic: isPublic) { (event) in
+            create(title: title, date: date, time: time, location: location, forURLString: urlString, aspectHeight: aspectHeight, link: link, description: description, category: category, isPublic: isPublic, id: id) { (event) in
                     guard event != nil else { return }
                 }
         }
         
     }
     
-    private static func create(title: String, date: Date, time: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String, category: Int, isPublic: Bool, completion: @escaping (Event?) -> Void) {
+    private static func create(title: String, date: Date, time: String, location: String, forURLString urlString: String, aspectHeight: CGFloat, link: String, description: String, category: Int, isPublic: Bool, id: String, completion: @escaping (Event?) -> Void) {
         let currentUser = User.current
-        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category, isPublic: isPublic, hasParticipant: false)
+        let event = Event(title: title, date: date, time: time, location: location, imgHeight: aspectHeight, imgURL: urlString, link: link, description: description, category: category, isPublic: isPublic, id: id, hasParticipant: false)
         
         var dict = event.dictValue
         
@@ -85,22 +85,7 @@ struct EventService {
             let date = Date()
             if let filter = filter {
                 if !filter.isPublic {
-                    var events2 = [Event]()
-                    for event in events {
-                        var creatorID: String?
-                        UserService.fbID(uid: event.creator.uid) { id in
-                            creatorID = id
-                        }
-                        if creatorID != nil {
-                            for id in ids {
-                                if creatorID == id {
-                                    events2.append(event)
-                                }
-                            }
-                        }
-                        
-                    }
-                    events = events2
+                    events = events.filter { ids.contains($0.id) }
                 }
                 switch filter.category {
                 case 0:

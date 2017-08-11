@@ -11,6 +11,7 @@ import UIKit
 import MessageUI
 import SwiftLinkPreview
 import GooglePlaces
+import FirebaseAuth
 
 class NewEventViewController: UIViewController, MFMessageComposeViewControllerDelegate, UITextViewDelegate, UITextFieldDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
@@ -33,7 +34,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     @IBOutlet weak var locationTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         let container: UIView = UIView()
         container.frame = self.view.frame
         container.center.x = self.view.center.x
@@ -65,7 +66,9 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
                 self.descriptionTextView.text = description
             }
             if let imageURL = result[.image] as? String {
-                self.uploadImageView.kf.setImage(with: URL(string: imageURL))
+                if !imageURL.isEmpty {
+                    self.uploadImageView.kf.setImage(with: URL(string: imageURL))
+                }
             }
             activityIndicator.stopAnimating()
             self.view.viewWithTag(101)?.removeFromSuperview()
@@ -90,7 +93,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         imageHelper.completionHandler = { image in
             self.uploadImageView.image = image
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
         }
         
         titleTextField.delegate = self
@@ -171,8 +174,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         } else {
             image = self.uploadImageView.image!
         }
-        
-        EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: link, description: self.descriptionTextView.text!, category: categoriesVC!.category, isPublic: categoriesVC!.isPublic)
+        let firUser = Auth.auth().currentUser
+        EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: link, description: self.descriptionTextView.text!, category: categoriesVC!.category, isPublic: categoriesVC!.isPublic, id: firUser!.providerData[0].uid)
         
         if !MFMessageComposeViewController.canSendText() {
             print("SMS services are not available")
@@ -180,7 +183,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
             composeVC.recipients = friends.map { $0.number }
-            composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Place: \(location). And here's the link: \(link). See you there!"
+            composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Location: \(location). See you there!"
             composeVC.subject = title
             
             self.present(composeVC, animated: true, completion: nil)

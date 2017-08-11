@@ -41,11 +41,10 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
         self.locationTextField.delegate = self
         
         self.fullNameTextField.text = firUser?.displayName
+        
         if firUser?.photoURL != nil {
             self.profileImageView.kf.setImage(with: firUser?.photoURL)
         }
-        profileImageView.layer.masksToBounds = true
-        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
 //        tapGesture.cancelsTouchesInView = true
@@ -60,6 +59,14 @@ class CreateProfileViewController: UIViewController, CLLocationManagerDelegate, 
 //        }
         
         nextButton.layer.cornerRadius = 5
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        profileImageView.layer.cornerRadius = 50
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 3
+        profileImageView.layer.borderColor = UIColor.white.cgColor
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

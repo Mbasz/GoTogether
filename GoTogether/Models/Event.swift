@@ -23,15 +23,16 @@ class Event {
     var description: String
     var category: Int
     var isPublic: Bool
+    var id: String
     var hasParticipant: Bool
     
     var dictValue: [String: Any] {
         let userDict = ["uid": creator.uid, "name": creator.name, "location": creator.location, "img_URL": creator.imgURL]
         
-        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "category": category, "is_public": isPublic, "has_participant": hasParticipant, "creator": userDict]
+        return ["title": title, "date": date, "time": time, "location": location, "img_URL": imgURL, "img_height": imgHeight, "link": link, "description": description, "category": category, "is_public": isPublic, "id": id, "has_participant": hasParticipant, "creator": userDict]
     }
     
-    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String, category: Int, isPublic: Bool, hasParticipant: Bool) {
+    init(title: String, date: Date, time: String, location: String, imgHeight: CGFloat, imgURL: String, link: String, description: String, category: Int, isPublic: Bool, id: String, hasParticipant: Bool) {
         self.title = title
         self.date = date
         self.time = time
@@ -43,6 +44,7 @@ class Event {
         self.creator = User.current
         self.category = category
         self.isPublic = isPublic
+        self.id = id
         self.hasParticipant = hasParticipant
     }
     
@@ -61,6 +63,7 @@ class Event {
             let description = dict["description"] as? String,
             let category = dict["category"] as? Int,
             let isPublic = dict["is_public"] as? Bool,
+            let id = dict["id"] as? String,
             let hasParticipant = dict["has_participant"] as? Bool
         else { return nil }
         
@@ -79,6 +82,7 @@ class Event {
         self.description = description
         self.category = category
         self.isPublic = isPublic
+        self.id = id
         self.hasParticipant = hasParticipant
     }
 }

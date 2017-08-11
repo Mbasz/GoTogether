@@ -17,8 +17,7 @@ class GTImageHelper: NSObject {
         imagePickerController.sourceType = sourceType
         imagePickerController.delegate = self
         viewController.addChildViewController(imagePickerController)
-        viewController.navigationController?.setNavigationBarHidden(true, animated: true)
-        //imagePickerController.navigationBar.tintColor
+        viewController.navigationController?.setNavigationBarHidden(true, animated: false)
         imagePickerController.navigationBar.barTintColor = UIColor.gtPink
         imagePickerController.didMove(toParentViewController: viewController)
         viewController.view.addSubview(imagePickerController.view)
@@ -32,10 +31,12 @@ extension GTImageHelper: UINavigationControllerDelegate, UIImagePickerController
         }
         picker.view.removeFromSuperview()
         picker.removeFromParentViewController()
+        
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.view.removeFromSuperview()
         picker.removeFromParentViewController()
-        
+        completionHandler?(UIImage(named: "uploadImage")!)
     }
+
 }

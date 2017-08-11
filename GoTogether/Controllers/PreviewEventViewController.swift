@@ -56,27 +56,28 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         let eventImgURL = URL(string: event.imgURL)
         eventImageView.kf.setImage(with: eventImgURL)
         
-        if User.current.uid == event.creator.uid {
-            nameLabel.isHidden = true
-            profileImageView.isHidden = true
-            checkbox.isHidden = true
-            checkboxLabel.isHidden = true
-            chatButton.isHidden = true
+        nameLabel.text = "\(event.creator.name) is going!"
+        if event.creator.imgURL.isEmpty {
+            profileImageView.image = UIImage(named: "profilePicture")
         } else {
-            nameLabel.text = "\(event.creator.name) is going!"
             let profileImgURL = URL(string: event.creator.imgURL)
-            profileImageView.layer.masksToBounds = true
-            profileImageView.layer.cornerRadius = profileImageView.frame.height/2
             profileImageView.kf.setImage(with: profileImgURL)
         }
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderWidth = 1
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
-        if let urlLink = URL(string: event.link) {
+        if URL(string: event.link) != nil {
+            urlLink = URL(string: event.link)
             if UIApplication.shared.canOpenURL(urlLink) {
                 linkButton.isEnabled = true
             }
             else {
                 linkButton.isEnabled = false
             }
+        } else {
+            linkButton.isEnabled = false
         }
         
 //        let shareButton = ShareButton<LinkShareContent>()
@@ -142,7 +143,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(urlLink, options: [:], completionHandler:  { success in
                 if !success {
-                    let alertController = UIAlertController(title: "Invalid URL", message: nil, preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Problem with internet connection", message: nil, preferredStyle: .alert)
                     let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(ok)
                     self.present(alertController, animated: true, completion: nil)

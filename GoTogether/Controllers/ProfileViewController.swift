@@ -33,10 +33,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, DZNEmptyData
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         profileImageView.clipsToBounds = true
-        let imgURL = URL(string: user.imgURL)
         if user.imgURL.isEmpty {
-            profileImageView.image = UIImage(named: "profilePictrue")
+            profileImageView.image = UIImage(named: "profilePicture")
         } else {
+            let imgURL = URL(string: user.imgURL)
             profileImageView.kf.setImage(with: imgURL)
         }
         myEventsButton.isUserInteractionEnabled = false
@@ -59,6 +59,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, DZNEmptyData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        profileImageView.layer.cornerRadius = 50
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.borderWidth = 3
+        profileImageView.layer.borderColor = UIColor.white.cgColor
         
         reloadMyEvents()
         
@@ -122,10 +127,16 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FbFriendCell", for: indexPath) as! FbFriendCell
             
             cell.friendNameLabel.text = friend.name
-            let friendImgURL = URL(string: friend.imgURL)
+            if friend.imgURL.isEmpty {
+                cell.friendImageView.image = UIImage(named: "profilePicture")
+            } else {
+                let friendImgURL = URL(string: friend.imgURL)
+                cell.friendImageView.kf.setImage(with: friendImgURL)
+            }
             cell.friendImageView.layer.masksToBounds = true
+            cell.friendImageView.layer.borderWidth = 1
+            cell.friendImageView.layer.borderColor = UIColor.white.cgColor
             cell.friendImageView.layer.cornerRadius = cell.friendImageView.frame.height/2
-            cell.friendImageView.kf.setImage(with: friendImgURL)
             
             return cell
         } else {
@@ -160,9 +171,9 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if myEventsButton.isUserInteractionEnabled {
-            return 70
+            return tableView.frame.height/6
         } else {
-            return 115
+            return tableView.frame.height/4
         }
     }
     

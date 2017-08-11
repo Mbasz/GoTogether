@@ -15,6 +15,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
 
     var ids = [String]()
     var events = [Event]()
+    var friendsEvents: [Event]?
     var eventsSearched: Array<Event>? = nil
     var filter: Filter?
     let searchController = UISearchController(searchResultsController: nil)
@@ -121,11 +122,17 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
         }
         
         let eventImgURL = URL(string: event.imgURL)
-        let profileImgURL = URL(string: event.creator.imgURL)
+        if event.creator.imgURL.isEmpty {
+            cell.profileImageView.image = UIImage(named: "profilePicture")
+        } else {
+            let profileImgURL = URL(string: event.creator.imgURL)
+            cell.profileImageView.kf.setImage(with: profileImgURL)
+        }
         cell.profileImageView.layer.masksToBounds = true
+        cell.profileImageView.layer.borderWidth = 1
+        cell.profileImageView.layer.borderColor = UIColor.white.cgColor
         cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height/2
         cell.eventImageView.kf.setImage(with: eventImgURL)
-        cell.profileImageView.kf.setImage(with: profileImgURL)
         cell.titleLabel.text = event.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
@@ -138,7 +145,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140
+        return self.view.superview!.frame.height/5+10
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -186,6 +193,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
     @IBAction func filterTapped(_ sender: Any) {
         if filter != nil {
             filter = nil
+            friendsEvents = nil
             filterButton.image = UIImage(named: "filter")
             reloadEvents()
         } else {
