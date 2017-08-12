@@ -145,7 +145,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.view.superview!.frame.height/5+10
+        return 130
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

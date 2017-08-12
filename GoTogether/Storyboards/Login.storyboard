@@ -24,34 +24,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firework" translatesAutoresizingMaskIntoConstraints="NO" id="xe8-FP-2Fo">
-                                <rect key="frame" x="16" y="54.5" width="343" height="514"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="TzP-EW-6AD">
+                                <rect key="frame" x="16" y="54.5" width="343" height="589"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firework" translatesAutoresizingMaskIntoConstraints="NO" id="xe8-FP-2Fo">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="514"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-CZ-pHe">
+                                        <rect key="frame" x="0.0" y="544" width="343" height="45"/>
+                                        <color key="backgroundColor" red="0.59742563468229559" green="0.50864473979467639" blue="0.79467923356796888" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="llL-Ud-POW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                        <state key="normal" title="Register or Log In">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonTapped:" destination="Waw-sc-wTa" eventType="touchUpInside" id="JW2-TK-a5Z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="xe8-FP-2Fo" secondAttribute="height" multiplier="343:514" id="Uf3-6m-LaB"/>
+                                    <constraint firstItem="xe8-FP-2Fo" firstAttribute="top" relation="lessThanOrEqual" secondItem="TzP-EW-6AD" secondAttribute="top" id="0C0-IW-sdV"/>
+                                    <constraint firstItem="nGH-CZ-pHe" firstAttribute="leading" secondItem="TzP-EW-6AD" secondAttribute="leading" id="KNk-RB-dxy"/>
+                                    <constraint firstItem="nGH-CZ-pHe" firstAttribute="width" secondItem="TzP-EW-6AD" secondAttribute="height" multiplier="343:589" id="g6D-CV-m28"/>
+                                    <constraint firstItem="nGH-CZ-pHe" firstAttribute="top" relation="lessThanOrEqual" secondItem="xe8-FP-2Fo" secondAttribute="bottom" constant="30" id="gVd-cM-uiy"/>
+                                    <constraint firstItem="xe8-FP-2Fo" firstAttribute="leading" relation="lessThanOrEqual" secondItem="TzP-EW-6AD" secondAttribute="leading" id="jtM-1h-6Ex"/>
+                                    <constraint firstItem="xe8-FP-2Fo" firstAttribute="width" relation="lessThanOrEqual" secondItem="TzP-EW-6AD" secondAttribute="height" multiplier="345:589" id="kal-tz-JaY"/>
+                                    <constraint firstItem="xe8-FP-2Fo" firstAttribute="centerX" secondItem="nGH-CZ-pHe" secondAttribute="centerX" id="ltW-7a-eGE"/>
+                                    <constraint firstAttribute="trailing" secondItem="nGH-CZ-pHe" secondAttribute="trailing" id="xmQ-ik-ikX"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="xe8-FP-2Fo" secondAttribute="trailing" id="zkD-ZL-76e"/>
                                 </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-CZ-pHe">
-                                <rect key="frame" x="16" y="593.5" width="343" height="48.5"/>
-                                <color key="backgroundColor" red="0.59742563468229559" green="0.50864473979467639" blue="0.79467923356796888" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                <state key="normal" title="Register or Log In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonTapped:" destination="Waw-sc-wTa" eventType="touchUpInside" id="JW2-TK-a5Z"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215690000003" green="0.94117647059999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="um6-7B-gnn" firstAttribute="top" secondItem="nGH-CZ-pHe" secondAttribute="bottom" constant="25" id="733-3a-eB1"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="leading" secondItem="PmJ-0L-U6B" secondAttribute="leadingMargin" id="CqY-FC-a8e"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="top" secondItem="xe8-FP-2Fo" secondAttribute="bottom" constant="25" id="J7E-wL-hyq"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="trailing" secondItem="PmJ-0L-U6B" secondAttribute="trailingMargin" id="NQO-we-52y"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="height" secondItem="PmJ-0L-U6B" secondAttribute="height" multiplier="1:14" constant="1" id="NuA-vo-do8"/>
-                            <constraint firstItem="xe8-FP-2Fo" firstAttribute="centerX" secondItem="PmJ-0L-U6B" secondAttribute="centerX" id="Vnw-oj-027"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="width" secondItem="xe8-FP-2Fo" secondAttribute="width" id="Wie-Yi-aSE"/>
-                            <constraint firstItem="nGH-CZ-pHe" firstAttribute="centerX" secondItem="PmJ-0L-U6B" secondAttribute="centerX" id="deY-8G-hYb"/>
+                            <constraint firstItem="um6-7B-gnn" firstAttribute="top" secondItem="TzP-EW-6AD" secondAttribute="bottom" constant="23.5" id="1Zj-dM-OL3"/>
+                            <constraint firstItem="TzP-EW-6AD" firstAttribute="width" relation="greaterThanOrEqual" secondItem="PmJ-0L-U6B" secondAttribute="height" multiplier="343:667" id="45j-8S-dSm"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TzP-EW-6AD" secondAttribute="trailing" constant="15" id="Ps1-48-ulH"/>
+                            <constraint firstItem="TzP-EW-6AD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PmJ-0L-U6B" secondAttribute="leading" constant="15" id="ZUP-B0-nvF"/>
+                            <constraint firstItem="TzP-EW-6AD" firstAttribute="top" secondItem="5nW-lE-ACm" secondAttribute="bottom" constant="34.5" id="bIP-rw-gGj"/>
+                            <constraint firstItem="um6-7B-gnn" firstAttribute="top" secondItem="nGH-CZ-pHe" secondAttribute="bottom" constant="23.5" id="chi-oF-fJU"/>
+                            <constraint firstItem="TzP-EW-6AD" firstAttribute="centerX" secondItem="PmJ-0L-U6B" secondAttribute="centerX" id="e3S-5s-XFG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HwS-RQ-5Y8"/>

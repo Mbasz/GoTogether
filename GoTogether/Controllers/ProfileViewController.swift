@@ -171,9 +171,9 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if myEventsButton.isUserInteractionEnabled {
-            return tableView.frame.height/6
+            return 60
         } else {
-            return tableView.frame.height/4
+            return 120
         }
     }
     

@@ -129,6 +129,9 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         super.prepare(for: segue, sender: sender)
         
         if segue.identifier == "toChat", let destination = segue.destination as? ChatViewController {
+            ChatService.checkForExistingChat(with: self.creator!, eventKey: event.key!) { (chat) in
+                self.existingChat = chat
+            }
             let currentUser = User.current
             let creator = Participant(uid: event!.creator.uid, name: event!.creator.name, imgURL: event!.creator.imgURL)
             let user = Participant(uid: currentUser.uid, name: currentUser.name, imgURL: currentUser.imgURL)
