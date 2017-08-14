@@ -178,7 +178,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: link, description: self.descriptionTextView.text!, category: categoriesVC!.category, isPublic: categoriesVC!.isPublic, id: firUser!.providerData[0].uid)
         
         if !MFMessageComposeViewController.canSendText() {
-            print("SMS services are not available")
+            //print("SMS services are not available")
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
@@ -188,7 +188,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             
             self.present(composeVC, animated: true, completion: nil)
         }
-        self.dismiss(animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
         tabBarController?.selectedIndex = 0
         navigationController?.popToRootViewController(animated: true)
     }
@@ -223,6 +223,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         
         alertController.addTextField { (textField) in
             textField.placeholder = "Type phone number"
+            textField.keyboardType = UIKeyboardType.phonePad
         }
         
         let addButton = UIAlertAction(title: "Add", style: .default) { (_) in

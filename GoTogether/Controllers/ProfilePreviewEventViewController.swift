@@ -174,8 +174,19 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        EventService.remove(currentUID: User.current.uid, eventKey: event!.key!)
-        self.navigationController?.popToRootViewController(animated: true)
+        let alertController = UIAlertController(title: "Do you want to delete this event?", message: nil, preferredStyle: .alert)
+        
+        let addButton = UIAlertAction(title: "Yes", style: .default) { (_) in
+            EventService.remove(currentUID: User.current.uid, eventKey: self.event!.key!)
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(addButton)
+        alertController.addAction(cancelButton)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func chatButtonTapped(_ sender: UIButton) {
