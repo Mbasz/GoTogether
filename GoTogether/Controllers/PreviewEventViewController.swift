@@ -124,6 +124,8 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             let members = [creator, user]
             destination.chat = existingChat ?? Chat(members: members)
             destination.eventKey = event.key!
+            destination.outgoingAvatarURL = URL(string: User.current.imgURL)
+            destination.incomingAvatarURL = URL(string: event.creator.imgURL)
         }
     }
 

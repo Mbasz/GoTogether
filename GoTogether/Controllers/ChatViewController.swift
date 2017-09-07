@@ -18,6 +18,8 @@ class ChatViewController: JSQMessagesViewController {
     var messagesHandle: DatabaseHandle = 0
     var messagesRef: DatabaseReference?
     var existingChat: Chat?
+    var incomingAvatarURL: URL?
+    var outgoingAvatarURL: URL?
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage = {
         guard let bubbleImageFactory = JSQMessagesBubbleImageFactory() else {
@@ -65,8 +67,8 @@ class ChatViewController: JSQMessagesViewController {
         // remove attachment button
         inputToolbar.contentView.leftBarButtonItem = nil
         
-        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
     }
     
     func tryObservingMessages() {
@@ -105,7 +107,16 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        var message = messages[indexPath.item]
+        
+        if message.jsqMessageValue.senderId == self.senderId {
+            let data = try? Data(contentsOf: outgoingAvatarURL!)
+            return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(data: data!), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        }
+        else {
+            let data = try? Data(contentsOf: incomingAvatarURL!)
+            return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(data: data!), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

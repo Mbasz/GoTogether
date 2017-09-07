@@ -18,6 +18,8 @@ class ProfileChatViewController: JSQMessagesViewController {
     var messagesHandle: DatabaseHandle = 0
     var messagesRef: DatabaseReference?
     var existingChat: Chat?
+    var incomingAvatarURL: URL?
+    var outgoingAvatarURL: URL?
     
     var outgoingBubbleImageView: JSQMessagesBubbleImage = {
         guard let bubbleImageFactory = JSQMessagesBubbleImageFactory() else {
@@ -64,8 +66,8 @@ class ProfileChatViewController: JSQMessagesViewController {
         // remove attachment button
         inputToolbar.contentView.leftBarButtonItem = nil
         
-        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
-        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height: kJSQMessagesCollectionViewAvatarSizeDefault)
     }
     
     func tryObservingMessages() {
@@ -91,9 +93,9 @@ extension ProfileChatViewController {
         return messages[indexPath.item].jsqMessageValue
     }
     
-    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
-    }
+//    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+//        return nil
+//    }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let message = messages[indexPath.item]
@@ -114,25 +116,18 @@ extension ProfileChatViewController {
     }
 
 
-//    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-//            var message = messages[indexPath.item]
-//            if User.current.uid == event.creator.uid {
-//                let incomingAvatarURL = URL(string: )
-//                let outgoingAvatarURL = URL(string: User.current.imgURL)
-//            }
-//        
-//            if message.jsqMessageValue.senderId == self.senderId {
-//                let data = try? Data(contentsOf: outgoingAvatarURL!)
-//                if data != nil {
-//                    return UIImage(data: data!) as! JSQMessageAvatarImageDataSource
-//                }
-//            }
-//            else {
-//                if incomingAvatarURL != nil {
-//                    return UIImage(data: data!) as! JSQMessageAvatarImageDataSource
-//                }
-//            }
-//    }
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+            var message = messages[indexPath.item]
+        
+        if message.jsqMessageValue.senderId == self.senderId {
+                let data = try? Data(contentsOf: outgoingAvatarURL!)
+                return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(data: data!), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            }
+            else {
+                let data = try? Data(contentsOf: incomingAvatarURL!)
+                return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(data: data!), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+            }
+    }
 
     func sendMessage(_ message: Message) {
         if chat?.key == nil {

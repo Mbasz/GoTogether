@@ -45,6 +45,10 @@ class ProfileChatListTableViewController: UITableViewController {
             
             destination.chat = chats[indexPath.row]
             destination.eventKey = eventKey
+            destination.outgoingAvatarURL = URL(string: User.current.imgURL)
+            UserService.show(forUID: chats[indexPath.row].memberUIDs[1]) { user in
+                destination.incomingAvatarURL = URL(string: user!.imgURL)
+            }
         }
     }
     
