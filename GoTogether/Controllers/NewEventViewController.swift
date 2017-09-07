@@ -36,6 +36,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: false)
         let container: UIView = UIView()
+        
         container.frame = self.view.frame
         container.center.x = self.view.center.x
         container.center.y = self.view.center.y - 20
@@ -48,37 +49,39 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         loadingView.alpha = 0.7
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        loadingView.addSubview(activityIndicator)
-        container.addSubview(loadingView)
-        self.view.addSubview(container)
-        activityIndicator.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
-        activityIndicator.isHidden = false
         
-        activityIndicator.startAnimating()
-        
-        slp.preview(categoriesVC!.link, onSuccess: { result in
-            if let title: String = result[.title] as? String {
-                self.titleTextField.text = title
-            }
-            if let description = result[.description] as? String, description.characters.count < 100 {
-                self.descriptionTextView.text = description
-            }
-            if let imageURL = result[.image] as? String {
-                if !imageURL.isEmpty {
-                    self.uploadImageView.kf.setImage(with: URL(string: imageURL))
-                }
-            }
-            activityIndicator.stopAnimating()
-            self.view.viewWithTag(101)?.removeFromSuperview()
+        if titleTextField.text!.isEmpty {
+            let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+            loadingView.addSubview(activityIndicator)
+            container.addSubview(loadingView)
+            self.view.addSubview(container)
+            activityIndicator.center = CGPoint(x: loadingView.frame.size.width / 2, y: loadingView.frame.size.height / 2)
+            activityIndicator.isHidden = false
             
-        }, onError: { error in
-            print("\(error.localizedDescription)")
-            activityIndicator.stopAnimating()
-            self.view.viewWithTag(101)?.removeFromSuperview()
-        })
-        
+            activityIndicator.startAnimating()
+            
+            slp.preview(categoriesVC!.link, onSuccess: { result in
+                if let title: String = result[.title] as? String {
+                    self.titleTextField.text = title
+                }
+                if let description = result[.description] as? String, description.characters.count < 100 {
+                    self.descriptionTextView.text = description
+                }
+                if let imageURL = result[.image] as? String {
+                    if !imageURL.isEmpty {
+                        self.uploadImageView.kf.setImage(with: URL(string: imageURL))
+                    }
+                }
+                activityIndicator.stopAnimating()
+                self.view.viewWithTag(101)?.removeFromSuperview()
+                
+            }, onError: { error in
+                print("\(error.localizedDescription)")
+                activityIndicator.stopAnimating()
+                self.view.viewWithTag(101)?.removeFromSuperview()
+            })
+        }
     }
     
     override func viewDidLoad() {
@@ -178,7 +181,8 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         EventService.create(title: title, date: date, time: time, location: location, image: self.image!, link: link, description: self.descriptionTextView.text!, category: categoriesVC!.category, isPublic: categoriesVC!.isPublic, id: firUser!.providerData[0].uid)
         
         if !MFMessageComposeViewController.canSendText() {
-            //print("SMS services are not available")
+            tabBarController?.selectedIndex = 0
+            navigationController?.popToRootViewController(animated: true)
         } else {
             let composeVC = MFMessageComposeViewController()
             composeVC.messageComposeDelegate = self
@@ -186,11 +190,12 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
             composeVC.body = "Hi, I want to invite you to this event: \(title) which takes place on \(dateString). Location: \(location). See you there!"
             composeVC.subject = title
             
-            self.present(composeVC, animated: true, completion: nil)
+            self.present(composeVC, animated: true) { _ in
+                self.tabBarController?.selectedIndex = 0
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
-        //self.dismiss(animated: true, completion: nil)
-        tabBarController?.selectedIndex = 0
-        navigationController?.popToRootViewController(animated: true)
+        
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith: MessageComposeResult) {

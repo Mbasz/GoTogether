@@ -40,7 +40,7 @@
 	<key>FacebookAppID</key>
 	<string>2069653663317176</string>
 	<key>FacebookDisplayName</key>
-	<string>GoTogether</string>
+	<string>GoTogethr</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

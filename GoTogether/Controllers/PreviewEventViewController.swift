@@ -68,8 +68,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
-        if URL(string: event.link) != nil {
-            urlLink = URL(string: event.link)
+        if let urlLink = URL(string: event.link) {
             if UIApplication.shared.canOpenURL(urlLink) {
                 linkButton.isEnabled = true
             }
@@ -79,19 +78,6 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         } else {
             linkButton.isEnabled = false
         }
-        
-//        let shareButton = ShareButton<LinkShareContent>()
-//        if let url = URL(string: event.link) {
-//            let content = LinkShareContent(url: url)
-//            shareButton.content = content
-//        }
-//        shareButton.frame.origin.y = 570
-//        shareButton.frame.origin.x = 27
-//        shareButton.frame.size = CGSize(width: 75, height: 30)
-//        let shareDialog = ShareDialog(content: content)
-//        shareDialog.mode = .native
-//        self.view.addSubview(shareButton)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -9,6 +9,7 @@
 import Foundation
 import BEMCheckBox
 import UIKit
+import FacebookCore
 import FacebookShare
 
 class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
@@ -106,18 +107,20 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         } else {
             linkButton.isEnabled = false
         }
-        
-//        let shareButton = ShareButton<LinkShareContent>()
-//        if let url = URL(string: event.link) {
-//            let content = LinkShareContent(url: url)
-//            shareButton.content = content
-//            let shareDialog = ShareDialog(content: content)
-//            shareDialog.mode = .native
-//        }
-//        shareButton.frame.origin.y = 570
-//        shareButton.frame.origin.x = 27
-//        shareButton.frame.size = CGSize(width: 75, height: 30)
-//        self.view.addSubview(shareButton)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if let url = URL(string: event.link) {
+            let content = LinkShareContent(url: url)
+            let frame = CGRect(x: self.view.subviews[0].frame.origin.x, y: deleteButton.frame.origin.y, width: deleteButton.frame.width, height: deleteButton.frame.height)
+            let shareButton = ShareButton<LinkShareContent>()
+            shareButton.content = content
+            shareButton.frame = frame
+            let shareDialog = ShareDialog(content: content)
+            shareDialog.mode = .automatic
+            shareDialog.failsOnInvalidData = true
+            self.view.addSubview(shareButton)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,10 +130,6 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
             checkbox.on = true
             checkboxLabel.text = ""
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func animationDidStop(for checkBox: BEMCheckBox) {
