@@ -161,6 +161,7 @@ extension ProfileViewController: UITableViewDataSource {
             cell.profileTitleLabel.text = event.title
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .long
+            dateFormatter.locale = Locale(identifier: "pl")
             cell.profileDateLabel.text = dateFormatter.string(from: event.date)
                 if event.date < Date() {
                     cell.alpha = 0.1

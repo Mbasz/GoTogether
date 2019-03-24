@@ -36,6 +36,7 @@ struct EventService {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "pl")
         
         dict["date"] = dateFormatter.string(from: dict["date"] as! Date)
         
@@ -118,7 +119,7 @@ struct EventService {
                     events = events.filter {$0.location.lowercased().contains(filter.location.lowercased())}
                 }
             }
-            events = events.filter {$0.date >= date}
+            //events = events.filter {$0.date >= date}
             events = events.filter {$0.creator.uid != User.current.uid}
             completion(events)
         })

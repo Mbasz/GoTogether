@@ -55,6 +55,7 @@ class Event {
             let name = userDict["name"] as? String,
             let profileImgURL = userDict["img_URL"] as? String,
             let title = dict["title"] as? String,
+            let date = dict["date"] as? String,
             let time = dict["time"] as? String,
             let location = dict["location"] as? String,
             let eventImgURL = dict["img_URL"] as? String,
@@ -73,7 +74,7 @@ class Event {
         self.key = snapshot.key
         self.creator = User(uid: uid, name: name, location: location, imgURL: profileImgURL)
         self.title = title
-        self.date = dateFormatter.date(from: dict["date"] as! String)!
+        self.date = dateFormatter.date(from: date)!
         self.time = time
         self.location = location
         self.imgURL = eventImgURL

@@ -49,6 +49,7 @@ class ProfilePreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         titleLabel.text = event.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "pl")
         dateLabel.text = dateFormatter.string(from: event.date)
         dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "hh:mm a"

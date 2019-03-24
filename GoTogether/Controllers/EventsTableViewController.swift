@@ -136,6 +136,7 @@ class EventsTableViewController: UITableViewController, UITabBarControllerDelega
         cell.titleLabel.text = event.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "pl")
         cell.dateLabel.text = dateFormatter.string(from: event.date)
         cell.nameLabel.text = "\(event.creator.name) is going!"
         

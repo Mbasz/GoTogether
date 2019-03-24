@@ -65,7 +65,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
                 if let title: String = result[.title] as? String {
                     self.titleTextField.text = title
                 }
-                if let description = result[.description] as? String, description.characters.count < 100 {
+                if let description = result[.description] as? String, description.count < 100 {
                     self.descriptionTextView.text = description
                 }
                 if let imageURL = result[.image] as? String {
@@ -156,6 +156,7 @@ class NewEventViewController: UIViewController, MFMessageComposeViewControllerDe
         categoriesVC!.reload = true
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "pl")
         let dateString = dateFormatter.string(from: eventDatePicker.date), title = self.titleTextField.text!, location = locationTextField.text!, link = categoriesVC!.link
         let date = eventDatePicker.date
         dateFormatter.timeStyle = .medium

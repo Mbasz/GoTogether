@@ -47,6 +47,7 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         titleLabel.text = event.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "pl")
         dateLabel.text = dateFormatter.string(from: event.date)
         dateFormatter.timeStyle = .medium
         dateFormatter.dateFormat = "hh:mm a"
@@ -68,14 +69,10 @@ class PreviewEventViewController: UIViewController, BEMCheckBoxDelegate {
         profileImageView.layer.borderColor = UIColor.white.cgColor
         profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         
-        if let urlLink = URL(string: event.link) {
-            if UIApplication.shared.canOpenURL(urlLink) {
-                linkButton.isEnabled = true
-            }
-            else {
-                linkButton.isEnabled = false
-            }
-        } else {
+        if let urlLink = URL(string: event.link), UIApplication.shared.canOpenURL(urlLink) {
+            linkButton.isEnabled = true
+        }
+        else {
             linkButton.isEnabled = false
         }
     }

@@ -107,7 +107,7 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        var message = messages[indexPath.item]
+        let message = messages[indexPath.item]
         
         if message.jsqMessageValue.senderId == self.senderId {
             let data = try? Data(contentsOf: outgoingAvatarURL!)

@@ -51,6 +51,8 @@ struct UserService {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         
+        dateFormatter.locale = Locale(identifier: "pl")
+        
         dict["date"] = dateFormatter.string(from: dict["date"] as! Date)
         
         let eventRef = DatabaseReference.toLocation(.showEvent(uid: currentUser.uid, eventKey: event.key!) )
